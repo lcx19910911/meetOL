@@ -1,0 +1,161 @@
+﻿
+@model  List<MeetPlan>
+@{
+    ViewBag.Title = "会议计划";
+}
+<style type="text/css">
+    html, body {
+        background-color: #efefef;
+        min-height: 100%;
+    }
+
+    .pt-list {
+        overflow: hidden;
+        border-radius: 5px;
+        font-size: 1.2rem;
+        padding: 0.7rem 0.2rem;
+        color: #000;
+        border-bottom: 1px solid #dfdfdf;
+        box-shadow: 1px 1px 2px 1px #ddd;
+        background-color: #fff;
+        margin-top: 0.8rem;
+    }
+
+    .pt-top p {
+        float: left;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        box-sizing: border-box;
+    }
+
+    .pt-top > p:nth-child(1) {
+        width: 20%;
+        text-align: center;
+        border-right: 3px solid #fff;
+    }
+
+    .pt-top > p:nth-child(2):before {
+        content: "主讲人：";
+    }
+
+    .pt-top > p:nth-child(2) {
+        width: 79%;
+        padding-left: 0.4rem;
+        line-height: 2.5rem;
+        text-indent: 1em;
+    }
+
+    .pt-top span {
+        display: block;
+        font-size: 1rem;
+    }
+
+    .pt-top strong:before {
+        content: "-";
+    }
+
+    .pt-top strong {
+        display: block;
+        font-size: 1.1rem;
+        font-weight: bold;
+    }
+
+    .pt-top {
+        overflow: hidden;
+    }
+
+    .pt-bottom {
+        width: 95%;
+        margin: 0.7rem auto 0;
+        border-top: 1px dotted #ccc;
+        font-size: 1rem;
+    }
+
+        .pt-bottom span {
+            display: block;
+            line-height: 1.4rem;
+            margin-top: 0.7rem;
+            padding: 0 0.5em;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+        }
+
+            .pt-bottom span:nth-child(1) {
+                color: #666;
+                -webkit-line-clamp: 2;
+            }
+</style>
+
+
+
+<div class="wrap">
+    <div class="article">
+        <a href="javascript:history.go(-1);" class="back fl">&lt;</a>
+        <span class="fr" style="padding:0 1.5rem;">&nbsp;</span>
+        <h2>@(Request["day"])会议计划</h2>
+    </div>
+</div>
+
+<div class="l">
+    <div class="w95 m0">
+        <ul>
+            <li>
+                @if (Model != null && Model.Count > 0)
+                {
+                    foreach (var item in Model)
+                    {
+                        <a href="#">
+                            <div class="pt-list">
+                                <div class="pt-top">
+                                    <p style="border-color: rgb(85, 245, 129);">
+                                        <span>@(item.StratTime.ToString("hh:mm"))</span>
+                                    </p>
+                                    <p>
+                                        @(item.Speaker.Name)
+                                    </p>
+                                </div>
+                                <p class="pt-bottom">
+                                    <span>&nbsp;&nbsp;&nbsp;&nbsp;@(item.Name)</span>
+                                </p>
+                            </div>
+                        </a>
+                        }
+                }
+                
+            </li>
+        </ul>
+    </div>
+</div>
+
+<script type="text/javascript">
+        $(function() {
+            function lRandom(a,b) {
+                var c,num;
+                if(a > b) {c = a;a = b;b = c;}
+                c = b-a+1;
+                num = Math.floor(Math.random()*c) + a;
+                return num;
+            };
+            $('.m-year').each(function() {
+                var r = lRandom(1,150),
+                    g = lRandom(1,150),
+                    b = lRandom(1,150);
+                $(this).css({
+                    'color': 'rgb(' + r + ',' + g + ',' + b + ')'
+                })
+            })
+            $('.pt-list').each(function(i, obj) {
+                var _this = $(obj).find('p').eq(0);
+                var r = lRandom(1,254),
+                    g = lRandom(1,254),
+                    b = lRandom(1,254);
+                _this.css({
+                    'border-color':'rgb(' + r + ',' + g + ',' + b + ')'
+                });
+            })
+        })
+</script>

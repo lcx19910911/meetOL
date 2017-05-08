@@ -1,0 +1,26 @@
+Time:2017/4/27 9:37:21-本次请求耗时 2.015 秒.
+Url:http://localhost:5068/base/_404
+UserHostAddress:::1;;
+WebServer:::1
+
+
+Time:2017/4/27 9:43:22-本次请求耗时 58.547 秒.
+Url:http://localhost:5068/admin/Meet/Find?_token=
+UrlReferrer:http://localhost:5068/admin/
+UserHostAddress:127.0.0.1;;
+WebServer:127.0.0.1
+
+
+Time:2017/4/27 9:43:22-本次请求耗时 58.782 秒.
+Url:http://localhost:5068/
+UserHostAddress:::1;;
+WebServer:::1
+
+
+Time:2017/4/27 9:44:23-本次请求耗时 23.297 秒.
+Url:http://localhost:5068/home/index?meetId=40ec84c8a64b44c4a882dedce17080c2
+UrlReferrer:http://localhost:5068/admin/
+UserHostAddress:::1;;
+WebServer:::1
+
+

@@ -1,0 +1,88 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>登录</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <link href="~/Styles/css/amazeui.css" rel="stylesheet" />
+    <style>
+        .header {
+            text-align: center;
+        }
+
+            .header h1 {
+                font-size: 200%;
+                color: #333;
+                margin-top: 30px;
+            }
+
+            .header p {
+                font-size: 14px;
+            }
+    </style>
+    <script>
+        function ShowLoading() {
+            $("#loadingDiv").show();
+        }
+        function CloseLoading() {
+            $("#loadingDiv").hide();
+        }
+    </script>
+</head>
+<body>
+    <div class="header">
+        <div class="am-g">
+            <h1>活动后台 - 登录</h1>
+        </div>
+        <hr />
+    </div>
+    <div class="am-g">
+        <div class="am-u-lg-6 am-u-md-8 am-u-sm-centered">
+            <form method="post" class="am-form" id="form">
+                <label for="account">账号:</label>
+                <input type="text" name="account" value="">
+                <br>
+                <label for="password">密码:</label>
+                <input type="password" name="password" value="">
+                <br>
+                <div class="am-cf">
+                    <input type="button" id="btnSubmit" name="" value="登 录" class="am-btn am-btn-primary  am-btn-block" onclick="Login()">
+                </div>
+            </form>
+            <hr>
+            <p>版权信息</p>
+        </div>
+    </div>
+    @Scripts.Render("~/Scripts/Login")
+
+    <script type="text/javascript">
+
+        function Login() {
+
+                if (document.forms[0].account.value == "") {
+                    $.Nuoya.alert("请输入账号");
+                    return false;
+                }
+                if (document.forms[0].password.value == "") {
+                    $.Nuoya.alert("请输入密码");
+                    return false;
+                }
+                $.Nuoya.action("/Login/Submit", { password: document.forms[0].password.value, account: document.forms[0].account.value }, function (data) {
+                    if (data!=null) {
+                        window.location.href = "@(string.IsNullOrEmpty(Request["redirecturl"])?"/home/index": Request["redirecturl"])";
+                    }
+                    else {
+                        $.Nuoya.alert(data);
+                    }
+                });
+        }
+    </script>
+</body>
+</html>

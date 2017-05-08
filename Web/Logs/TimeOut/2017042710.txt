@@ -1,0 +1,13 @@
+Time:2017/4/27 10:13:18-本次请求耗时 6.687 秒.
+Url:http://localhost:5068/
+UserHostAddress:::1;;
+WebServer:::1
+
+
+Time:2017/4/27 10:14:47-本次请求耗时 16.016 秒.
+Url:http://localhost:5068/Admin/TopicUserJoin/GetPageList?_token=
+UrlReferrer:http://localhost:5068/admin/TopicUserJoin/index?meetId=52aacad7422b4234ab88a664f2fe75b9
+UserHostAddress:::1;;
+WebServer:::1
+
+

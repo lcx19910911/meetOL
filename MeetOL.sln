@@ -1,0 +1,128 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web", "Web", "{F965447F-1825-4AB0-A94F-DA08E9342749}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{B79A4B1E-6DAA-4761-9D2F-3987512F031F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Untity", "Untity", "{AE62B11D-2303-4B9D-97D9-95FA3A5DCC0A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Service", "Service", "{BDB6BBD8-EE59-46B7-8453-BBAB4F2D2EE3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MPUtil", "MPUtil\MPUtil.csproj", "{3BBC72D2-FB0D-4490-ACFA-C62B31A95AB5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "Core\Core.csproj", "{54F62FCF-237F-4071-8D89-2B3A4AC8A2AF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MeetOL", "Web\MeetOL.csproj", "{164FA3F1-4A12-458D-B979-10B29CAE9622}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Domain\Domain.csproj", "{C11F259A-56D2-4A64-BD34-E613F43212D8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Enum", "Enum\Enum.csproj", "{8C23E9B1-34EC-4E41-A340-A70C99C63A07}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Repository", "Repository\Repository.csproj", "{782F0F81-D0D1-49D3-9464-E77DAA8B3B06}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IService", "IService\IService.csproj", "{7F5A4474-B443-45BB-9493-D74C828893FB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Service", "Service\Service.csproj", "{037FB642-136E-474A-9D35-3B28B8AA7D2F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Model", "Model\Model.csproj", "{AFF1C068-C80B-4888-9F09-B0850D0FBB72}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "lib", "lib", "{636BADB9-91CF-4679-A9F1-204C4D8D7CE7}"
+	ProjectSection(SolutionItems) = preProject
+		lib\Antlr3.Runtime.dll = lib\Antlr3.Runtime.dll
+		lib\AutoMapper.dll = lib\AutoMapper.dll
+		lib\EntityFramework.dll = lib\EntityFramework.dll
+		lib\EntityFramework.SqlServer.dll = lib\EntityFramework.SqlServer.dll
+		lib\ICSharpCode.SharpZipLib.dll = lib\ICSharpCode.SharpZipLib.dll
+		lib\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll = lib\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+		lib\Microsoft.Practices.ServiceLocation.dll = lib\Microsoft.Practices.ServiceLocation.dll
+		lib\Microsoft.Practices.Unity.Configuration.dll = lib\Microsoft.Practices.Unity.Configuration.dll
+		lib\Microsoft.Practices.Unity.dll = lib\Microsoft.Practices.Unity.dll
+		lib\Microsoft.Practices.Unity.Interception.Configuration.dll = lib\Microsoft.Practices.Unity.Interception.Configuration.dll
+		lib\Microsoft.Practices.Unity.Interception.dll = lib\Microsoft.Practices.Unity.Interception.dll
+		lib\Microsoft.Practices.Unity.Mvc.dll = lib\Microsoft.Practices.Unity.Mvc.dll
+		lib\Microsoft.Practices.Unity.RegistrationByConvention.dll = lib\Microsoft.Practices.Unity.RegistrationByConvention.dll
+		lib\Microsoft.Web.Infrastructure.dll = lib\Microsoft.Web.Infrastructure.dll
+		lib\Newtonsoft.Json.dll = lib\Newtonsoft.Json.dll
+		lib\NLog.dll = lib\NLog.dll
+		lib\NPOI.dll = lib\NPOI.dll
+		lib\NPOI.OOXML.dll = lib\NPOI.OOXML.dll
+		lib\NPOI.OpenXml4Net.dll = lib\NPOI.OpenXml4Net.dll
+		lib\NPOI.OpenXmlFormats.dll = lib\NPOI.OpenXmlFormats.dll
+		Repository\packages.config = Repository\packages.config
+		lib\System.Net.Http.Formatting.dll = lib\System.Net.Http.Formatting.dll
+		lib\System.Web.Helpers.dll = lib\System.Web.Helpers.dll
+		lib\System.Web.Http.dll = lib\System.Web.Http.dll
+		lib\System.Web.Http.WebHost.dll = lib\System.Web.Http.WebHost.dll
+		lib\System.Web.Mvc.dll = lib\System.Web.Mvc.dll
+		lib\System.Web.Optimization.dll = lib\System.Web.Optimization.dll
+		lib\System.Web.Razor.dll = lib\System.Web.Razor.dll
+		lib\System.Web.Webpages.Deployment.dll = lib\System.Web.Webpages.Deployment.dll
+		lib\System.Web.Webpages.dll = lib\System.Web.Webpages.dll
+		lib\System.Web.Webpages.Razor.dll = lib\System.Web.Webpages.Razor.dll
+		lib\WebActivatorEx.dll = lib\WebActivatorEx.dll
+		lib\WebGrease.dll = lib\WebGrease.dll
+		lib\zxing.dll = lib\zxing.dll
+		lib\zxing.presentation.dll = lib\zxing.presentation.dll
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3BBC72D2-FB0D-4490-ACFA-C62B31A95AB5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3BBC72D2-FB0D-4490-ACFA-C62B31A95AB5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3BBC72D2-FB0D-4490-ACFA-C62B31A95AB5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3BBC72D2-FB0D-4490-ACFA-C62B31A95AB5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{54F62FCF-237F-4071-8D89-2B3A4AC8A2AF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{54F62FCF-237F-4071-8D89-2B3A4AC8A2AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{54F62FCF-237F-4071-8D89-2B3A4AC8A2AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{54F62FCF-237F-4071-8D89-2B3A4AC8A2AF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{164FA3F1-4A12-458D-B979-10B29CAE9622}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{164FA3F1-4A12-458D-B979-10B29CAE9622}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{164FA3F1-4A12-458D-B979-10B29CAE9622}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{164FA3F1-4A12-458D-B979-10B29CAE9622}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C11F259A-56D2-4A64-BD34-E613F43212D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C11F259A-56D2-4A64-BD34-E613F43212D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C11F259A-56D2-4A64-BD34-E613F43212D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C11F259A-56D2-4A64-BD34-E613F43212D8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8C23E9B1-34EC-4E41-A340-A70C99C63A07}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8C23E9B1-34EC-4E41-A340-A70C99C63A07}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8C23E9B1-34EC-4E41-A340-A70C99C63A07}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8C23E9B1-34EC-4E41-A340-A70C99C63A07}.Release|Any CPU.Build.0 = Release|Any CPU
+		{782F0F81-D0D1-49D3-9464-E77DAA8B3B06}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{782F0F81-D0D1-49D3-9464-E77DAA8B3B06}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{782F0F81-D0D1-49D3-9464-E77DAA8B3B06}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{782F0F81-D0D1-49D3-9464-E77DAA8B3B06}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7F5A4474-B443-45BB-9493-D74C828893FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7F5A4474-B443-45BB-9493-D74C828893FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7F5A4474-B443-45BB-9493-D74C828893FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7F5A4474-B443-45BB-9493-D74C828893FB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{037FB642-136E-474A-9D35-3B28B8AA7D2F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{037FB642-136E-474A-9D35-3B28B8AA7D2F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{037FB642-136E-474A-9D35-3B28B8AA7D2F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{037FB642-136E-474A-9D35-3B28B8AA7D2F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AFF1C068-C80B-4888-9F09-B0850D0FBB72}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AFF1C068-C80B-4888-9F09-B0850D0FBB72}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AFF1C068-C80B-4888-9F09-B0850D0FBB72}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AFF1C068-C80B-4888-9F09-B0850D0FBB72}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{3BBC72D2-FB0D-4490-ACFA-C62B31A95AB5} = {AE62B11D-2303-4B9D-97D9-95FA3A5DCC0A}
+		{54F62FCF-237F-4071-8D89-2B3A4AC8A2AF} = {AE62B11D-2303-4B9D-97D9-95FA3A5DCC0A}
+		{164FA3F1-4A12-458D-B979-10B29CAE9622} = {F965447F-1825-4AB0-A94F-DA08E9342749}
+		{C11F259A-56D2-4A64-BD34-E613F43212D8} = {B79A4B1E-6DAA-4761-9D2F-3987512F031F}
+		{8C23E9B1-34EC-4E41-A340-A70C99C63A07} = {B79A4B1E-6DAA-4761-9D2F-3987512F031F}
+		{782F0F81-D0D1-49D3-9464-E77DAA8B3B06} = {B79A4B1E-6DAA-4761-9D2F-3987512F031F}
+		{7F5A4474-B443-45BB-9493-D74C828893FB} = {BDB6BBD8-EE59-46B7-8453-BBAB4F2D2EE3}
+		{037FB642-136E-474A-9D35-3B28B8AA7D2F} = {BDB6BBD8-EE59-46B7-8453-BBAB4F2D2EE3}
+		{AFF1C068-C80B-4888-9F09-B0850D0FBB72} = {B79A4B1E-6DAA-4761-9D2F-3987512F031F}
+	EndGlobalSection
+EndGlobal

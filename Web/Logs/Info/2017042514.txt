@@ -1,0 +1,73 @@
+Time:2017/4/25 14:22:06-UserId-  682f28bcfd124992908f2588c36d8a9f
+Url:http://localhost:5068/home/index
+UrlReferrer:http://localhost:5068/login/quit
+UserHostAddress:::1;;
+WebServer:::1
+
+
+Time:2017/4/25 14:23:14-UserId-  682f28bcfd124992908f2588c36d8a9f
+Url:http://localhost:5068/home/index
+UrlReferrer:http://localhost:5068/meet/index
+UserHostAddress:::1;;
+WebServer:::1
+
+
+Time:2017/4/25 14:24:09-UserId-  682f28bcfd124992908f2588c36d8a9f
+Url:http://localhost:5068/
+UserHostAddress:127.0.0.1;;
+WebServer:127.0.0.1
+
+
+Time:2017/4/25 14:25:02-UserId-  682f28bcfd124992908f2588c36d8a9f
+Url:http://localhost:5068/home/index
+UrlReferrer:http://localhost:5068/login/quit
+UserHostAddress:::1;;
+WebServer:::1
+
+
+Time:2017/4/25 14:40:33-UserId-  682f28bcfd124992908f2588c36d8a9f
+Url:http://localhost:5068/
+UserHostAddress:::1;;
+WebServer:::1
+
+
+Time:2017/4/25 14:40:45-UserId-  682f28bcfd124992908f2588c36d8a9f
+Url:http://localhost:5068/home/index
+UrlReferrer:http://localhost:5068/login/quit
+UserHostAddress:::1;;
+WebServer:::1
+
+
+Time:2017/4/25 14:40:58-1:52aacad7422b4234ab88a664f2fe75b9,682f28bcfd124992908f2588c36d8a9f
+Url:http://localhost:5068/meet/doBindApply
+UrlReferrer:http://localhost:5068/meet/join
+UserHostAddress:::1;;
+WebServer:::1
+
+
+Time:2017/4/25 14:40:58-13559191390,112,121,1212,682f28bcfd124992908f2588c36d8a9f
+Url:http://localhost:5068/meet/doBindApply
+UrlReferrer:http://localhost:5068/meet/join
+UserHostAddress:::1;;
+WebServer:::1
+
+
+Time:2017/4/25 14:46:54-UserId-  682f28bcfd124992908f2588c36d8a9f
+Url:http://localhost:5068/
+UserHostAddress:::1;;
+WebServer:::1
+
+
+Time:2017/4/25 14:47:14-UserId-  2c1a2563dd644fc7ac08f8707fc2c280
+Url:http://localhost:5068/home/index
+UrlReferrer:http://localhost:5068/login/quit
+UserHostAddress:::1;;
+WebServer:::1
+
+
+Time:2017/4/25 14:51:57-UserId-  2c1a2563dd644fc7ac08f8707fc2c280
+Url:http://localhost:5068/
+UserHostAddress:::1;;
+WebServer:::1
+
+

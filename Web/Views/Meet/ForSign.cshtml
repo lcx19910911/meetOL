@@ -1,0 +1,52 @@
+﻿@model bool
+@{
+    ViewBag.Title = "会议签到";
+}
+<style type="text/css">
+    body {
+        background-color: #fff;
+    }
+
+    .info > div {
+        overflow: hidden;
+        background: #f5f5f5;
+        padding: 1rem;
+        margin-top: 1rem;
+    }
+
+    .info input {
+        border: 0;
+        border-bottom: 1px solid #aaa;
+        background: inherit;
+    }
+
+    .audit-status:before {
+        content: "审核状态：";
+        color: #333;
+    }
+
+    .auditing {
+        color: #3C3;
+    }
+
+    .audited {
+        color: #f33;
+    }
+</style>
+<div class="wrap">
+    <div class="article">
+        <a href="javascript:history.go(-1);" class="back fl">&lt;</a>
+        <span class="fr" style="padding:0 1.5rem;">&nbsp;</span>
+        <h2>会议签到</h2>
+    </div>
+</div>
+<div class="l">
+    @if (Model)
+            {
+        <div class="w80 txt-center m0 mt40 f4 audit-status auditing">签到成功</div>
+    }
+    else
+    {
+        <div class="w80 txt-center m0 mt40 f4 audit-status auditing">签到失败</div>
+    }
+</div>

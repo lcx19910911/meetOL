@@ -1,0 +1,242 @@
+﻿
+  /*公共部分*/
+body {width: 100%;margin: 0 auto;padding: 0px 0px;font-family: "Arial", "Microsoft YaHei", "Tahoma";max-width: 650px;position:relative;background-color:#F5F5F5;-webkit-tap-highlight-color:rgba(0,0,0,0); }
+ ul{padding:0px 0px;margin:0px 0px;}
+ li{list-style-type:none}
+ input {outline:none;}
+ a{text-decoration:none;color:#000000}
+ .article{width:100%;text-align:center;background-color: #31a5f8;z-index:999}
+ .article h2{margin:0px 0px 0px 0px;color: #fff;line-height:50px}
+footer {width:100%;max-width:650px;position:fixed;bottom:0px;height:50px;background-color:#E8E7E8}  
+footer a{width:25%;display:inline-block;float:left;text-align:center}  
+footer a span{display:inline-block;padding:5px 10px 0px 10px;width:20px;}
+footer a span img{width:100%;background-size:100% 100%;}
+footer a b{font-size:12px;line-height:20px;color:#EC8D2A;float: left;width: 100%;} 
+/*.dowm_all_content{max-width: 650px;width:100%;min-height:0;position:absolute;left:0;top:0;z-index:-1;
+   background: url('../img/bg.png') 0 0 no-repeat;background-size:100% 100%;padding-bottom: 80px;}*/
+  
+   /*会议报名*/
+.info{width:100%;text-align: center;padding: 0px 0px 20px 0;}
+.info ul{padding:0px 14px 10px 14px;}
+.info ul li{background-color:#ffffff;height:36px;margin:8px 0px;overflow: hidden;padding:6px 0px}
+.info ul li span{float:left; font-size:14px;color:#000;line-height:36px;overflow: hidden;text-overflow: ellipsis;
+    white-space: nowrap;display: inline-block;word-wrap: normal;width:60px;}
+.info ul li input{height:34px; border: none;float:left;font-size: 14px;width:35%;border-width:0;border-color:white;border-style:none;
+background:none;}
+.info ul li select{border:1px solid #E8E7E8;height:26px;margin-top:6px;float:left;width:90px; appearance:none;
+  -moz-appearance:none;-webkit-appearance:none; background: url('../img/xiala.png') no-repeat scroll right center transparent;
+ padding:0px 14px;border-radius: 3px;background-size: 20px 20px;}
+.info ul li a{width:22px;float:left;display: inline-block;padding: 8px 0px;}
+.info ul li a img{width:22px}
+.info ul li i{display:none;font-style:normal;color:red;font-size: 12px;float:left;padding:10px 0px;overflow: hidden;text-overflow: ellipsis;
+    white-space: nowrap;word-wrap: normal;width:116px;text-align: left;}
+#btnsavedata {width:60%;height:30px;}
+.user_pic{width:100%;text-align:center}
+.user_pic div{padding: 14px 40px 0px 40px;}
+.user_pic img{width:100%;background-size:cover}
+.ack{text-align:center}
+.ack input{width: 50%;border-radius:6px;height: 30px;margin-top:10px;background-color:#31a5f8}
+
+.dowm_all_content{max-width: 650px;width:100%;min-height:0;position:absolute;left:0;top:0;z-index:-1;
+   background: url('../img/bg.png') 0 0 no-repeat;background-size:100% 100%;padding-bottom: 80px;}
+.common{padding:14px 40px 10px 40px;}   
+.common li{background-color:#F2EFF8;margin:8px 0px;float:left;width:100%}
+.common li a span{width:32px;display: inline-block;float:left;padding: 8px 10px 8px 10px;}
+.common  li span img{width:100%;background-size:100% 100%;}
+.common li a b{font-size:14px;color:#636363;float:left;line-height:50px;padding: 0px 15px;}
+.common li a{display: inline-block;width: 100%;}
+ 
+ /*下载内容*/ 
+.order_content{padding:0px 14px 10px 14px;} 
+.order_content p{height:30px;}
+.ordersubmint{ width: 50%;
+    padding: 10px 0;
+    background-color: #00a0ea;
+    text-align: center;
+    border: none;
+    color: #ffffff;
+    font-family: "微软雅黑";
+    -webkit-appearance: none;
+    border-radius: 5px; } 
+
+.order_content p label{display: inline-block;width: 80px;text-align: right;float:left} 
+.order_content p span{padding: 0 14px;display: block; width: 60%;white-space: nowrap;text-overflow: ellipsis;overflow: hidden; float: left;}  
+.order_content p i{float:left}
+ .demeanour_more {width: 70%;text-align: center;background-color: #31a5f8;color: #fff; padding: 10px 0; border: none;-webkit-appearance: none; cursor: pointer;border-radius: 6px; margin-left: 15%; }
+.applyNotice-under{text-align: center;}
+  /*节目评选*/
+.out_program{width:100%}
+.program{margin:0 14px;} 
+.program p{width: 100%;padding: 16px 0px;margin:0px 0px  } 
+.program p span{padding: 0px 20px;}
+.program_info{padding:0 12px;margin:0px 0px;} 
+.program_info li{height: 30px;} 
+.program_info li label{display: block; width:78%;white-space: nowrap;text-overflow: ellipsis;overflow: hidden; float: left;}
+
+.program li span{float: left;padding: 0px 5px;}
+.tip{line-height: 35px;padding: 0px 14px;text-align:center}
+.tip span{font-size:14px;color:red}
+.choosesubmint{width:100%;text-align:center;margin-top:8px;}
+.choosesubmint input{width:70%;height:40px;border-radius: 6px;font-size:16px}    
+
+/*会议提问*/   
+#question{margin:0px 20px;}
+#question span{font-size:14px;color:#000;padding:0px 8px;
+    line-height:40px;}
+#content{width:100%;border-radius: 4px;}
+.Submit{width:100%;text-align:center;margin-top:30px;} 
+#questionSubmit{width:70%;height:40px;border-radius: 6px;font-size:16px}    
+#tip{margin:6px 32px;text-align:center}
+#tip span{color:red;font-size:14px;padding:0px 14px}    
+   /*资料下载*/
+.short_introduce{width:100%;}   
+.short_introduce span{display:block;width:100%;text-align:center;padding: 14px 0px;}  
+.short_introduce p{padding:12px;text-indent:2em;margin: 0 0;}        
+
+.content img{ width:100%;}      
+.all_content
+{
+    margin-bottom:60px;
+    }   
+    
+    
+    
+    
+    h2 {
+    text-align: center;
+    margin-top: 40px;
+    font-size: 35px;
+    font-family: STKaiti;
+
+}
+
+.seat-middle-content {
+    margin-bottom: 50px;
+    width: 100%;
+}
+.program {
+    margin: 0 14px;
+}
+.big-title {
+    width: 100%;
+    height: 30px;
+    line-height: 30px;
+    color: #fe3d3d;
+    text-align: center;
+    font-size: 18px;
+    overflow: hidden;
+    display: block;
+    font-weight: bold;
+}
+.small-title{width: 100%;
+    height: 25px;
+    overflow: hidden;
+    box-sizing: border-box;
+    border-bottom: 2px solid rgba(249, 133, 96, 0.58);
+    text-align: center;
+    margin-top: 5px;
+    margin-bottom: 0px;
+} 
+
+.small-title li:first-child {
+    color: #fe3d3d;
+    width: 15%;
+    height: 100%;
+    line-height: 25px;
+    float: left;
+    font-size: 15px;
+}  
+.small-title li{
+    color: #fe3d3d;
+    width: 25%;
+    height: 100%;
+    line-height: 25px;
+    float: left;
+    font-size: 15px;
+} 
+.small-title li:last-child{  color: #fe3d3d;
+    width: 35%;
+    height: 100%;
+    line-height: 25px;
+    float: left;
+    font-size: 12px;position:relative}  
+.small-title li {
+    color: #fe3d3d;
+    width: 25%;
+    height: 100%;
+    line-height: 25px;
+    float: left;
+    font-size: 15px;
+
+} 
+.small-title li span{font-size: 12px;float:none;
+                     /* width:32px; */
+                     overflow: hidden; vertical-align: middle;text-overflow: ellipsis;
+    white-space: nowrap;display: inline-block;word-wrap: normal;  }
+.small-title li img{width:20px; position: absolute;right: 2px;top: 0px;}    
+.seat-under-content {
+    width: 100%;
+    overflow: hidden;
+    margin-top: 10px;
+}
+.under-firstList {
+    width: 100%;
+    overflow: hidden;
+}
+.input_small_title {
+    width: 100%;
+    height: 25px;
+    line-height: 25px;
+    float: left;
+    text-align: center;
+    margin-top: 3px;
+    color: rgba(249, 133, 96, 0.58);
+}
+.under-secondList {
+    width: 100%;
+    overflow: hidden;
+    padding-bottom: 20px;
+}    
+.under-secondList input {
+    -webkit-appearance: none;
+    height: 42px;
+    width: 75%;
+    margin: 5px auto;
+    color: #FFF;
+    font-size: 25px;
+    font-weight: bold;
+    background-color: #31a5f8;
+    border-radius: 5px;
+    font-family: STKaiti;
+    display: block;
+    border: none;
+    outline: none;
+} 
+
+/*2017.04.21将头部修改为固定在屏幕顶部*/
+.article {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    max-width: 650px;
+    min-width: 320px;
+}
+.article a {
+    padding-right: 2rem;
+}
+.article h2 {
+    font-size: 24px;
+}
+.article * {
+    line-height: 60px;
+    color: #fff;
+    font-size: 20px;
+    padding: 0 0.5em;
+}
+.article a:hover, .article a:active {
+    color: #fff;
+}
+body {
+    padding: 60px 0;
+    box-sizing: border-box;
+}

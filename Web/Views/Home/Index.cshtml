@@ -1,0 +1,34 @@
+﻿@model Meet
+@{
+    ViewBag.Title = Model.Name;
+}
+<link href="~/Styles/meetingindex.css" rel="stylesheet" />
+<script src="~/Scripts/Meet/my.js"></script>
+<script src="~/Scripts/Meet/WeixinApi.js"></script>
+<div class="all">
+    @if (!(bool)ViewBag.IsHadJoin)
+    {
+        <a href="/meet/join" style="position: fixed; right: 1%; top: 31%; width: 70px; height: 70px; z-index: 10;">
+            <img src="~/Images/bm.png" alt="" style="display: block; width: 100%; height: 100%;">
+        </a>
+    }
+    <div class="article">
+        <h2>会议简介</h2>
+    </div>
+    <div class="out_time_address" style="margin-top: 50px;">
+        <div class="in_time_address">
+            <div class="time_address">
+                <p><img src="/images/icon_time2.png"><span>@(Model.Name) </span></p>
+            </div>
+            <div class="time_address">
+                <p><img src="/images/icon_time2.png"><span>@(Model.OngoingTime.ToString("yyyy年MM月dd日"))- @(Model.OverTime.ToString("yyyy年MM月dd日"))</span></p>
+            </div>
+            <div class="time_address buttonKey-GPS" onclick="wx.openLocation();">
+                <p><img src="/images/xd_icon_5.png" style="height:16px;width:13px"><span>@(Model.Address)</span></p>
+            </div>
+        </div>
+    </div>
+    <div class="content">
+        @Html.Raw(Model.Content)
+    </div>
+</div>

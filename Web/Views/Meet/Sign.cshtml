@@ -1,0 +1,136 @@
+﻿@{
+    ViewBag.Title = "会议签到";
+}
+<style type="text/css">
+    body {
+        background-color: #fff;
+    }
+
+    .meet-banner img {
+        display: block;
+        width: 100%;
+    }
+
+    .meet-code {
+        width: 16rem;
+        height: 16rem;
+    }
+
+        .meet-code img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            padding: 0.5rem;
+            background-color: #eee0d3;
+        }
+
+    .meet-txt {
+        font-size: 1.5rem;
+        color: #000;
+    }
+
+    /* 2017.4.25 */
+    .l {
+        background: url(./img/meet-bg.jpg) no-repeat;
+        background-size: 100% 100%;
+        background-position: center;
+    }
+
+    .meet-pro {
+        width: 80%;
+        line-height: 1.5rem;
+        font-size: 0.9rem;
+        color: #000;
+    }
+
+        .meet-pro:before {
+            content: "友情提示：";
+            font-size: 1.2rem;
+            font-weight: 500;
+            color: #dd0000;
+        }
+
+    .meet-ul {
+        text-align: left;
+        padding-left: 3.5rem;
+    }
+
+        .meet-ul li {
+            line-height: 1.8rem;
+        }
+
+            .meet-ul li:nth-child(1):before {
+                content: "步骤一: ";
+                color: #dd0000;
+            }
+
+            .meet-ul li:nth-child(2):before {
+                content: "步骤二: ";
+                color: #dd0000;
+            }
+
+            .meet-ul li:nth-child(3):before {
+                content: "步骤三: ";
+                color: #dd0000;
+            }
+
+    /*2017.4.25-12:00*/
+    footer a {
+        width: 25%;
+        display: inline-block;
+        float: left;
+        text-align: center;
+    }
+</style>
+<script src="~/Scripts/jquery.qrcode.min.js"></script>
+<div class="wrap">
+    <div class="meet-banner">
+        <img src="/images/meet-banner.jpg">
+    </div>
+</div>
+<div class="meet-con">
+    <!--2017.4.25-->
+    <div class="meet-pro m0 mt10 txt-center">
+        <ul class="meet-ul">
+            <li> 进入微信,点击右上角“+”</li>
+            <li> 在弹出框中点击“扫一扫”</li>
+            <li> 即可扫描二维码进行会议签到</li>
+        </ul>
+    </div>
+    <div class="meet-code m0 mt30 cy-codeImg" style="margin:0 auto;width:200px;">
+    </div>
+    <div class="meet-txt m0 mt20 txt-center">
+        扫二维码签到
+    </div>
+    <div class="mt50">&nbsp;</div>
+</div>
+@if (!(bool)ViewBag.Sign)
+{
+<script>
+    $(function () {
+
+        
+        $(".cy-codeImg").qrcode({
+            width: 200, //宽度 
+            height: 200, //高度 
+            text:'@((string)ViewBag.Url)' //任意内容 
+        });
+        setInterval(function () {
+            $.ajax({
+                url: "/meet/GetSignUrl",
+                success: function (data) {
+                        $(".cy-codeImg").qrcode({
+                            width: "100%", //宽度 
+                            height: "100%", //高度 
+                            text: data.Result //任意内容 
+                        });
+                }
+            })
+        },10000)
+    })
+</script>
+}
+else
+{
+    <div class="w80 txt-center m0 mt40 f4 audit-status auditing">已签到</div>
+}

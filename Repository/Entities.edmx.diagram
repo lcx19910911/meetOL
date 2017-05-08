@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="d607267f418742b9b1f9bb870bf1f7e7" Name="Diagram1">
+        <EntityTypeShape EntityType="PlugInsModel.Prize" Width="1.5" PointX="0.625" PointY="4.625" />
+        <EntityTypeShape EntityType="PlugInsModel.DinnerShop" Width="1.5" PointX="2.625" PointY="5.5" />
+        <EntityTypeShape EntityType="PlugInsModel.OrderDetails" Width="1.5" PointX="8.625" PointY="6.875" />
+        <EntityTypeShape EntityType="PlugInsModel.DinnerOrder" Width="1.5" PointX="4.625" PointY="4" />
+        <EntityTypeShape EntityType="PlugInsModel.Person" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="PlugInsModel.ScratchCard" Width="1.5" PointX="2.625" PointY="0.625" />
+        <EntityTypeShape EntityType="PlugInsModel.UserJoinCounter" Width="1.5" PointX="10.375" PointY="6" />
+        <EntityTypeShape EntityType="PlugInsModel.DinnerDish" Width="1.5" PointX="8.75" PointY="1.375" />
+        <EntityTypeShape EntityType="PlugInsModel.UserScore" Width="1.5" PointX="4.75" PointY="10.75" />
+        <EntityTypeShape EntityType="PlugInsModel.UserSign" Width="1.5" PointX="6.75" PointY="10.75" />
+        <EntityTypeShape EntityType="PlugInsModel.User" Width="1.5" PointX="12.375" PointY="4.75" />
+        <EntityTypeShape EntityType="PlugInsModel.ScoreDetails" Width="1.5" PointX="0.75" PointY="10.75" />
+        <EntityTypeShape EntityType="PlugInsModel.UserPuzzle" Width="1.5" PointX="12.375" PointY="8.75" />
+        <EntityTypeShape EntityType="PlugInsModel.Category" Width="1.5" PointX="5.375" PointY="0.75" />
+        <EntityTypeShape EntityType="PlugInsModel.Goods" Width="1.5" PointX="9.375" PointY="9.75" />
+        <EntityTypeShape EntityType="PlugInsModel.GoodsDetails" Width="1.5" PointX="11.375" PointY="0.75" />
+        <EntityTypeShape EntityType="PlugInsModel.Recommend" Width="1.5" PointX="11.375" PointY="11.75" />
+        <EntityTypeShape EntityType="PlugInsModel.GoodsOrder" Width="1.5" PointX="13.375" PointY="0.75" />
+        <EntityTypeShape EntityType="PlugInsModel.Puzzle" Width="1.5" PointX="3.375" PointY="13.75" />
+        </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

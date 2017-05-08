@@ -1,0 +1,26 @@
+﻿@model List<Domain.DownLoadModel>
+@{
+    ViewBag.Title = "资料下载";
+}
+
+
+<div class="all_content">
+    <div class="article">
+        <a href="javascript:history.go(-1);" class="back fl">&lt;</a>
+        <span class="fr" style="padding:0 1.5rem;">&nbsp;</span>
+        <h2>
+            资料下载
+        </h2>
+    </div>
+    <div class="order_content" style="margin-top:10px;">
+
+        @if (Model != null && Model.Count > 0)
+        {
+            foreach (var item in Model)
+            {
+                <p><span>@(item.Name)</span><a  style="color:red" href="@(item.Path)"><label>下载</label></a></p>
+            }
+        }
+
+    </div>
+</div>

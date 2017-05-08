@@ -1,0 +1,30 @@
+Time:2017/4/24 18:00:37-本次请求耗时 4.531 秒.
+Url:http://localhost:5068/
+UserHostAddress:::1;;
+WebServer:::1
+
+
+Time:2017/4/24 18:03:15-本次请求耗时 11.047 秒.
+Url:http://localhost:5068/home/index?meetId=52aacad7422b4234ab88a664f2fe75b9
+UserHostAddress:::1;;
+WebServer:::1
+
+
+Time:2017/4/24 18:03:15-本次请求耗时 11.422 秒.
+Url:http://localhost:5068/
+UserHostAddress:::1;;
+WebServer:::1
+
+
+Time:2017/4/24 18:04:34-本次请求耗时 8.75 秒.
+Url:http://localhost:5068/
+UserHostAddress:::1;;
+WebServer:::1
+
+
+Time:2017/4/24 18:04:34-本次请求耗时 8.75 秒.
+Url:http://localhost:5068/home/index?meetId=52aacad7422b4234ab88a664f2fe75b9
+UserHostAddress:::1;;
+WebServer:::1
+
+

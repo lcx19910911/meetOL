@@ -1,0 +1,130 @@
+﻿@model List<MeetPlan>
+@{
+    ViewBag.Title = "演讲嘉宾评选";
+}
+<link href="~/Styles/newCom.css" rel="stylesheet" />
+<link href="~/Styles/index.css" rel="stylesheet" />
+<link href="~/Styles/mobie-style.css" rel="stylesheet" />
+<style type="text/css">
+    .msg {
+        border-bottom: 1px solid rgba(249, 133, 96, 0.38);
+    }
+
+    .small-title li:last-child {
+        width: 15%;
+        font-size: 15px;
+    }
+
+    .small-title li:nth-child(2) {
+        width: 40%;
+    }
+
+    .small-title li:nth-child(3) {
+        width: 15%;
+    }
+    
+    .small-title li:nth-child(4) {
+        width: 15%;
+    }
+    .msg li img {
+        height: 2em;
+    }
+</style>
+
+
+<div class="all_content">
+    <div class="article">
+        <a href="javascript:history.go(-1);" class="back fl">&lt;</a>
+        <span class="fr" style="padding:0 1.5rem;">&nbsp;</span>
+        <h2>演讲嘉宾评选</h2>
+
+    </div>
+    </div>
+
+    <div class="seat-all-content">
+        <div class="seat-middle-content">
+            <div class="program">
+                <div class="program-title">
+
+                    <ul class="small-title">
+                        <li>编号</li>
+                        <li>标题</li>
+                        <li>嘉宾</li>
+                        <li>点赞数</li>
+                        <li></li>
+                    </ul>
+                </div>
+
+                @if (Model != null && Model.Count > 0)
+            {
+                var index = 0;
+                foreach (var item in Model)
+                {
+                    index++;
+                        <ul class="msg">
+                            <li>
+                                @(index)
+                            </li>
+                            <li>
+                                @(item.Name)
+                            </li>
+                            <li>
+                                @(item.Speaker.Name)
+                            </li>
+                            <li>
+                                @(item.VoteCount)
+                            </li>
+                            <li>
+                                @if (item.CanVote)
+                                {
+                                    <img src="/images/good.png" alt="点赞" class="goodit" data-planId="@(item.ID)">
+                                }
+                                else
+                                {
+                                    <img src="/images/good2.png" alt="已点赞">
+                                }
+                            </li>
+                        </ul>
+                    }
+                }
+
+            </div>
+        </div>
+    </div>
+
+    <div id="tanchu" style="display:none;">
+        <div id="tipo">
+        </div>
+        <div class="tan">
+            <p>
+                投票成功
+            </p>
+            <p>
+                感谢您的参与
+            </p>
+            <input type="button" value="确定" class="innBtn" onclick="window.location.href = '/meet/vote';">
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+
+            $('.goodit').click(function () {
+                var curtarget = $(this);
+                var planId = curtarget.attr("data-planId")
+                $.ajax({
+                    type: "POST",
+                    url: "/meet/AddPlanJoin",
+                    data: { planId: planId },
+                    success: function (data) {
+                        if (data.Result) {
+                            $("#tanchu").show();
+                        }
+                        else {
+                            alert(data.ErrorDesc);
+                        }
+                    }
+                });
+            })
+        });
+    </script>

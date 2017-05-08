@@ -1,0 +1,226 @@
+﻿@model List<MeetTopic>
+@{
+    ViewBag.Title = "话题圈";
+}
+<link href="~/Styles/newCom.css" rel="stylesheet" />
+<link href="~/Styles/mobie-style.css" rel="stylesheet" />
+<style type="text/css">
+    body {
+        background-color: #fff;
+    }
+
+    .q-box li {
+        overflow: hidden;
+    }
+
+    .user-box {
+        overflow: hidden;
+    }
+
+    .head-portrait {
+        float: left;
+        width: 20%;
+    }
+
+    .r-cont {
+        float: right;
+        width: 80%;
+    }
+
+    .head-portrait img {
+        display: block;
+        width: 3.5rem;
+        height: 3.5rem;
+    }
+
+    .user-name {
+        color: #39f;
+    }
+
+    .r-cont p {
+    }
+
+    .comment {
+        background: #efefef;
+        padding: 1rem 0.5rem;
+        word-wrap: break-word;
+        margin-top: 0.6rem;
+    }
+
+        .comment p {
+            margin-bottom: 0.5rem;
+        }
+
+    .comment-cont:before {
+        content: "：";
+    }
+
+    .reply-box {
+        overflow: hidden;
+    }
+
+        .reply-box span {
+            float: right;
+            color: #39f;
+        }
+
+    .publish-page {
+        display: none;
+        position: fixed;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background: #fff;
+        z-index: 100;
+    }
+
+    .xianzhi {
+        width: 80%;
+        display: block;
+        margin: 0 auto;
+        font-size: 15px;
+        border-radius: 5px;
+        box-sizing: border-box;
+        height: 20px;
+    }
+
+        .xianzhi em {
+            float: right;
+        }
+
+    #tanchu {
+        display: none;
+    }
+</style>
+<div class="wrap">
+    <div class="article">
+        <a href="javascript:history.go(-1);" class="back fl">&lt;</a>
+        <span class="fr" style="padding:0 1.5rem;">&nbsp;</span>
+        <h2>话题圈</h2>
+    </div>
+</div>
+<div class="l">
+    <div class="q-box w95 m10">
+        <ul>
+            @if (Model != null && Model.Count > 0)
+            {
+                foreach (var item in Model)
+                {
+                    <li>
+                        <div class="user-box">
+                            <div class="head-portrait">
+                                <img src="@(item.Speaker.HeadImages)">
+                            </div>
+                            <div class="r-cont">
+                                <h3 class="user-name">@(item.Speaker.Name)</h3>
+                                <p>
+                                    @(item.Name)
+                                </p>
+                            </div>
+                        </div>
+                        <div class="reply-box" data-id="@(item.ID)" data-name="@(item.Name)" data-room="@(item.Room?.Name)">
+                            <span>回复</span>
+                        </div>
+                        <div class="comment">
+                            @if (item.TopicUserJoins != null && item.TopicUserJoins.Count > 0)
+                            {
+                                foreach (var obj in item.TopicUserJoins)
+                                {
+                                    <p>
+                                        <span class="user-name">@(obj.User?.RealName)</span>
+                                        <span class="comment-cont">@(obj.Content)</span>
+                                    </p>
+                                }
+                            }
+                        </div>
+                    </li>
+                }
+            }
+
+        </ul>
+    </div>
+</div>
+
+        <div class="publish-page" style="margin-bottom: 50px;margin-top:50px; max-width:650px;">
+            <div class="article">
+                <a href="javascript:void(0);" class="back-btn fl">&lt;</a>
+                <span class="fr" style="padding:0 1.5rem;">&nbsp;</span>
+                <h2>参与话题</h2>
+            </div>
+            <div class="message-all-outside">
+                <input type="hidden" id="topicId" />
+                <div class="message-top-title">
+                    <h2>
+                        参&nbsp;&nbsp;&nbsp;于
+                    </h2>
+                </div>
+                <div>
+                    <h3 style="text-align: center;">
+                        主会场-第一分会场问题提问处
+                    </h3>
+                    <textarea name="ESentiment" id="content" placeholder="说出您想问的问题..." onkeyup="cal()" maxlength="50"></textarea>
+                    <div class="xianzhi">
+                        <em id="Number">50/50</em>
+                    </div>
+                    <input type="submit" value="提交" class="innBtn" onclick="btnClick()">
+                </div>
+            </div>
+            <div class="message-all-outside">
+                <p style="text-align: center;">
+                    你提问的每一条问题
+                </p>
+                <p style="text-align: center;">
+                    都会出现在大屏幕上，请注意用词哦
+                </p>
+            </div>
+        </div>
+
+    <div id="tanchu">
+        <div id="tipo">
+        </div>
+        <div class="tan">
+            <div id="tisi">
+                <p>发表成功</p>
+                <p>感谢您的参与</p>
+            </div>
+            <input type="submit" value="确定" class="innBtn" onclick="btnClickque()">
+        </div>
+    </div>
+    <script type="text/javascript">
+        function btnClick() {
+            $.ajax({
+                url: "/meet/AddTopicJoin",
+                method: "post",
+                data: { topicId: $("#topicId").val(), content: $("#content").val() },
+                success: function (data) {
+                    if (data.Result) {
+                        $('#tanchu').show();
+                    }
+                    else {
+                        alert(data.ErrorDesc);
+                    }
+                }
+            })
+        }
+        function cal() {
+            var content = $("#content").val();
+            $("#Number").html((50 - content.length) + "/50")
+        }
+        function btnClickque() {
+            $('#tanchu').hide();
+            $('.publish-page').hide();
+        }
+        $('.reply-box').on('click', function () {
+            var name = $(this).attr("data-name");
+            var room = $(this).attr("data-room");
+            var id = $(this).attr("data-id");
+            $(".message-top-title h2").html(name);
+            $(".message-all-outside h3").html(room);
+            $("#topicId").val(id);
+            $('.publish-page').show();
+        })
+        $('.back-btn').on('click', function () {
+            $('.publish-page').hide();
+        })
+
+    </script>

@@ -1,0 +1,57 @@
+Time:2017/4/25 15:01:00-本次请求耗时 5.703 秒.
+Url:http://localhost:5068/meet/sign?meetId=52aacad7422b4234ab88a664f2fe75b9
+UserHostAddress:::1;;
+WebServer:::1
+
+
+Time:2017/4/25 15:25:08-本次请求耗时 7.672 秒.
+Url:http://localhost:5068/meet/sign?meetId=52aacad7422b4234ab88a664f2fe75b9
+UserHostAddress:::1;;
+WebServer:::1
+
+
+Time:2017/4/25 15:25:20-本次请求耗时 4.328 秒.
+Url:http://localhost:5068/meet/sign?meetId=52aacad7422b4234ab88a664f2fe75b9
+UserHostAddress:::1;;
+WebServer:::1
+
+
+Time:2017/4/25 15:29:40-本次请求耗时 4.5 秒.
+Url:http://localhost:5068/meet/sign?meetId=52aacad7422b4234ab88a664f2fe75b9
+UserHostAddress:::1;;
+WebServer:::1
+
+
+Time:2017/4/25 15:29:40-本次请求耗时 9.078 秒.
+Url:http://localhost:5068/
+UserHostAddress:::1;;
+WebServer:::1
+
+
+Time:2017/4/25 15:30:11-本次请求耗时 21.391 秒.
+Url:http://localhost:5068/Meet/ForSign?info=MzM0MEMxQzc2M0M0NDBFNzg2REUxRTc1RTY0RjQwMkRDRkE2RDY2QUM1OENGRjZEN0FGMENGQ0IyQzhENEExNDNGQjMzMDRFNEZENzVCNEQ1NjAzRjBENTk4QURCOTY5
+UserHostAddress:::1;;
+WebServer:::1
+
+
+Time:2017/4/25 15:30:18-本次请求耗时 7.36 秒.
+Url:http://localhost:5068/meet/GetSignUrl
+UrlReferrer:http://localhost:5068/meet/sign?meetId=52aacad7422b4234ab88a664f2fe75b9
+UserHostAddress:::1;;
+WebServer:::1
+
+
+Time:2017/4/25 15:30:37-本次请求耗时 5.063 秒.
+Url:http://localhost:5068/meet/GetSignUrl
+UrlReferrer:http://localhost:5068/meet/sign?meetId=52aacad7422b4234ab88a664f2fe75b9
+UserHostAddress:::1;;
+WebServer:::1
+
+
+Time:2017/4/25 15:30:52-本次请求耗时 9.656 秒.
+Url:http://localhost:5068/meet/GetSignUrl
+UrlReferrer:http://localhost:5068/meet/sign?meetId=52aacad7422b4234ab88a664f2fe75b9
+UserHostAddress:::1;;
+WebServer:::1
+
+

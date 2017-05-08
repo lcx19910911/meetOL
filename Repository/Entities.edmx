@@ -1,0 +1,972 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="PlugInsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="UNID" />
+          </Key>
+          <Property Name="UNID" Type="char" MaxLength="32" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ShopId" Type="char" MaxLength="32" />
+          <Property Name="PersonId" Type="char" MaxLength="32" />
+          <Property Name="Image" Type="varchar" MaxLength="500" />
+          <Property Name="Sort" Type="int" Nullable="false" />
+          <Property Name="CreatedTime" Type="datetime" Nullable="false" />
+          <Property Name="UpdatedTime" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DinnerDish">
+          <Key>
+            <PropertyRef Name="UNID" />
+          </Key>
+          <Property Name="UNID" Type="char" MaxLength="32" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ShopId" Type="char" MaxLength="32" Nullable="false" />
+          <Property Name="CategoryId" Type="char" MaxLength="32" Nullable="false" />
+          <Property Name="Sort" Type="int" Nullable="false" />
+          <Property Name="Price" Type="numeric" Precision="12" Scale="2" Nullable="false" />
+          <Property Name="Label" Type="varchar" MaxLength="100" />
+          <Property Name="Image" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="State" Type="int" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="500" />
+          <Property Name="UpdatedTime" Type="datetime" Nullable="false" />
+          <Property Name="CreatedTime" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DinnerOrder">
+          <Key>
+            <PropertyRef Name="UNID" />
+          </Key>
+          <Property Name="UNID" Type="char" MaxLength="32" Nullable="false" />
+          <Property Name="OrderNum" Type="char" MaxLength="32" />
+          <Property Name="ShopId" Type="char" MaxLength="32" Nullable="false" />
+          <Property Name="OpenId" Type="varchar" MaxLength="50" />
+          <Property Name="TableId" Type="varchar" MaxLength="50" />
+          <Property Name="TotalPrice" Type="numeric" Precision="12" Scale="2" Nullable="false" />
+          <Property Name="Remark" Type="varchar" MaxLength="500" />
+          <Property Name="Details" Type="varchar" MaxLength="1000" />
+          <Property Name="State" Type="int" Nullable="false" />
+          <Property Name="UpdatedTime" Type="datetime" Nullable="false" />
+          <Property Name="CreatedTime" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DinnerShop">
+          <Key>
+            <PropertyRef Name="UNID" />
+          </Key>
+          <Property Name="UNID" Type="char" MaxLength="32" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="PersonId" Type="char" MaxLength="32" Nullable="false" />
+          <Property Name="Sort" Type="int" Nullable="false" />
+          <Property Name="ContactPhone" Type="varchar" MaxLength="20" />
+          <Property Name="Address" Type="varchar" MaxLength="100" />
+          <Property Name="Introduction" Type="varchar" MaxLength="1000" />
+          <Property Name="StartShoptime" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="EndShoptime" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Image" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="CreatedTime" Type="datetime" Nullable="false" />
+          <Property Name="Mark" Type="varchar" MaxLength="10" />
+          <Property Name="UpdatedTime" Type="datetime" Nullable="false" />
+          <Property Name="Flag" Type="bigint" />
+        </EntityType>
+        <EntityType Name="Goods">
+          <Key>
+            <PropertyRef Name="UNID" />
+          </Key>
+          <Property Name="UNID" Type="char" MaxLength="32" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CategoryId" Type="char" MaxLength="32" />
+          <Property Name="StockNum" Type="int" Nullable="false" />
+          <Property Name="SurplusNum" Type="int" Nullable="false" />
+          <Property Name="OverTime" Type="datetime" Nullable="false" />
+          <Property Name="OngoingTime" Type="datetime" Nullable="false" />
+          <Property Name="OriginalPrice" Type="numeric" Precision="12" Scale="2" />
+          <Property Name="SellingPrice" Type="numeric" Precision="12" Scale="2" />
+          <Property Name="ScoreNum" Type="int" />
+          <Property Name="CreatedTime" Type="datetime" />
+          <Property Name="UpdatedTime" Type="datetime" Nullable="false" />
+          <Property Name="Flag" Type="bigint" />
+          <Property Name="PersonId" Type="char" MaxLength="32" Nullable="false" />
+          <Property Name="TimeStamp" Type="timestamp" StoreGeneratedPattern="Computed" />
+          <Property Name="Image" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="State" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="GoodsDetails">
+          <Key>
+            <PropertyRef Name="UNID" />
+          </Key>
+          <Property Name="UNID" Type="char" MaxLength="32" Nullable="false" />
+          <Property Name="GoodsId" Type="char" MaxLength="32" Nullable="false" />
+          <Property Name="Image" Type="varchar" MaxLength="500" />
+          <Property Name="Sort" Type="int" />
+        </EntityType>
+        <EntityType Name="GoodsOrder">
+          <Key>
+            <PropertyRef Name="UNID" />
+          </Key>
+          <Property Name="UNID" Type="char" MaxLength="32" Nullable="false" />
+          <Property Name="GoodsId" Type="char" MaxLength="32" Nullable="false" />
+          <Property Name="OpenId" Type="char" MaxLength="32" Nullable="false" />
+          <Property Name="PersonId" Type="char" MaxLength="32" Nullable="false" />
+          <Property Name="Count" Type="int" />
+          <Property Name="AllPrice" Type="numeric" Precision="12" Scale="2" />
+          <Property Name="ScoreNum" Type="int" />
+          <Property Name="CreatedTime" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="OrderDetails">
+          <Key>
+            <PropertyRef Name="UNID" />
+          </Key>
+          <Property Name="UNID" Type="char" MaxLength="32" Nullable="false" />
+          <Property Name="OrderId" Type="char" MaxLength="32" Nullable="false" />
+          <Property Name="DishId" Type="char" MaxLength="32" Nullable="false" />
+          <Property Name="DishName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Price" Type="numeric" Precision="12" Scale="2" Nullable="false" />
+          <Property Name="Number" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Person">
+          <Key>
+            <PropertyRef Name="UNID" />
+          </Key>
+          <Property Name="UNID" Type="char" MaxLength="32" Nullable="false" />
+          <Property Name="Account" Type="varchar" MaxLength="50" />
+          <Property Name="Name" Type="varchar" MaxLength="50" />
+          <Property Name="Password" Type="char" MaxLength="32" />
+          <Property Name="Remark" Type="varchar" MaxLength="256" />
+          <Property Name="Flag" Type="bigint" Nullable="false" />
+          <Property Name="UpdatedTime" Type="datetime" Nullable="false" />
+          <Property Name="CreatedTime" Type="datetime" Nullable="false" />
+          <Property Name="ComId" Type="char" MaxLength="32" />
+          <Property Name="IsChildren" Type="int" />
+          <Property Name="ShopId" Type="char" MaxLength="32" />
+        </EntityType>
+        <EntityType Name="Prize">
+          <Key>
+            <PropertyRef Name="UNID" />
+          </Key>
+          <Property Name="UNID" Type="char" MaxLength="32" Nullable="false" />
+          <Property Name="TargetCode" Type="int" Nullable="false" />
+          <Property Name="TargetID" Type="varchar" MaxLength="50" />
+          <Property Name="OnePrize" Type="varchar" MaxLength="50" />
+          <Property Name="OnePrizeCount" Type="int" Nullable="false" />
+          <Property Name="OnePrizeImage" Type="varchar" MaxLength="500" />
+          <Property Name="TwoPrize" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="TwoPrizeCount" Type="int" Nullable="false" />
+          <Property Name="TwoPrizeImage" Type="varchar" MaxLength="500" />
+          <Property Name="ThreePrize" Type="varchar" MaxLength="50" />
+          <Property Name="ThreePrizeCount" Type="int" Nullable="false" />
+          <Property Name="ThreePrizeImage" Type="varchar" MaxLength="500" />
+          <Property Name="AllCount" Type="int" Nullable="false" />
+          <Property Name="ExpectedPeopleCount" Type="int" Nullable="false" />
+          <Property Name="hadPrizeCount" Type="int" Nullable="false" />
+          <Property Name="DayLimt" Type="int" Nullable="false" />
+          <Property Name="AllCountLimt" Type="int" Nullable="false" />
+          <Property Name="IsShowCount" Type="int" Nullable="false" />
+          <Property Name="TimeStamp" Type="timestamp" StoreGeneratedPattern="Computed" />
+        </EntityType>
+        <EntityType Name="Puzzle">
+          <Key>
+            <PropertyRef Name="UNID" />
+          </Key>
+          <Property Name="UNID" Type="char" MaxLength="32" Nullable="false" />
+          <Property Name="PersonId" Type="char" MaxLength="32" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="CreatedTime" Type="datetime" Nullable="false" />
+          <Property Name="Image" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="UpdatedTime" Type="datetime" Nullable="false" />
+          <Property Name="Flag" Type="bigint" Nullable="false" />
+          <Property Name="DifficultyType" Type="int" Nullable="false" />
+          <Property Name="Description" Type="text" />
+          <Property Name="IsBindScore" Type="int" Nullable="false" />
+          <Property Name="Score" Type="int" Nullable="false" />
+          <Property Name="BindTitle" Type="varchar" MaxLength="64" />
+          <Property Name="BindName" Type="varchar" MaxLength="500" />
+          <Property Name="BindLogoUrl" Type="varchar" MaxLength="500" />
+          <Property Name="BindUrl" Type="varchar" MaxLength="500" />
+          <Property Name="OverTime" Type="datetime" Nullable="false" />
+          <Property Name="OngoingTime" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Recommend">
+          <Key>
+            <PropertyRef Name="UNID" />
+          </Key>
+          <Property Name="UNID" Type="char" MaxLength="32" Nullable="false" />
+          <Property Name="Title" Type="varchar" MaxLength="64" />
+          <Property Name="PersonId" Type="char" MaxLength="32" Nullable="false" />
+          <Property Name="Sort" Type="int" Nullable="false" />
+          <Property Name="TargetID" Type="char" MaxLength="32" />
+          <Property Name="TargetCode" Type="int" />
+          <Property Name="RecommendCode" Type="int" />
+          <Property Name="CreatedTime" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ScoreDetails">
+          <Key>
+            <PropertyRef Name="UNID" />
+          </Key>
+          <Property Name="UNID" Type="char" MaxLength="32" Nullable="false" />
+          <Property Name="OpenId" Type="char" MaxLength="32" Nullable="false" />
+          <Property Name="PersonId" Type="char" MaxLength="32" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="500" />
+          <Property Name="CreatedTime" Type="datetime" Nullable="false" />
+          <Property Name="Value" Type="int" Nullable="false" />
+          <Property Name="IsAdd" Type="int" Nullable="false" />
+          <Property Name="Type" Type="int" Nullable="false" />
+          <Property Name="TargetId" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="ScratchCard">
+          <Key>
+            <PropertyRef Name="UNID" />
+          </Key>
+          <Property Name="UNID" Type="char" MaxLength="32" Nullable="false" />
+          <Property Name="PersonId" Type="varchar" MaxLength="50" />
+          <Property Name="Name" Type="varchar" MaxLength="64" />
+          <Property Name="KeyWord" Type="varchar" MaxLength="64" />
+          <Property Name="OngoingTime" Type="datetime" Nullable="false" />
+          <Property Name="OverTime" Type="datetime" Nullable="false" />
+          <Property Name="RepeatNotice" Type="varchar" MaxLength="64" />
+          <Property Name="PreheatingTitle" Type="varchar" MaxLength="64" />
+          <Property Name="PreheatingImage" Type="varchar" MaxLength="500" />
+          <Property Name="PreheatingDescribe" Type="varchar" MaxLength="2000" />
+          <Property Name="OngoingTitle" Type="varchar" MaxLength="64" />
+          <Property Name="OngoingImage" Type="varchar" MaxLength="500" />
+          <Property Name="OngoingDescribe" Type="varchar" MaxLength="2000" />
+          <Property Name="OverTitle" Type="varchar" MaxLength="64" />
+          <Property Name="OverImage" Type="varchar" MaxLength="500" />
+          <Property Name="OverDescribe" Type="varchar" MaxLength="2000" />
+          <Property Name="CreatedTime" Type="datetime" Nullable="false" />
+          <Property Name="UpdatedTime" Type="datetime" Nullable="false" />
+          <Property Name="Flag" Type="bigint" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="OpenId" />
+          </Key>
+          <Property Name="OpenId" Type="char" MaxLength="32" Nullable="false" />
+          <Property Name="NickName" Type="varchar" MaxLength="50" />
+          <Property Name="HeadImgUrl" Type="varchar" MaxLength="500" />
+          <Property Name="Country" Type="varchar" MaxLength="50" />
+          <Property Name="Province" Type="varchar" MaxLength="50" />
+          <Property Name="City" Type="varchar" MaxLength="50" />
+          <Property Name="Sex" Type="int" />
+          <Property Name="MobilePhone" Type="varchar" MaxLength="11" />
+          <Property Name="CreatedTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="UserJoinCounter">
+          <Key>
+            <PropertyRef Name="UNID" />
+          </Key>
+          <Property Name="UNID" Type="char" MaxLength="32" Nullable="false" />
+          <Property Name="TargetCode" Type="int" Nullable="false" />
+          <Property Name="TargetID" Type="varchar" MaxLength="50" />
+          <Property Name="OpenID" Type="varchar" MaxLength="50" />
+          <Property Name="CreatedTime" Type="datetime" Nullable="false" />
+          <Property Name="IsPrize" Type="int" Nullable="false" />
+          <Property Name="PrizeGrade" Type="int" Nullable="false" />
+          <Property Name="SN" Type="varchar" MaxLength="50" />
+          <Property Name="IsCach" Type="int" Nullable="false" />
+          <Property Name="CachTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="UserPuzzle">
+          <Key>
+            <PropertyRef Name="UNID" />
+          </Key>
+          <Property Name="UNID" Type="char" MaxLength="32" Nullable="false" />
+          <Property Name="PuzzleId" Type="char" MaxLength="32" />
+          <Property Name="PuzzleDate" Type="date" />
+          <Property Name="OpenId" Type="char" MaxLength="32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserScore">
+          <Key>
+            <PropertyRef Name="UNID" />
+          </Key>
+          <Property Name="UNID" Type="char" MaxLength="32" Nullable="false" />
+          <Property Name="OpenId" Type="char" MaxLength="32" Nullable="false" />
+          <Property Name="PersonId" Type="char" MaxLength="32" Nullable="false" />
+          <Property Name="Score" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserSign">
+          <Key>
+            <PropertyRef Name="UNID" />
+          </Key>
+          <Property Name="UNID" Type="char" MaxLength="32" Nullable="false" />
+          <Property Name="OpenId" Type="char" MaxLength="32" Nullable="false" />
+          <Property Name="SignDate" Type="date" />
+          <Property Name="SignNum" Type="int" Nullable="false" />
+          <Property Name="PersonId" Type="char" MaxLength="32" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="PlugInsModelStoreContainer">
+          <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DinnerDish" EntityType="Self.DinnerDish" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DinnerOrder" EntityType="Self.DinnerOrder" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DinnerShop" EntityType="Self.DinnerShop" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Goods" EntityType="Self.Goods" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GoodsDetails" EntityType="Self.GoodsDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GoodsOrder" EntityType="Self.GoodsOrder" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrderDetails" EntityType="Self.OrderDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Person" EntityType="Self.Person" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Prize" EntityType="Self.Prize" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Puzzle" EntityType="Self.Puzzle" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Recommend" EntityType="Self.Recommend" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ScoreDetails" EntityType="Self.ScoreDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ScratchCard" EntityType="Self.ScratchCard" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserJoinCounter" EntityType="Self.UserJoinCounter" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserPuzzle" EntityType="Self.UserPuzzle" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserScore" EntityType="Self.UserScore" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserSign" EntityType="Self.UserSign" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="PlugInsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="PlugInsEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Prize" EntityType="PlugInsModel.Prize" />
+          <EntitySet Name="DinnerShop" EntityType="PlugInsModel.DinnerShop" />
+          <EntitySet Name="OrderDetails" EntityType="PlugInsModel.OrderDetails" />
+          <EntitySet Name="DinnerOrder" EntityType="PlugInsModel.DinnerOrder" />
+          <EntitySet Name="Person" EntityType="PlugInsModel.Person" />
+          <EntitySet Name="ScratchCard" EntityType="PlugInsModel.ScratchCard" />
+          <EntitySet Name="UserJoinCounter" EntityType="PlugInsModel.UserJoinCounter" />
+          <EntitySet Name="DinnerDish" EntityType="PlugInsModel.DinnerDish" />
+          <EntitySet Name="UserScore" EntityType="PlugInsModel.UserScore" />
+          <EntitySet Name="UserSign" EntityType="PlugInsModel.UserSign" />
+          <EntitySet Name="User" EntityType="PlugInsModel.User" />
+          <EntitySet Name="ScoreDetails" EntityType="PlugInsModel.ScoreDetails" />
+          <EntitySet Name="UserPuzzle" EntityType="PlugInsModel.UserPuzzle" />
+          <EntitySet Name="Category" EntityType="PlugInsModel.Category" />
+          <EntitySet Name="Goods" EntityType="PlugInsModel.Goods" />
+          <EntitySet Name="GoodsDetails" EntityType="PlugInsModel.GoodsDetails" />
+          <EntitySet Name="Recommend" EntityType="PlugInsModel.Recommend" />
+          <EntitySet Name="GoodsOrder" EntityType="PlugInsModel.GoodsOrder" />
+          <EntitySet Name="Puzzle" EntityType="PlugInsModel.Puzzle" />
+          </EntityContainer>
+        <EntityType Name="Prize">
+          <Key>
+            <PropertyRef Name="UNID" />
+          </Key>
+          <Property Name="UNID" Type="String" Nullable="false" MaxLength="32" FixedLength="true" Unicode="false" />
+          <Property Name="TargetCode" Type="Int32" Nullable="false" />
+          <Property Name="TargetID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="OnePrize" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="OnePrizeCount" Type="Int32" Nullable="false" />
+          <Property Name="OnePrizeImage" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="TwoPrize" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="TwoPrizeCount" Type="Int32" Nullable="false" />
+          <Property Name="TwoPrizeImage" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="ThreePrize" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ThreePrizeCount" Type="Int32" Nullable="false" />
+          <Property Name="ThreePrizeImage" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="AllCount" Type="Int32" Nullable="false" />
+          <Property Name="ExpectedPeopleCount" Type="Int32" Nullable="false" />
+          <Property Name="hadPrizeCount" Type="Int32" Nullable="false" />
+          <Property Name="DayLimt" Type="Int32" Nullable="false" />
+          <Property Name="AllCountLimt" Type="Int32" Nullable="false" />
+          <Property Name="IsShowCount" Type="Int32" Nullable="false" />
+          <Property Name="TimeStamp" Type="Binary" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" ConcurrencyMode="Fixed" />
+        </EntityType>
+        <EntityType Name="DinnerShop">
+          <Key>
+            <PropertyRef Name="UNID" />
+          </Key>
+          <Property Name="UNID" Type="String" Nullable="false" MaxLength="32" FixedLength="true" Unicode="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PersonId" Type="String" Nullable="false" MaxLength="32" FixedLength="true" Unicode="false" />
+          <Property Name="Sort" Type="Int32" Nullable="false" />
+          <Property Name="ContactPhone" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Introduction" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="StartShoptime" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="EndShoptime" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Image" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Mark" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="UpdatedTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Flag" Type="Int64" />
+        </EntityType>
+        <EntityType Name="OrderDetails">
+          <Key>
+            <PropertyRef Name="UNID" />
+          </Key>
+          <Property Name="UNID" Type="String" Nullable="false" MaxLength="32" FixedLength="true" Unicode="false" />
+          <Property Name="OrderId" Type="String" Nullable="false" MaxLength="32" FixedLength="true" Unicode="false" />
+          <Property Name="DishId" Type="String" Nullable="false" MaxLength="32" FixedLength="true" Unicode="false" />
+          <Property Name="DishName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Price" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
+          <Property Name="Number" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DinnerOrder">
+          <Key>
+            <PropertyRef Name="UNID" />
+          </Key>
+          <Property Name="UNID" Type="String" Nullable="false" MaxLength="32" FixedLength="true" Unicode="false" />
+          <Property Name="OrderNum" Type="String" MaxLength="32" FixedLength="true" Unicode="false" />
+          <Property Name="ShopId" Type="String" Nullable="false" MaxLength="32" FixedLength="true" Unicode="false" />
+          <Property Name="OpenId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="TableId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="TotalPrice" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
+          <Property Name="Remark" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Details" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="State" Type="Int32" Nullable="false" />
+          <Property Name="UpdatedTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedTime" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="Person">
+          <Key>
+            <PropertyRef Name="UNID" />
+          </Key>
+          <Property Name="UNID" Type="String" Nullable="false" MaxLength="32" FixedLength="true" Unicode="false" />
+          <Property Name="Account" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="32" FixedLength="true" Unicode="false" />
+          <Property Name="Remark" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
+          <Property Name="Flag" Type="Int64" Nullable="false" />
+          <Property Name="UpdatedTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ComId" Type="String" MaxLength="32" FixedLength="true" Unicode="false" />
+          <Property Name="IsChildren" Type="Int32" />
+          <Property Name="ShopId" Type="String" MaxLength="32" FixedLength="true" Unicode="false" />
+        </EntityType>
+        <EntityType Name="ScratchCard">
+          <Key>
+            <PropertyRef Name="UNID" />
+          </Key>
+          <Property Name="UNID" Type="String" Nullable="false" MaxLength="32" FixedLength="true" Unicode="false" />
+          <Property Name="PersonId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Name" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="KeyWord" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="OngoingTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="OverTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="RepeatNotice" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="PreheatingTitle" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="PreheatingImage" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="PreheatingDescribe" Type="String" MaxLength="2000" FixedLength="false" Unicode="false" />
+          <Property Name="OngoingTitle" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="OngoingImage" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="OngoingDescribe" Type="String" MaxLength="2000" FixedLength="false" Unicode="false" />
+          <Property Name="OverTitle" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="OverImage" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="OverDescribe" Type="String" MaxLength="2000" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdatedTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Flag" Type="Int64" />
+        </EntityType>
+        <EntityType Name="UserJoinCounter">
+          <Key>
+            <PropertyRef Name="UNID" />
+          </Key>
+          <Property Name="UNID" Type="String" Nullable="false" MaxLength="32" FixedLength="true" Unicode="false" />
+          <Property Name="TargetCode" Type="Int32" Nullable="false" />
+          <Property Name="TargetID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="OpenID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IsPrize" Type="Int32" Nullable="false" />
+          <Property Name="PrizeGrade" Type="Int32" Nullable="false" />
+          <Property Name="SN" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IsCach" Type="Int32" Nullable="false" />
+          <Property Name="CachTime" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="DinnerDish">
+          <Key>
+            <PropertyRef Name="UNID" />
+          </Key>
+          <Property Name="UNID" Type="String" Nullable="false" MaxLength="32" FixedLength="true" Unicode="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ShopId" Type="String" Nullable="false" MaxLength="32" FixedLength="true" Unicode="false" />
+          <Property Name="CategoryId" Type="String" Nullable="false" MaxLength="32" FixedLength="true" Unicode="false" />
+          <Property Name="Sort" Type="Int32" Nullable="false" />
+          <Property Name="Price" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
+          <Property Name="Label" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Image" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="State" Type="Int32" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="UpdatedTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedTime" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="UserScore">
+          <Key>
+            <PropertyRef Name="UNID" />
+          </Key>
+          <Property Name="UNID" Type="String" Nullable="false" MaxLength="32" FixedLength="true" Unicode="false" />
+          <Property Name="OpenId" Type="String" Nullable="false" MaxLength="32" FixedLength="true" Unicode="false" />
+          <Property Name="PersonId" Type="String" Nullable="false" MaxLength="32" FixedLength="true" Unicode="false" />
+          <Property Name="Score" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserSign">
+          <Key>
+            <PropertyRef Name="UNID" />
+          </Key>
+          <Property Name="UNID" Type="String" Nullable="false" MaxLength="32" FixedLength="true" Unicode="false" />
+          <Property Name="OpenId" Type="String" Nullable="false" MaxLength="32" FixedLength="true" Unicode="false" />
+          <Property Name="SignDate" Type="DateTime" Precision="0" />
+          <Property Name="SignNum" Type="Int32" Nullable="false" />
+          <Property Name="PersonId" Type="String" Nullable="false" MaxLength="32" FixedLength="true" Unicode="false" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="OpenId" />
+          </Key>
+          <Property Name="OpenId" Type="String" Nullable="false" MaxLength="32" FixedLength="true" Unicode="false" />
+          <Property Name="NickName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="HeadImgUrl" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Country" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Province" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Sex" Type="Int32" />
+          <Property Name="MobilePhone" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedTime" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="ScoreDetails">
+          <Key>
+            <PropertyRef Name="UNID" />
+          </Key>
+          <Property Name="UNID" Type="String" Nullable="false" MaxLength="32" FixedLength="true" Unicode="false" />
+          <Property Name="OpenId" Type="String" Nullable="false" MaxLength="32" FixedLength="true" Unicode="false" />
+          <Property Name="PersonId" Type="String" Nullable="false" MaxLength="32" FixedLength="true" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Value" Type="Int32" Nullable="false" />
+          <Property Name="IsAdd" Type="Int32" Nullable="false" />
+          <Property Name="Type" Type="Int32" Nullable="false" />
+          <Property Name="TargetId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="UserPuzzle">
+          <Key>
+            <PropertyRef Name="UNID" />
+          </Key>
+          <Property Name="UNID" Type="String" Nullable="false" MaxLength="32" FixedLength="true" Unicode="false" />
+          <Property Name="PuzzleId" Type="String" MaxLength="32" FixedLength="true" Unicode="false" />
+          <Property Name="PuzzleDate" Type="DateTime" Precision="0" />
+          <Property Name="OpenId" Type="String" Nullable="false" MaxLength="32" FixedLength="true" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="UNID" />
+          </Key>
+          <Property Name="UNID" Type="String" Nullable="false" MaxLength="32" FixedLength="true" Unicode="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ShopId" Type="String" MaxLength="32" FixedLength="true" Unicode="false" />
+          <Property Name="PersonId" Type="String" MaxLength="32" FixedLength="true" Unicode="false" />
+          <Property Name="Image" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Sort" Type="Int32" Nullable="false" />
+          <Property Name="CreatedTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdatedTime" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="Goods">
+          <Key>
+            <PropertyRef Name="UNID" />
+          </Key>
+          <Property Name="UNID" Type="String" Nullable="false" MaxLength="32" FixedLength="true" Unicode="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CategoryId" Type="String" MaxLength="32" FixedLength="true" Unicode="false" />
+          <Property Name="StockNum" Type="Int32" Nullable="false" />
+          <Property Name="SurplusNum" Type="Int32" Nullable="false" />
+          <Property Name="OverTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="OngoingTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="OriginalPrice" Type="Decimal" Precision="12" Scale="2" />
+          <Property Name="SellingPrice" Type="Decimal" Precision="12" Scale="2" />
+          <Property Name="ScoreNum" Type="Int32" />
+          <Property Name="CreatedTime" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Flag" Type="Int64" />
+          <Property Name="PersonId" Type="String" Nullable="false" MaxLength="32" FixedLength="true" Unicode="false" />
+          <Property Name="TimeStamp" Type="Binary" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="Image" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="State" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="GoodsDetails">
+          <Key>
+            <PropertyRef Name="UNID" />
+          </Key>
+          <Property Name="UNID" Type="String" Nullable="false" MaxLength="32" FixedLength="true" Unicode="false" />
+          <Property Name="GoodsId" Type="String" Nullable="false" MaxLength="32" FixedLength="true" Unicode="false" />
+          <Property Name="Image" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Sort" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Recommend">
+          <Key>
+            <PropertyRef Name="UNID" />
+          </Key>
+          <Property Name="UNID" Type="String" Nullable="false" MaxLength="32" FixedLength="true" Unicode="false" />
+          <Property Name="Title" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="PersonId" Type="String" Nullable="false" MaxLength="32" FixedLength="true" Unicode="false" />
+          <Property Name="Sort" Type="Int32" Nullable="false" />
+          <Property Name="TargetID" Type="String" MaxLength="32" FixedLength="true" Unicode="false" />
+          <Property Name="TargetCode" Type="Int32" />
+          <Property Name="RecommendCode" Type="Int32" />
+          <Property Name="CreatedTime" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="GoodsOrder">
+          <Key>
+            <PropertyRef Name="UNID" />
+          </Key>
+          <Property Name="UNID" Type="String" Nullable="false" MaxLength="32" FixedLength="true" Unicode="false" />
+          <Property Name="GoodsId" Type="String" Nullable="false" MaxLength="32" FixedLength="true" Unicode="false" />
+          <Property Name="OpenId" Type="String" Nullable="false" MaxLength="32" FixedLength="true" Unicode="false" />
+          <Property Name="PersonId" Type="String" Nullable="false" MaxLength="32" FixedLength="true" Unicode="false" />
+          <Property Name="Count" Type="Int32" />
+          <Property Name="AllPrice" Type="Decimal" Precision="12" Scale="2" />
+          <Property Name="ScoreNum" Type="Int32" />
+          <Property Name="CreatedTime" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="Puzzle">
+          <Key>
+            <PropertyRef Name="UNID" />
+          </Key>
+          <Property Name="UNID" Type="String" Nullable="false" MaxLength="32" FixedLength="true" Unicode="false" />
+          <Property Name="PersonId" Type="String" Nullable="false" MaxLength="32" FixedLength="true" Unicode="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Image" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="UpdatedTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Flag" Type="Int64" Nullable="false" />
+          <Property Name="DifficultyType" Type="Int32" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="IsBindScore" Type="Int32" Nullable="false" />
+          <Property Name="Score" Type="Int32" Nullable="false" />
+          <Property Name="BindTitle" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="BindName" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="BindLogoUrl" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="BindUrl" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="OverTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="OngoingTime" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="PlugInsModelStoreContainer" CdmEntityContainer="PlugInsEntities">
+          <EntitySetMapping Name="Prize">
+            <EntityTypeMapping TypeName="PlugInsModel.Prize">
+              <MappingFragment StoreEntitySet="Prize">
+                <ScalarProperty Name="TimeStamp" ColumnName="TimeStamp" />
+                <ScalarProperty Name="IsShowCount" ColumnName="IsShowCount" />
+                <ScalarProperty Name="AllCountLimt" ColumnName="AllCountLimt" />
+                <ScalarProperty Name="DayLimt" ColumnName="DayLimt" />
+                <ScalarProperty Name="hadPrizeCount" ColumnName="hadPrizeCount" />
+                <ScalarProperty Name="ExpectedPeopleCount" ColumnName="ExpectedPeopleCount" />
+                <ScalarProperty Name="AllCount" ColumnName="AllCount" />
+                <ScalarProperty Name="ThreePrizeImage" ColumnName="ThreePrizeImage" />
+                <ScalarProperty Name="ThreePrizeCount" ColumnName="ThreePrizeCount" />
+                <ScalarProperty Name="ThreePrize" ColumnName="ThreePrize" />
+                <ScalarProperty Name="TwoPrizeImage" ColumnName="TwoPrizeImage" />
+                <ScalarProperty Name="TwoPrizeCount" ColumnName="TwoPrizeCount" />
+                <ScalarProperty Name="TwoPrize" ColumnName="TwoPrize" />
+                <ScalarProperty Name="OnePrizeImage" ColumnName="OnePrizeImage" />
+                <ScalarProperty Name="OnePrizeCount" ColumnName="OnePrizeCount" />
+                <ScalarProperty Name="OnePrize" ColumnName="OnePrize" />
+                <ScalarProperty Name="TargetID" ColumnName="TargetID" />
+                <ScalarProperty Name="TargetCode" ColumnName="TargetCode" />
+                <ScalarProperty Name="UNID" ColumnName="UNID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DinnerShop">
+            <EntityTypeMapping TypeName="PlugInsModel.DinnerShop">
+              <MappingFragment StoreEntitySet="DinnerShop">
+                <ScalarProperty Name="Flag" ColumnName="Flag" />
+                <ScalarProperty Name="UpdatedTime" ColumnName="UpdatedTime" />
+                <ScalarProperty Name="Mark" ColumnName="Mark" />
+                <ScalarProperty Name="CreatedTime" ColumnName="CreatedTime" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="EndShoptime" ColumnName="EndShoptime" />
+                <ScalarProperty Name="StartShoptime" ColumnName="StartShoptime" />
+                <ScalarProperty Name="Introduction" ColumnName="Introduction" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="ContactPhone" ColumnName="ContactPhone" />
+                <ScalarProperty Name="Sort" ColumnName="Sort" />
+                <ScalarProperty Name="PersonId" ColumnName="PersonId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="UNID" ColumnName="UNID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrderDetails">
+            <EntityTypeMapping TypeName="PlugInsModel.OrderDetails">
+              <MappingFragment StoreEntitySet="OrderDetails">
+                <ScalarProperty Name="Number" ColumnName="Number" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="DishName" ColumnName="DishName" />
+                <ScalarProperty Name="DishId" ColumnName="DishId" />
+                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+                <ScalarProperty Name="UNID" ColumnName="UNID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DinnerOrder">
+            <EntityTypeMapping TypeName="PlugInsModel.DinnerOrder">
+              <MappingFragment StoreEntitySet="DinnerOrder">
+                <ScalarProperty Name="CreatedTime" ColumnName="CreatedTime" />
+                <ScalarProperty Name="UpdatedTime" ColumnName="UpdatedTime" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="Details" ColumnName="Details" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="TotalPrice" ColumnName="TotalPrice" />
+                <ScalarProperty Name="TableId" ColumnName="TableId" />
+                <ScalarProperty Name="OpenId" ColumnName="OpenId" />
+                <ScalarProperty Name="ShopId" ColumnName="ShopId" />
+                <ScalarProperty Name="OrderNum" ColumnName="OrderNum" />
+                <ScalarProperty Name="UNID" ColumnName="UNID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Person">
+            <EntityTypeMapping TypeName="PlugInsModel.Person">
+              <MappingFragment StoreEntitySet="Person">
+                <ScalarProperty Name="ShopId" ColumnName="ShopId" />
+                <ScalarProperty Name="IsChildren" ColumnName="IsChildren" />
+                <ScalarProperty Name="ComId" ColumnName="ComId" />
+                <ScalarProperty Name="CreatedTime" ColumnName="CreatedTime" />
+                <ScalarProperty Name="UpdatedTime" ColumnName="UpdatedTime" />
+                <ScalarProperty Name="Flag" ColumnName="Flag" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Account" ColumnName="Account" />
+                <ScalarProperty Name="UNID" ColumnName="UNID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ScratchCard">
+            <EntityTypeMapping TypeName="PlugInsModel.ScratchCard">
+              <MappingFragment StoreEntitySet="ScratchCard">
+                <ScalarProperty Name="Flag" ColumnName="Flag" />
+                <ScalarProperty Name="UpdatedTime" ColumnName="UpdatedTime" />
+                <ScalarProperty Name="CreatedTime" ColumnName="CreatedTime" />
+                <ScalarProperty Name="OverDescribe" ColumnName="OverDescribe" />
+                <ScalarProperty Name="OverImage" ColumnName="OverImage" />
+                <ScalarProperty Name="OverTitle" ColumnName="OverTitle" />
+                <ScalarProperty Name="OngoingDescribe" ColumnName="OngoingDescribe" />
+                <ScalarProperty Name="OngoingImage" ColumnName="OngoingImage" />
+                <ScalarProperty Name="OngoingTitle" ColumnName="OngoingTitle" />
+                <ScalarProperty Name="PreheatingDescribe" ColumnName="PreheatingDescribe" />
+                <ScalarProperty Name="PreheatingImage" ColumnName="PreheatingImage" />
+                <ScalarProperty Name="PreheatingTitle" ColumnName="PreheatingTitle" />
+                <ScalarProperty Name="RepeatNotice" ColumnName="RepeatNotice" />
+                <ScalarProperty Name="OverTime" ColumnName="OverTime" />
+                <ScalarProperty Name="OngoingTime" ColumnName="OngoingTime" />
+                <ScalarProperty Name="KeyWord" ColumnName="KeyWord" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="PersonId" ColumnName="PersonId" />
+                <ScalarProperty Name="UNID" ColumnName="UNID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserJoinCounter">
+            <EntityTypeMapping TypeName="PlugInsModel.UserJoinCounter">
+              <MappingFragment StoreEntitySet="UserJoinCounter">
+                <ScalarProperty Name="CachTime" ColumnName="CachTime" />
+                <ScalarProperty Name="IsCach" ColumnName="IsCach" />
+                <ScalarProperty Name="SN" ColumnName="SN" />
+                <ScalarProperty Name="PrizeGrade" ColumnName="PrizeGrade" />
+                <ScalarProperty Name="IsPrize" ColumnName="IsPrize" />
+                <ScalarProperty Name="CreatedTime" ColumnName="CreatedTime" />
+                <ScalarProperty Name="OpenID" ColumnName="OpenID" />
+                <ScalarProperty Name="TargetID" ColumnName="TargetID" />
+                <ScalarProperty Name="TargetCode" ColumnName="TargetCode" />
+                <ScalarProperty Name="UNID" ColumnName="UNID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DinnerDish">
+            <EntityTypeMapping TypeName="PlugInsModel.DinnerDish">
+              <MappingFragment StoreEntitySet="DinnerDish">
+                <ScalarProperty Name="CreatedTime" ColumnName="CreatedTime" />
+                <ScalarProperty Name="UpdatedTime" ColumnName="UpdatedTime" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="Label" ColumnName="Label" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Sort" ColumnName="Sort" />
+                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+                <ScalarProperty Name="ShopId" ColumnName="ShopId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="UNID" ColumnName="UNID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserScore">
+            <EntityTypeMapping TypeName="PlugInsModel.UserScore">
+              <MappingFragment StoreEntitySet="UserScore">
+                <ScalarProperty Name="Score" ColumnName="Score" />
+                <ScalarProperty Name="PersonId" ColumnName="PersonId" />
+                <ScalarProperty Name="OpenId" ColumnName="OpenId" />
+                <ScalarProperty Name="UNID" ColumnName="UNID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserSign">
+            <EntityTypeMapping TypeName="PlugInsModel.UserSign">
+              <MappingFragment StoreEntitySet="UserSign">
+                <ScalarProperty Name="PersonId" ColumnName="PersonId" />
+                <ScalarProperty Name="SignNum" ColumnName="SignNum" />
+                <ScalarProperty Name="SignDate" ColumnName="SignDate" />
+                <ScalarProperty Name="OpenId" ColumnName="OpenId" />
+                <ScalarProperty Name="UNID" ColumnName="UNID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User">
+            <EntityTypeMapping TypeName="PlugInsModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="CreatedTime" ColumnName="CreatedTime" />
+                <ScalarProperty Name="MobilePhone" ColumnName="MobilePhone" />
+                <ScalarProperty Name="Sex" ColumnName="Sex" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Province" ColumnName="Province" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="HeadImgUrl" ColumnName="HeadImgUrl" />
+                <ScalarProperty Name="NickName" ColumnName="NickName" />
+                <ScalarProperty Name="OpenId" ColumnName="OpenId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ScoreDetails">
+            <EntityTypeMapping TypeName="PlugInsModel.ScoreDetails">
+              <MappingFragment StoreEntitySet="ScoreDetails">
+                <ScalarProperty Name="TargetId" ColumnName="TargetId" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="IsAdd" ColumnName="IsAdd" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="CreatedTime" ColumnName="CreatedTime" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="PersonId" ColumnName="PersonId" />
+                <ScalarProperty Name="OpenId" ColumnName="OpenId" />
+                <ScalarProperty Name="UNID" ColumnName="UNID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserPuzzle">
+            <EntityTypeMapping TypeName="PlugInsModel.UserPuzzle">
+              <MappingFragment StoreEntitySet="UserPuzzle">
+                <ScalarProperty Name="OpenId" ColumnName="OpenId" />
+                <ScalarProperty Name="PuzzleDate" ColumnName="PuzzleDate" />
+                <ScalarProperty Name="PuzzleId" ColumnName="PuzzleId" />
+                <ScalarProperty Name="UNID" ColumnName="UNID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Category">
+            <EntityTypeMapping TypeName="PlugInsModel.Category">
+              <MappingFragment StoreEntitySet="Category">
+                <ScalarProperty Name="UpdatedTime" ColumnName="UpdatedTime" />
+                <ScalarProperty Name="CreatedTime" ColumnName="CreatedTime" />
+                <ScalarProperty Name="Sort" ColumnName="Sort" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="PersonId" ColumnName="PersonId" />
+                <ScalarProperty Name="ShopId" ColumnName="ShopId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="UNID" ColumnName="UNID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Goods">
+            <EntityTypeMapping TypeName="PlugInsModel.Goods">
+              <MappingFragment StoreEntitySet="Goods">
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="TimeStamp" ColumnName="TimeStamp" />
+                <ScalarProperty Name="PersonId" ColumnName="PersonId" />
+                <ScalarProperty Name="Flag" ColumnName="Flag" />
+                <ScalarProperty Name="UpdatedTime" ColumnName="UpdatedTime" />
+                <ScalarProperty Name="CreatedTime" ColumnName="CreatedTime" />
+                <ScalarProperty Name="ScoreNum" ColumnName="ScoreNum" />
+                <ScalarProperty Name="SellingPrice" ColumnName="SellingPrice" />
+                <ScalarProperty Name="OriginalPrice" ColumnName="OriginalPrice" />
+                <ScalarProperty Name="OngoingTime" ColumnName="OngoingTime" />
+                <ScalarProperty Name="OverTime" ColumnName="OverTime" />
+                <ScalarProperty Name="SurplusNum" ColumnName="SurplusNum" />
+                <ScalarProperty Name="StockNum" ColumnName="StockNum" />
+                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="UNID" ColumnName="UNID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GoodsDetails">
+            <EntityTypeMapping TypeName="PlugInsModel.GoodsDetails">
+              <MappingFragment StoreEntitySet="GoodsDetails">
+                <ScalarProperty Name="Sort" ColumnName="Sort" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="GoodsId" ColumnName="GoodsId" />
+                <ScalarProperty Name="UNID" ColumnName="UNID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Recommend">
+            <EntityTypeMapping TypeName="PlugInsModel.Recommend">
+              <MappingFragment StoreEntitySet="Recommend">
+                <ScalarProperty Name="CreatedTime" ColumnName="CreatedTime" />
+                <ScalarProperty Name="RecommendCode" ColumnName="RecommendCode" />
+                <ScalarProperty Name="TargetCode" ColumnName="TargetCode" />
+                <ScalarProperty Name="TargetID" ColumnName="TargetID" />
+                <ScalarProperty Name="Sort" ColumnName="Sort" />
+                <ScalarProperty Name="PersonId" ColumnName="PersonId" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="UNID" ColumnName="UNID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GoodsOrder">
+            <EntityTypeMapping TypeName="PlugInsModel.GoodsOrder">
+              <MappingFragment StoreEntitySet="GoodsOrder">
+                <ScalarProperty Name="CreatedTime" ColumnName="CreatedTime" />
+                <ScalarProperty Name="ScoreNum" ColumnName="ScoreNum" />
+                <ScalarProperty Name="AllPrice" ColumnName="AllPrice" />
+                <ScalarProperty Name="Count" ColumnName="Count" />
+                <ScalarProperty Name="PersonId" ColumnName="PersonId" />
+                <ScalarProperty Name="OpenId" ColumnName="OpenId" />
+                <ScalarProperty Name="GoodsId" ColumnName="GoodsId" />
+                <ScalarProperty Name="UNID" ColumnName="UNID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Puzzle">
+            <EntityTypeMapping TypeName="PlugInsModel.Puzzle">
+              <MappingFragment StoreEntitySet="Puzzle">
+                <ScalarProperty Name="OngoingTime" ColumnName="OngoingTime" />
+                <ScalarProperty Name="OverTime" ColumnName="OverTime" />
+                <ScalarProperty Name="BindUrl" ColumnName="BindUrl" />
+                <ScalarProperty Name="BindLogoUrl" ColumnName="BindLogoUrl" />
+                <ScalarProperty Name="BindName" ColumnName="BindName" />
+                <ScalarProperty Name="BindTitle" ColumnName="BindTitle" />
+                <ScalarProperty Name="Score" ColumnName="Score" />
+                <ScalarProperty Name="IsBindScore" ColumnName="IsBindScore" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="DifficultyType" ColumnName="DifficultyType" />
+                <ScalarProperty Name="Flag" ColumnName="Flag" />
+                <ScalarProperty Name="UpdatedTime" ColumnName="UpdatedTime" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="CreatedTime" ColumnName="CreatedTime" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="PersonId" ColumnName="PersonId" />
+                <ScalarProperty Name="UNID" ColumnName="UNID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="无" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

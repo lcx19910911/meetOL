@@ -1,0 +1,155 @@
+﻿@model MeetUserJoin
+@using Core.Extensions;
+@{
+    ViewBag.Title = "会议报名";
+}
+<style type="text/css">
+    body {
+        background-color: #fff;
+    }
+
+    .info > div {
+        overflow: hidden;
+        background: #f5f5f5;
+        padding: 1rem;
+        margin-top: 1rem;
+    }
+
+    .info input {
+        border: 0;
+        border-bottom: 1px solid #aaa;
+        background: inherit;
+    }
+
+    .audit-status:before {
+        content: "审核状态：";
+        color: #333;
+    }
+
+    .auditing {
+        color: #3C3;
+    }
+
+    .audited {
+        color: #f33;
+    }
+</style>
+<div class="wrap">
+    <div class="article">
+        <a href="javascript:history.go(-1);" class="back fl">&lt;</a>
+        <span class="fr" style="padding:0 1.5rem;">&nbsp;</span>
+        <h2>会议报名</h2>
+    </div>
+</div>
+<div class="l">
+    @if ((bool)ViewBag.IsMax)
+    {
+        <div class="w80 txt-center m0 mt40 f4 audit-status auditing">报名人数已满</div>
+    }
+    else
+    {
+        if (!(bool)ViewBag.IsBind)
+        {
+        <form id="bindForm">
+            <div class="w90 m40 f2 info">
+                <div>
+                    姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名：<input type="text" name="realName" class="l-input w60 fr">
+                </div>
+                <div>
+                    单&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;位：<input type="text" name="compnay" class="l-input w60 fr">
+                </div>
+                <div>
+                    职&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;位：<input type="text" name="position" class="l-input w60 fr">
+                </div>
+                <div>
+                    联系方式：<input type="text" name="phone" class="l-input w60 fr" maxlength="11">
+                </div>
+            </div>
+        </form>
+        <div class="button w40 br4 f4 mt20" id="bindBtn">提交</div>
+        }
+        else
+        {
+            if (Model == null)
+            {
+
+                <div class="w80 txt-center m0 mt40 f4">你暂未参加报名该会议</div>
+            <div class="button w40 br4 f4 mt20" id="applyBtn">报名</div>
+            }
+            else
+            {
+            <div class="w80 txt-center m0 mt40 f4 audit-status auditing">@Model.State.GetDescription()</div>
+            }
+        }
+    }
+</div>
+
+
+<script>
+
+
+    function confirm_do() {
+        var name = $("[name='realName']").val();
+        var compnay = $("[name='compnay']").val();
+        var position = $("[name='position']").val();
+        var phone = $("[name='phone']").val();
+        var myreg = /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1}))+\d{8})$/;
+        if (name != "" && compnay != "" && position != "" && phone != "" && myreg.test(phone)) {
+            return true;
+        }
+        else {
+            if (name == "") {
+                alert("请输入姓名");
+                return false;
+            }
+
+            if (phone == "") {
+                alert("请输入手机");
+                return false;
+            }
+
+            if (myreg.test(phone)) {
+                alert("请输入正确的手机号");
+                return false;
+            }
+            return false;
+        }
+    }
+</script>
+<script>
+
+    
+    $("#applyBtn").click(function () {
+            $.ajax({
+                url: "/meet/doApply",
+                method: "post",
+                success: function (data) {
+                    if (data.Result) {
+                        history.go(-1);
+                    }
+                    else {
+                        alert(data.ErrorDesc);
+                    }
+                }
+            })
+    });
+    $("#bindBtn").click(function () {
+        if (confirm_do()){
+            $.ajax({
+                url: "/meet/doBindApply",
+                method: "post",
+                data: $("#bindForm").serialize(),
+                success: function (data) {
+                    if (data.Result) {
+                        history.go(-1);
+                    }
+                    else {
+                        alert(data.ErrorDesc);
+                    }
+                }
+            })
+        }
+        
+        event.preventDefault();
+    });
+</script>

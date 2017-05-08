@@ -1,0 +1,34 @@
+Time:2017/4/25 10:32:06-本次请求耗时 14.922 秒.
+Url:http://localhost:5068/Admin/User/GetPageList?_token=
+UrlReferrer:http://localhost:5068/Admin/User/Index
+UserHostAddress:::1;;
+WebServer:::1
+
+
+Time:2017/4/25 10:33:29-本次请求耗时 3.015 秒.
+Url:http://localhost:5068/Admin/User/GetPageList?_token=
+UrlReferrer:http://localhost:5068/Admin/User/Index
+UserHostAddress:::1;;
+WebServer:::1
+
+
+Time:2017/4/25 10:35:04-本次请求耗时 17.141 秒.
+Url:http://localhost:5068/Admin/User/Add
+UrlReferrer:http://localhost:5068/Admin/User/Index
+UserHostAddress:::1;;
+WebServer:::1
+
+
+Time:2017/4/25 10:43:19-本次请求耗时 9.188 秒.
+Url:http://localhost:5068/
+UserHostAddress:::1;;
+WebServer:::1
+
+
+Time:2017/4/25 10:43:44-本次请求耗时 7.563 秒.
+Url:http://localhost:5068/home/index
+UrlReferrer:http://localhost:5068/login/Quit
+UserHostAddress:::1;;
+WebServer:::1
+
+

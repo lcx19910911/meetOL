@@ -1,0 +1,47 @@
+Time:2017/4/25 14:21:27-本次请求耗时 17.422 秒.
+Url:http://localhost:5068/meet/doBindApply
+UrlReferrer:http://localhost:5068/Meet/Join
+UserHostAddress:::1;;
+WebServer:::1
+
+
+Time:2017/4/25 14:23:12-本次请求耗时 39.25 秒.
+Url:http://localhost:5068/meet/index
+UserHostAddress:::1;;
+WebServer:::1
+
+
+Time:2017/4/25 14:23:20-本次请求耗时 3.25 秒.
+Url:http://localhost:5068/meet/index
+UrlReferrer:http://localhost:5068/meet/index
+UserHostAddress:::1;;
+WebServer:::1
+
+
+Time:2017/4/25 14:24:13-本次请求耗时 4.046 秒.
+Url:http://localhost:5068/meet/join
+UrlReferrer:http://localhost:5068/meet/index
+UserHostAddress:::1;;
+WebServer:::1
+
+
+Time:2017/4/25 14:24:13-本次请求耗时 4.234 秒.
+Url:http://localhost:5068/
+UserHostAddress:127.0.0.1;;
+WebServer:127.0.0.1
+
+
+Time:2017/4/25 14:25:35-本次请求耗时 21.953 秒.
+Url:http://localhost:5068/meet/doBindApply
+UrlReferrer:http://localhost:5068/meet/join
+UserHostAddress:::1;;
+WebServer:::1
+
+
+Time:2017/4/25 14:40:58-本次请求耗时 2.563 秒.
+Url:http://localhost:5068/meet/doBindApply
+UrlReferrer:http://localhost:5068/meet/join
+UserHostAddress:::1;;
+WebServer:::1
+
+

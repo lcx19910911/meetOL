@@ -1,0 +1,200 @@
+﻿
+@{
+    ViewBag.Title = "会议座位图";
+}
+<link href="~/Styles/meetingindex.css" rel="stylesheet" />
+<style>
+    /*2017.4.20--修改*/
+    .backOverlay {
+        display: none;
+        /*display: block;*/
+        position: fixed;
+        left: 0;
+        top: 0;
+        width: 100%;
+        /*max-width: 650px;*/
+        height: 100%;
+        background: rgba(0, 0, 0, 0.8);
+        z-index: 100;
+        /*visibility: visible;*/
+        -webkit-transition-duration: 400ms;
+        transition-duration: 400ms;
+    }
+
+    .meet-directShow {
+        display: none;
+        overflow: hidden;
+        position: fixed;
+        z-index: 101;
+        max-width: 650px;
+        width: 100%;
+        height: 80%;
+        left: 0;
+        top: 32%;
+        /*background: #f40;*/
+        color: #FFF;
+        text-align: center;
+    }
+
+    .mDirImg {
+        position: absolute;
+        left: 0;
+        z-index: 1015;
+        width: 100%;
+        height: auto;
+    }
+
+    #img2 {
+        display: none;
+        position: absolute;
+        top: 42%;
+        left: 0;
+        z-index: 111;
+        /*width: 100%;*/
+        /*height: 216px;*/
+    }
+</style>
+
+<!-- 2017.4.20--遮罩层-->
+<div class="backOverlay"></div>
+<img id="img2" />
+<!-- 2017.4.20--End-->
+
+<div class="all">
+    <div class="article">
+        <a href="javascript:history.go(-1);" class="back fl">&lt;</a>
+        <span class="fr" style="padding:0 1.5rem;">&nbsp;</span>
+        <h2>会议座位图</h2>
+    </div>
+
+    <div class="content">
+        <!-- 2017.4.20--修改了margin-top的值-->
+        <img class="meet-directImg" src="@ViewBag.Path" style="width:100%; margin-top:40%;">
+    </div>
+</div>
+
+<!--2017.4.20 -- 引用2.14jquery版本-->
+
+<script src="~/Scripts/Meet/my.js"></script>
+<script src="~/Scripts/Meet/WeixinApi.js"></script>
+<script>
+//    2017.4.20 -- script整个搬过去
+    window.onload = function (){
+        var img2 =document.getElementById("img2");
+        $('#img2').css({
+            width: $('.meet-directImg').width(),
+            height: $('.meet-directImg').height()
+        });
+
+        /*
+         */
+        var img2 =document.getElementById("img2");
+//             var imgDiv =document.getElementById("imgDiv");
+
+
+        var touchScale = function(seletor) {
+            console.log(1111);
+            var startX, endX, scale, x1, x2, y1, y2, imgLeft, imgTop, imgWidth, imgHeight, dragLeft, dragTop,
+                one = false,
+                $touch = $(seletor),
+                originalWidth = $touch.width(),
+                originalHeight = $touch.height(),
+                baseScale = parseFloat(originalWidth/originalHeight),
+                imgData = [];
+            function siteData(name) {
+                imgLeft = parseInt(name.css('left'));
+                imgTop = parseInt(name.css('top'));
+                imgWidth = name.width();
+                imgHeight = name.height();
+            }
+            $(document).on('touchstart touchmove touchend', '#' + seletor.id, function(event){
+                event.preventDefault();
+                var $me = $(seletor),
+                    touch1 = event.originalEvent.targetTouches[0],  // 第一根手指touch事件
+                    touch2 = event.originalEvent.targetTouches[1],  // 第二根手指touch事件
+                    fingers = event.originalEvent.touches.length;   // 屏幕上手指数量
+                //手指放到屏幕上的时候，还没有进行其他操作
+                if (event.type == 'touchstart') {
+                    console.log($('#img2').height());
+                    if (fingers == 2) {
+                        // 缩放图片的时候X坐标起始值
+                        startX = Math.abs(touch1.pageX - touch2.pageX);
+                        one = false;
+                    }
+                    else if (fingers == 1) {
+//                          预存手指刚点击时的位置
+                        x1 = touch1.pageX;
+                        y1 = touch1.pageY;
+//                             获取图片当前的位置
+                        imgLeft = $me.css('left');
+                        imgTop = $me.css('top');
+                        one = true;
+                    }
+                    siteData($me);
+                }
+                //手指在屏幕上滑动
+                else if (event.type == 'touchmove') {
+                    console.log($('#img2').height());
+                    if (fingers == 2) {
+                        // 缩放图片的时候X坐标滑动变化值
+                        endX = Math.abs(touch1.pageX - touch2.pageX);
+                        scale = endX - startX;
+                        $me.css({
+                            'width' : originalWidth + scale,
+                            'height' : (originalWidth + scale)/baseScale,
+                            'left' : imgLeft,
+                            'top' : imgTop
+                        });
+
+                    }else if (fingers == 1) {
+
+//                          手指拖动图片实时的位置
+                        x2 = touch1.pageX;
+                        y2 = touch1.pageY;
+//                             console.log(x2 + ":" + y2);
+                        if (one) {
+                            dragLeft = imgLeft + (x2 - x1);
+                            dragTop = imgTop + (y2 - y1);
+//                            这个是边界，块不可以出这个边界，但是图片是可以出去的，所以注释掉
+//                                 if ( dragLeft < 0) {
+//                                     dragLeft = 0;
+//                                 } else if (dragLeft > $(window).width() - $me.width()) {
+//                                     dragLeft = $(window).width() - $me.width();
+//                                 }
+//                                 if ( dragTop < 0) {
+//                                     dragTop = 0;
+//                                 } else if (dragTop > $(window).height() - $me.height()) {
+//                                     dragTop = $(window).height() - $me.height();
+//                                 }
+                            $me.css({
+                                'left' : dragLeft,
+                                'top' : dragTop,
+                            });
+                        }
+
+                    }
+                }
+                //手指移开屏幕
+                else if (event.type == 'touchend') {
+                    // 手指移开后保存图片的宽
+                    originalWidth = $touch.width();
+                    siteData($me);
+                }
+            });
+        };
+        touchScale(img2);
+    };
+    $(function () {
+        //    2017.4.20--用户选择商品规格时，点击图片弹出背景并放大图片
+        $(".meet-directImg").click(function () {
+            $(".backOverlay").fadeIn(300);
+            var dirImg = $(".meet-directImg").attr("src");
+            $('#img2').attr('src', dirImg);
+            $('#img2').show();
+        });
+
+        $('.backOverlay').click(function () {
+            $('.backOverlay, #img2').hide();
+        });
+    });
+</script>

@@ -1,0 +1,12 @@
+Time:2017/4/24 17:00:31-本次请求耗时 110.328 秒.
+Url:http://localhost:5068/
+UserHostAddress:::1;;
+WebServer:::1
+
+
+Time:2017/4/24 17:58:48-本次请求耗时 6.422 秒.
+Url:http://localhost:5068/
+UserHostAddress:::1;;
+WebServer:::1
+
+
