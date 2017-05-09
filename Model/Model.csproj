@@ -57,6 +57,7 @@
     <Compile Include="BaseEntity.cs" />
     <Compile Include="MeetTopic.cs" />
     <Compile Include="PlanVoteUserJoin.cs" />
+    <Compile Include="ExportModel.cs" />
     <Compile Include="TopicUserJoin.cs" />
     <Compile Include="Speaker.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

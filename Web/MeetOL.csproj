@@ -19,9 +19,9 @@
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort />
-    <IISExpressAnonymousAuthentication />
-    <IISExpressWindowsAuthentication />
-    <IISExpressUseClassicPipelineMode />
+    <IISExpressAnonymousAuthentication>enabled</IISExpressAnonymousAuthentication>
+    <IISExpressWindowsAuthentication>disabled</IISExpressWindowsAuthentication>
+    <IISExpressUseClassicPipelineMode>false</IISExpressUseClassicPipelineMode>
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
@@ -176,6 +176,7 @@
     <Content Include="Areas\Admin\HtmlTemplates\Admin\ChangePassword.html" />
     <Content Include="Areas\Admin\HtmlTemplates\Admin\Update.html" />
     <Content Include="Areas\Admin\HtmlTemplates\Meet\Report.html" />
+    <Content Include="Areas\Admin\HtmlTemplates\Meet\SelectFile.html" />
     <Content Include="Areas\Admin\HtmlTemplates\Meet\Update.html" />
     <Content Include="Areas\Admin\HtmlTemplates\Plan\Update.html" />
     <Content Include="Areas\Admin\HtmlTemplates\Speaker\Index.html" />

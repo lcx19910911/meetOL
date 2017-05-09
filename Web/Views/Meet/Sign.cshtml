@@ -108,25 +108,27 @@
 {
 <script>
     $(function () {
-
+        var isChangeQrCode = '@(ViewBag.IsChangeQrCode)';
         
         $(".cy-codeImg").qrcode({
             width: 200, //宽度 
             height: 200, //高度 
             text:'@((string)ViewBag.Url)' //任意内容 
         });
-        setInterval(function () {
-            $.ajax({
-                url: "/meet/GetSignUrl",
-                success: function (data) {
+        if (isChangeQrCode == "1") {
+            setInterval(function () {
+                $.ajax({
+                    url: "/meet/GetSignUrl",
+                    success: function (data) {
                         $(".cy-codeImg").qrcode({
                             width: "100%", //宽度 
                             height: "100%", //高度 
                             text: data.Result //任意内容 
                         });
-                }
-            })
-        },10000)
+                    }
+                })
+            }, 10000)
+        }
     })
 </script>
 }

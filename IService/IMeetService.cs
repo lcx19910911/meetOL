@@ -54,5 +54,7 @@ namespace IService
         WebResult<bool> AddUserJoin(string meetId, string userId);
 
         List<MeetTopic> GetListByMeetId(string id);
+
+        WebResult<bool> ExportInto(List<ExportModel> list, string meetId);
     }
 }

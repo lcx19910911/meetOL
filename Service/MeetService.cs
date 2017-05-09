@@ -46,7 +46,7 @@ namespace Service
         {
             using (DbRepository db = new DbRepository())
             {
-                var query = db.Meet.Where(x=>!x.IsDelete);
+                var query = db.Meet.Where(x => !x.IsDelete);
                 if (title.IsNotNullOrEmpty())
                 {
                     query = query.Where(x => x.Name.Contains(title));
@@ -82,6 +82,7 @@ namespace Service
                     {
                         x.IsJoinAuditStr = x.IsJoinAudit.GetDescription();
                         x.IsAutoAllotStr = x.IsAutoAllot.GetDescription();
+                        x.IsChangeQrcodeStr = x.IsChangeQrcode.GetDescription();
                     }
                 });
 
@@ -124,9 +125,9 @@ namespace Service
             model.Meet.CreateUserId = Client.LoginUser.ID;
             Add<Meet>(model.Meet);
             model.MeetPlans.ForEach(x =>
-            {              
+            {
                 x.MeetID = model.Meet.ID;
-                x.ID= Guid.NewGuid().ToString("N");
+                x.ID = Guid.NewGuid().ToString("N");
                 Add<MeetPlan>(x);
                 x.MeetTopics.ForEach(y =>
                 {
@@ -142,7 +143,7 @@ namespace Service
 
         public string GetLastMeetID()
         {
-            return GetList<Meet>(x=>!x.IsDelete).OrderByDescending(x => x.OngoingTime).FirstOrDefault()?.ID;
+            return GetList<Meet>(x => !x.IsDelete).OrderByDescending(x => x.OngoingTime).FirstOrDefault()?.ID;
         }
 
         /// <summary>
@@ -157,7 +158,7 @@ namespace Service
             if (model.Meet.OverTime < model.Meet.OngoingTime || model.Meet.OverTime < DateTime.Now)
                 return Result(false, ErrorCode.meet_end_time_error);
             var entity = Find(model.ID);
-            if(entity==null)     
+            if (entity == null)
                 return Result(false, ErrorCode.sys_param_format_error);
             if (entity.Meet.CreateUserId != Client.LoginUser.ID)
             {
@@ -214,7 +215,7 @@ namespace Service
             if (entity.MeetPlans != null && entity.MeetPlans.Count > 0)
             {
                 var deletePlanIdList = entity.MeetPlans.Where(x => !planIdList.Contains(x.ID)).Select(x => x.ID).ToList();
-                if(deletePlanIdList!=null&& deletePlanIdList.Count>0)
+                if (deletePlanIdList != null && deletePlanIdList.Count > 0)
                     Delete<MeetPlan>(string.Join(",", deletePlanIdList));
             }
             if (entity.MeetTopics != null && entity.MeetTopics.Count > 0)
@@ -224,7 +225,7 @@ namespace Service
                     Delete<MeetTopic>(string.Join(",", deleteTopicIdList));
             }
             CacheHelper.Clear();
-            return Result(true);         
+            return Result(true);
         }
 
 
@@ -247,7 +248,7 @@ namespace Service
                     {
                         var model = new MeetModel()
                         {
-                            ID=x.ID,
+                            ID = x.ID,
                             Meet = x,
                             Rooms = dic_Room.Values.Where(y => x.RoomIDs.Contains(y.ID)).ToList()
                         };
@@ -276,7 +277,7 @@ namespace Service
 
                         if (dic_MeetJoin.ContainsKey(x.ID))
                             model.MeetUserJoins = dic_MeetJoin[x.ID];
-                        
+
                         cacheModel.Add(model);
                     });
                 }
@@ -287,7 +288,7 @@ namespace Service
 
         public MeetModel Find(string id)
         {
-            var model=GetCacheList().Find(x=>x.ID.Equals(id));
+            var model = GetCacheList().Find(x => x.ID.Equals(id));
             if (model == null)
                 return null;
             var aryModel = model.MeetPlans;
@@ -316,7 +317,7 @@ namespace Service
             if (entity.MeetUserJoins != null && entity.MeetUserJoins.Count > 0)
             {
                 model.JoinCount = entity.MeetUserJoins.Count();
-                model.SignCount = entity.MeetUserJoins.Where(x=>x.HadSign==YesOrNoCode.Yes).Count();
+                model.SignCount = entity.MeetUserJoins.Where(x => x.HadSign == YesOrNoCode.Yes).Count();
             }
             if (entity.MeetPlans != null && entity.MeetPlans.Count > 0)
             {
@@ -327,7 +328,7 @@ namespace Service
             {
                 model.TopicCount = entity.MeetTopics.Count();
                 var topicIdList = entity.MeetTopics.Select(x => x.ID).ToList();
-                model.TopicJoinCount = GetCount<TopicUserJoin>(x => topicIdList.Contains(x.MeetTopicID)&&x.State==UserJoinState.Pass);
+                model.TopicJoinCount = GetCount<TopicUserJoin>(x => topicIdList.Contains(x.MeetTopicID) && x.State == UserJoinState.Pass);
                 model.VoteCount = GetCount<PlanVoteUserJoin>(x => x.MeetID == id);
             }
             return model;
@@ -344,7 +345,7 @@ namespace Service
             if (id.IsNullOrEmpty())
                 return new List<MeetTopic>();
             var model = Find(id);
-            if(model==null)
+            if (model == null)
                 return new List<MeetTopic>();
             var list = new List<MeetTopic>();
             if (model.MeetPlans == null)
@@ -354,7 +355,8 @@ namespace Service
                 var topic = model.MeetPlans.Select(y => y.MeetTopics).FirstOrDefault();
                 if (topic != null)
                 {
-                    topic.ForEach(y => {
+                    topic.ForEach(y =>
+                    {
                         y.Speaker = x.Speaker;
                     });
                     list.AddRange(topic);
@@ -390,6 +392,82 @@ namespace Service
             return Result(true);
         }
 
+
+        /// <summary>
+        ///导出 获取分页列表
+        /// </summary>
+        /// <param name="pageIndex">页码</param>
+        /// <param name="pageSize">分页大小</param>
+        /// <param name="name">名称 - 搜索项</param>
+        /// <param name="no">编号 - 搜索项</param>
+        /// <returns></returns>
+        public WebResult<bool> ExportInto(List<ExportModel> list, string meetId
+            )
+        {
+            if (list == null || meetId.IsNullOrEmpty())
+            {
+                return Result(false, ErrorCode.sys_param_format_error);
+            }
+            using (DbRepository entities = new DbRepository())
+            {
+                string msg = string.Empty;
+                list.ForEach(x =>
+                {
+                    if (string.IsNullOrEmpty(msg))
+                    {
+                        var model = Find<User>(y => y.MobilePhone == x.Mobile);
+                        if (model == null)
+                        {
+                            model = new User()
+                            {
+                                ID = Guid.NewGuid().ToString("N"),
+                                Compnay = x.Company,
+                                MobilePhone = x.Mobile,
+                                Position = x.Position,
+                                NickName = x.Name,
+                                RealName = x.Name
+                            };
+                            Add<MeetUserJoin>(new MeetUserJoin()
+                            {
+                                MeetID = meetId,
+                                UserID = model.ID,
+                                State = UserJoinState.Pass,
+                                AuditTime = DateTime.Now,
+                            });
+                        }
+                        else
+                        {
+                            model.NickName = x.Name;
+                            model.RealName = x.Name;
+                            model.Compnay = x.Company;
+                            model.Position = x.Position;
+                            if (!IsExits<MeetUserJoin>(y => y.UserID == model.ID && y.MeetID == meetId))
+                            {
+
+                                Add<MeetUserJoin>(new MeetUserJoin()
+                                {
+                                    MeetID = meetId,
+                                    UserID = model.ID,
+                                    State = UserJoinState.Pass,
+                                    AuditTime = DateTime.Now,
+                                });
+                            }
+                        }
+                    }
+                });
+
+                if (msg.IsNotNullOrEmpty())
+                {
+                    return Result(false, msg);
+                }
+                else
+                {
+                    return Result(true);
+                }
+            }
+        }
+
+
         #region 报名
 
 
@@ -405,7 +483,7 @@ namespace Service
             var meetModel = Find(meetId);
             if (meetModel == null)
                 return Result(false, ErrorCode.sys_param_format_error);
-            if (GetCount<MeetUserJoin>(x =>!x.IsDelete&&x.MeetID == meetId) > meetModel.Meet.MaxLimit)
+            if (GetCount<MeetUserJoin>(x => !x.IsDelete && x.MeetID == meetId) > meetModel.Meet.MaxLimit)
             {
                 return Result(false, ErrorCode.meet_join_max);
             }
