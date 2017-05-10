@@ -97,6 +97,29 @@ namespace MeetOL.Controllers
                 return View(false);
             }
         }
+        public ActionResult SignResult()
+        {
+            var meet = IMeetService.Find(this.MeetID);
+            if (meet == null)
+                return View("Index");
+            var usrIdList = meet.MeetUserJoins.Select(x => x.UserID).ToList();
+            var userDic = IUserService.GetList(x => usrIdList.Contains(x.ID)).ToDictionary(x => x.ID);
+            if (meet.MeetUserJoins != null && meet.MeetUserJoins.Count > 0)
+            {
+                meet.MeetUserJoins.ForEach(x =>
+                {
+                    if (x.UserID.IsNotNullOrEmpty() && userDic.ContainsKey(x.UserID))
+                    {
+                        x.User = userDic[x.UserID];
+                    }
+                });
+
+                return View(meet.MeetUserJoins);
+            }
+            else
+                return View(new List<MeetUserJoin>());
+        }
+        
 
         /// <summary>
         /// 增加评论
