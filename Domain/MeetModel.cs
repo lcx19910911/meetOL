@@ -27,5 +27,7 @@ namespace Domain
 
         public List<string> userIdList { get; set; }
         public List<string> signUserIdList { get; set; }
+
+        public MeetUserJoin UserJoin { get; set; }
     }
 }

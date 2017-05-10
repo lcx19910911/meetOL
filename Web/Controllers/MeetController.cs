@@ -13,6 +13,7 @@ using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
 using Domain;
 using Core.Helper;
+using EnumPro;
 
 namespace MeetOL.Controllers
 {
@@ -150,6 +151,28 @@ namespace MeetOL.Controllers
             return JResult(ITopicUserJoinService.GetPageList(pageIndex, pageSize,"", topicId,null,null,null));
         }
 
+
+        /// <summary>
+        /// 我的会议
+        /// </summary>
+        /// <returns></returns>
+        [JoinFilter]
+        public ActionResult MyMeet()
+        {
+            return View();
+        }
+        /// <summary>
+        /// 我的会议
+        /// </summary>
+        /// <returns></returns>
+        [JoinFilter]
+        public ActionResult MyList(YesOrNoCode? type)
+        {
+            ViewBag.Type = type;
+            var model = IMeetService.GetListByUserId(this.LoginUser.ID);
+            return View(model);
+        }
+        
 
         #region 页面
 

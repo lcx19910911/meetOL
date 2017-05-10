@@ -278,6 +278,7 @@
     <Content Include="Images\loading.jpg" />
     <Content Include="Images\meet-banner.jpg" />
     <Content Include="Images\meetingImg.png" />
+    <Content Include="Images\myMeet.png" />
     <Content Include="Images\pingxuan.png" />
     <Content Include="Images\xd_icon_5.png" />
     <Content Include="Images\xiazai.png" />
@@ -714,6 +715,8 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Meet\Vote.cshtml" />
     <Content Include="Views\Meet\ForSign.cshtml" />
+    <Content Include="Views\Meet\MyMeet.cshtml" />
+    <Content Include="Views\Meet\MyList.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -1,0 +1,114 @@
+﻿@{
+    ViewBag.Title = "我的会议";
+}
+<style type="text/css">
+    html, body {
+        background-color: #efefef;
+    }
+
+    .m-year {
+        font-size: 1.4rem;
+        margin-top: 1rem;
+        text-indent: 0.7rem;
+        font-weight: bold;
+    }
+
+    .pt-list {
+        overflow: hidden;
+        position: relative;
+        border-radius: 5px;
+        font-size: 1.2rem;
+        padding: 0.7rem 0.2rem;
+        color: #000;
+        border-bottom: 1px solid #dfdfdf;
+        box-shadow: 1px 1px 2px 1px #ddd;
+        background-color: #fff;
+        margin-top: 0.8rem;
+    }
+
+        .pt-list p {
+            float: left;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            box-sizing: border-box;
+        }
+
+            .pt-list p:nth-child(1) {
+                width: 13%;
+                text-align: center;
+                border-right: 3px solid #fff;
+            }
+
+            .pt-list p:nth-last-child(1) {
+                width: 87%;
+                padding-left: 0.8rem;
+                line-height: 3.5rem;
+                text-indent: 1em;
+            }
+
+        .pt-list span {
+            display: block;
+            font-size: 1rem;
+        }
+
+        /*.pt-list span:after {*/
+        /*content: "月";*/
+        /*}*/
+
+        .pt-list strong {
+            display: block;
+            font-size: 1.6rem;
+            font-weight: bold;
+        }
+
+    /*2017.5.9*/
+    footer a {
+        width: 20%;
+    }
+
+    .pt-list p {
+        float: left;
+        display: block;
+        height: 3.5rem;
+        line-height: 3.5rem;
+    }
+
+    .pt-list .pt-icon {
+        position: absolute;
+        top: 27%;
+        left: 5%;
+        width: 30px;
+        height: 30px;
+        line-height: 3.5rem;
+        background: url(./img/baoming.png) no-repeat;
+        background-size: 100% 100%;
+    }
+</style>
+
+<div class="all_content">
+    <div class="article">
+        <a href="javascript:history.go(-1);" class="back fl">&lt;</a>
+        <span class="fr" style="padding:0 1.5rem;">&nbsp;</span>
+        <h2>我的会议</h2>
+
+    </div>
+    </div>
+
+   <div class="l">
+    <div class="w95 m0">
+        <ul>
+            <li>
+                <a href="/meet/myList">
+                    <div class="pt-list">
+                        <p>
+                            <span class="pt-icon"></span>
+                        </p>
+                        <p>报名会议</p>
+                    </div>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
+

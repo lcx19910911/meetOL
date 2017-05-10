@@ -333,6 +333,30 @@ namespace Service
             return model;
         }
 
+        /// <summary>
+        /// 获取该用户报名通过的会议集合
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        public List<MeetModel> GetListByUserId(string userId)
+        {
+            if (userId.IsNullOrEmpty())
+                return new List<MeetModel>();
+            var meetList = GetCacheList() ;
+            var returnList = new List<MeetModel>();
+            if (meetList != null && meetList.Count > 0)
+            {
+                meetList.ForEach(x =>
+                {
+                    x.UserJoin = x.MeetUserJoins.Where(y => y.ID.Equals(userId)&&y.State==UserJoinState.Pass).FirstOrDefault();
+                    if (x.UserJoin != null)
+                    {
+                        returnList.Add(x);
+                    }
+                });
+            }
+            return returnList;
+        }
 
         /// <summary>
         /// 搜索关键字

@@ -1,0 +1,319 @@
+﻿@model List<MeetModel>
+@{
+    ViewBag.Title = "报名会议";
+}
+<style type="text/css">
+    /*2017.5.9*/
+    html, body {
+        background-color: #efefef;
+        min-height: 100%;
+    }
+
+    .m-year {
+        font-size: 1.4rem;
+        margin-top: 1rem;
+        text-indent: 0.7rem;
+        font-weight: bold;
+    }
+
+    .pt-list {
+        overflow: hidden;
+        position: relative;
+        border-radius: 5px;
+        font-size: 1.2rem;
+        padding: 0.7rem 0.2rem;
+        color: #000;
+        border-bottom: 1px solid #dfdfdf;
+        box-shadow: 1px 1px 2px 1px #ddd;
+        background-color: #fff;
+        margin-top: 0.8rem;
+    }
+
+        .pt-list p {
+            float: left;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            box-sizing: border-box;
+        }
+
+        .pt-list span {
+            display: block;
+            font-size: 1rem;
+        }
+
+        .pt-list strong {
+            display: block;
+            font-size: 1.6rem;
+            font-weight: bold;
+        }
+
+    /*2017.5.9*/
+    footer a {
+        width: 20%;
+    }
+
+    .pt-list .pt-icon {
+        position: absolute;
+        top: 29%;
+        left: 5%;
+        width: 30px;
+        height: 30px;
+        line-height: 49px;
+        background: url(./img/baoming.png) no-repeat;
+        background-size: 100% 100%;
+    }
+
+    /* 2017.5.9 */
+
+    .pt-list {
+        overflow: hidden;
+        border-radius: 5px;
+        font-size: 1.2rem;
+        padding: 0.7rem 0.2rem;
+        color: #000;
+        border-bottom: 1px solid #dfdfdf;
+        box-shadow: 1px 1px 2px 1px #ddd;
+        background-color: #fff;
+        margin-top: 0.8rem;
+    }
+
+    .pt-top p {
+        float: left;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        box-sizing: border-box;
+    }
+
+    .pt-top > p:nth-child(1) {
+        width: 20%;
+        text-align: center;
+        border-right: 3px solid #fff;
+    }
+
+    .pt-top > p:nth-child(2):before {
+        content: "地点：";
+    }
+
+    .pt-top > p:nth-child(2) {
+        width: 79%;
+        padding-left: 0.4rem;
+        line-height: 2rem;
+        text-indent: 1em;
+    }
+
+    .pt-top span {
+        display: block;
+        font-size: 1rem;
+    }
+
+    .pt-top strong:before {
+        content: "-";
+    }
+
+    .pt-top strong {
+        display: block;
+        font-size: 1.1rem;
+        font-weight: bold;
+    }
+
+    .pt-top {
+        overflow: hidden;
+    }
+
+    .pt-content {
+        overflow: hidden;
+        width: 95%;
+        margin: 0.7rem auto 0;
+        border-top: 1px dotted #ccc;
+        font-size: 1rem;
+        padding: 0.5rem;
+    }
+
+        .pt-content p {
+            overflow: hidden;
+            width: 100%;
+            box-sizing: border-box;
+            padding: 0.2rem;
+            line-height: 2.2rem;
+        }
+
+            .pt-content p span {
+                float: left;
+                color: #333;
+                display: block;
+                font-size: 0.9rem;
+            }
+
+                .pt-content p span:nth-of-type(2) {
+                    margin-left: 1rem;
+                }
+
+        /* rc:表示已报名，已赴约 gc:表示未报名未赴约 */
+        .pt-content .rc {
+            color: #EC8D2A;
+        }
+
+        .pt-content .gc {
+            color: #52c883;
+        }
+
+        .pt-content .fw600 {
+            font-weight: 600;
+        }
+
+    /*2017.5.9 -- meet-container style*/
+    .meet-container {
+        overflow: hidden;
+        position: relative;
+        width: 100%;
+        min-width: 320px;
+        max-width: 650px;
+        height: auto;
+    }
+
+    .meet-title {
+        position: fixed;
+        overflow: hidden;
+        top: 60px;
+        z-index: 998;
+        width: 100%;
+        max-width: 650px;
+        height: 42px;
+        box-sizing: border-box;
+        line-height: 40px;
+        background: #fff;
+    }
+
+    .meet-tList {
+        overflow: hidden;
+        padding-bottom: 10px;
+        background: #fff;
+    }
+
+        .meet-tList li {
+            float: left;
+            width: 33.3%;
+            text-align: center;
+            cursor: pointer;
+        }
+
+    .activeTxt {
+        color: #da4453;
+        border-bottom: 2px solid #da4453;
+    }
+</style>
+
+<div class="wrap">
+    <div class="article">
+        <a href="javascript:history.go(-1);" class="back fl"><</a>
+        <span class="fr" style="padding:0 1.5rem;">&nbsp;</span>
+        <h2>报名会议</h2>
+    </div>
+</div>
+<div class="l">
+    <div class="meet-container">
+        <div class="meet-title">
+            <ul class="meet-tList">
+                <li @(ViewBag.Type==null?"class=\"activeTxt\"":"")>全部会议</li>
+                <li data-type="1" @(ViewBag.Type!=null&& ViewBag.Type== EnumPro.YesOrNoCode.Yes? "class=\"activeTxt\"":"")>已赴约</li>
+                <li data-type="0" @(ViewBag.Type!=null && ViewBag.Type == EnumPro.YesOrNoCode.No ? "class=\"activeTxt\"":"")>未赴约</li>
+            </ul>
+        </div>
+        <div class="meet-content">
+            <div class="meet-con">
+                <div class="w95 m0">
+                    <ul>
+                        @if (Model != null && Model.Count > 0)
+                        {
+                            foreach (var item in Model)
+                            {
+                                <li>
+                                    <a href="#">
+                                        <div class="pt-list">
+                                            <div class="pt-top">
+                                                <p style="border-color: rgb(80, 30, 227);">
+                                                    <span>@(item.Meet.OngoingTime)</span>
+                                                    <strong>@(item.Meet.OverTime)</strong>
+                                                </p>
+                                                <p>@(string.Join(",",item.Rooms.Select(x=>x.Name).ToList()))</p>
+                                            </div>
+                                            <div class="pt-content">
+                                                <p>
+                                                    <span>会议名称:</span>
+                                                    <span class="fw600 w70 txt-hidden">
+                                                        @item.Meet.Name
+                                                    </span>
+                                                </p>
+                                                <p>
+                                                    <span>参与报名情况:</span>
+                                                    <span class="@(item.UserJoin.State==UserJoinState.Pass?"gc":"rc")">
+                                                        @(item.UserJoin.State==UserJoinState.Pass?"已报名":(item.UserJoin.State== UserJoinState.WaitAudit?"等待审核":"已被拒绝"))
+                                                    </span>
+                                                </p>
+                                                <p>
+                                                    <span>签到情况:</span>
+                                                    <span class="@(item.UserJoin.HadSign==EnumPro.YesOrNoCode.Yes?"gc":"rc")">
+                                                        @(item.UserJoin.HadSign==EnumPro.YesOrNoCode.Yes?"已签到":"未签到")
+                                                    </span>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                            }
+                        }
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(window).resize(initFont);
+    initFont();
+    function initFont() {
+        var htmlWidth = $('html').width();
+        if (htmlWidth >= 650) {
+            $("html").css({"font-size": "24px"});
+        } else {
+            $("html").css({"font-size": 12 / 320 * htmlWidth + "px"});
+        }
+    };
+
+//   随机取色
+    $(function () {
+        function lRandom(a, b) {
+            var c, num;
+            if (a > b) {
+                c = a;
+                a = b;
+                b = c;
+            }
+            c = b - a + 1;
+            num = Math.floor(Math.random() * c) + a;
+            return num;
+        };
+
+        $('.pt-list').each(function (i, obj) {
+            var _this = $(obj).find('p').eq(0);
+            var r = lRandom(49, 49),
+                g = lRandom(165, 165),
+                b = lRandom(241, 249);
+            _this.css({
+                'border-color': 'rgb(' + r + ',' + g + ',' + b + ')'
+            });
+        });
+    });
+
+    $(function () {
+        //  计算margin-top的高度
+        $('.meet-content').css({'margin-top': $('.meet-title').height() + 12});
+        $('.meet-tList li').click(function() {
+            window.location.href = "/meet/mylist?type=" + $(this).attr("data-type");
+        })
+    });
+
+</script>
