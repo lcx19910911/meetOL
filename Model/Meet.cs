@@ -43,6 +43,15 @@ namespace Model
         [NotMapped]
         public string IsJoinAuditStr { get; set; }
 
+
+
+        /// <summary>
+        /// 签到二维码是否变化
+        /// </summary>
+        public YesOrNoCode IsChangeQrcode { get; set; } = YesOrNoCode.No;
+        [NotMapped]
+        public string IsChangeQrcodeStr { get; set; }
+
         /// <summary>
         /// 座位图
         /// </summary

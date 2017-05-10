@@ -52,8 +52,12 @@ namespace MeetOL.Controllers
                 return View("Index");
             ViewBag.Url = "";
             ViewBag.Sign = false;
-
-            var code = CacheHelper.Get<string>("sign_code", CacheTimeOption.TenSecond, () =>
+            var meet = IMeetService.Find(this.MeetID);
+            if (meet == null)
+                return View("Index");
+            ViewBag.IsChangeQrCode = meet.Meet.IsChangeQrcode;
+            CacheTimeOption timeCode = meet.Meet.IsChangeQrcode == EnumPro.YesOrNoCode.Yes ? CacheTimeOption.HalfDay : CacheTimeOption.TenSecond;
+            var code = CacheHelper.Get<string>("sign_code", timeCode, () =>
             {
                 return Guid.NewGuid().ToString("N").SubString(6); ;
             });

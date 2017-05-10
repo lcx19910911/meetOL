@@ -45,7 +45,7 @@
                 <th dataname="Name">会议名称</th>
                 <th dataname="Address">地点</th>
                 <th dataname="IsJoinAuditStr">需要审核</th>
-                @*<th dataname="IsAutoAllotStr">座位自动分配</th>*@
+                <th dataname="IsChangeQrcodeStr">动态签到</th>
                 <th dataname="MaxLimit">人数限制</th>
                 <th dataname="OngoingTime" datatype="jsondate">开始时间</th>
                 <th dataname="OverTime" datatype="jsondate">结束时间</th>
@@ -829,6 +829,43 @@
                     }
                 },
                 {
+                    className: "am-text-secondary",
+                    icon: "icon-pie-chart",
+                    name: "导入",
+                    click: function (item) {
+
+                        $.Nuoya.ajaxDialog({
+                            closeViaDimmer: false,
+                            width: "600px",
+                            height: "500px",
+                            ajaxUrl: "/Areas/Admin/HtmlTemplates/Meet/SelectFile.html",
+                            title: "选择文件",
+                            callback: function () {
+                            },
+                            buttons: [{
+                                label: "保存",
+                                callback: function (e) {
+                                    $.Nuoya.form("form").ajaxSubmit({
+                                        ajaxUrl: "/Admin/Meet/ExportInto",
+                                        params: {
+                                            meetId: item.ID,
+                                            mark:'export'
+                                        },
+                                        callback: function (data) {
+                                            if (!data.ErrorDesc) {
+                                                e.hide();
+                                                grid.reload();
+                                            }
+                                            else
+                                                $.Nuoya.alert(data.ErrorDesc);
+                                        }
+                                    });
+                                }
+                            }]
+                        })
+                    }
+                },
+                {
                     className: "am-text-success",
                     icon: "icon-bluetooth-b",
                     name: "统计",
@@ -862,4 +899,6 @@
             ]
         });
     </script>
+
+
 }

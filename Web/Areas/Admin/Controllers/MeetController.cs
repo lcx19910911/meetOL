@@ -14,6 +14,9 @@ using MPUtil.UserMng;
 using Service;
 using Model;
 using Domain;
+using Core.Helper;
+using System.IO;
+using System.Collections;
 
 namespace MeetOL.Areas.Admin.Controllers
 {
@@ -125,6 +128,28 @@ namespace MeetOL.Areas.Admin.Controllers
             var effect = IMeetPlanService.UpdateCount(id,count);
             return JResult(effect);
         }
+
+
+        private Hashtable GetHT()
+        {
+            Hashtable hs = new Hashtable();
+            hs["Name"] = "名称";
+            hs["Mobile"] = "手机号";
+            hs["Company"] = "公司";
+            hs["Position"] = "职位";
+            return hs;
+        }
+
+        public ActionResult ExportInto(string mark,string meetId)
+        {
+            HttpPostedFileBase file = Request.Files[0];
+            string path = UploadHelper.Save(file, mark);
+            string filePath = Path.Combine(Server.MapPath("~/") + path);
+            var list = NPOIHelper<ExportModel>.FromExcel(GetHT(), filePath);
+            //var msg = ;
+            return JResult(IMeetService.ExportInto(list, meetId));
+        }
+
 
         /// <summary>
         /// 修改投票数

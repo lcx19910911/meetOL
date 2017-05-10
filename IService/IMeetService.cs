@@ -56,5 +56,7 @@ namespace IService
         List<MeetTopic> GetListByMeetId(string id);
 
         List<MeetModel> GetListByUserId(string userId);
+
+        WebResult<bool> ExportInto(List<ExportModel> list, string meetId);
     }
 }
