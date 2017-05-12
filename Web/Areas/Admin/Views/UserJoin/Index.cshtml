@@ -99,9 +99,9 @@
                         }
                     },
                     click: function (item) {
-                        $.Nuoya.action("/Admin/MeetUserJoin/Audit", {
+                        $.Nuoya.action("/Admin/UserJoin/Audit", {
                             id: item.ID,
-                            isPass: 1
+                            state: 1
                         },
                         function () {
                             grid.reload();
@@ -121,9 +121,9 @@
                         }
                     },
                     click: function (item) {
-                        $.Nuoya.action("/Admin/MeetUserJoin/Audit", {
+                        $.Nuoya.action("/Admin/UserJoin/Audit", {
                             id: item.ID,
-                            isPass:2
+                            state: 2
                         },
                         function () {
                             grid.reload();

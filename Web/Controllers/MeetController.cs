@@ -55,7 +55,7 @@ namespace MeetOL.Controllers
             var meet = IMeetService.Find(this.MeetID);
             if (meet == null)
                 return View("Index");
-            ViewBag.IsChangeQrCode = meet.Meet.IsChangeQrcode;
+            ViewBag.IsChangeQrCode = meet.Meet.IsChangeQrcode==YesOrNoCode.Yes?1:0;
             CacheTimeOption timeCode = meet.Meet.IsChangeQrcode == EnumPro.YesOrNoCode.Yes ? CacheTimeOption.HalfDay : CacheTimeOption.TenSecond;
             var code = CacheHelper.Get<string>("sign_code", timeCode, () =>
             {

@@ -243,7 +243,7 @@ namespace Service
 
         public MeetUserJoin Find(string id)
         {
-            var model=Find(id);
+            var model=Find<MeetUserJoin>(x=>x.ID==id);
             if (model != null)
                 model.User = Find<User>(x=>x.ID.Equals(model.UserID));
             return model;

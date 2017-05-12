@@ -543,7 +543,7 @@
                         }
                         var ongoingTime = document.forms[0].OngoingTime.value;
                         var overTime = document.forms[0].OverTime.value;
-                        if (ongoingTime > overTime) {
+                        if (new Date(ongoingTime) > new Date(overTime)) {
                             $.Nuoya.alert("开始时间必须小于结束时间");
                             return false;
                         }
@@ -723,13 +723,13 @@
                                         $.Nuoya.alert("活动结束时间不能为空");
                                         return false;
                                     }
+
                                     var ongoingTime = document.forms[0].OngoingTime.value;
                                     var overTime = document.forms[0].OverTime.value;
-                                    if (ongoingTime > overTime) {
+                                    if (new Date(ongoingTime) > new Date(overTime)) {
                                         $.Nuoya.alert("开始时间必须小于结束时间");
                                         return false;
                                     }
-
                                     $("[name=Content]").val(ue.getContent());
                                     var result = $.Nuoya.form("form").valid();
                                     var data = GetPostObj();
