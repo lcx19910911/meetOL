@@ -701,7 +701,6 @@
     <Content Include="Areas\Admin\Views\Plan\Index.cshtml" />
     <Content Include="Areas\Admin\Views\PlanUserJoin\Index.cshtml" />
     <Content Include="Areas\Admin\Views\User\Index.cshtml" />
-    <Content Include="2017.5.10-myMeetShow.rar" />
     <None Include="Properties\PublishProfiles\plugins.pubxml" />
     <Content Include="Views\Base\_505.cshtml" />
     <Content Include="Scripts\UEditor\third-party\video-js\font\vjs.eot" />
@@ -732,6 +731,7 @@
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
+    <Content Include="导入名单.xlsx" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
