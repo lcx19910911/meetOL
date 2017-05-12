@@ -193,10 +193,10 @@ namespace MeetOL.Controllers
         /// </summary>
         /// <returns></returns>
         [JoinFilter]
-        public ActionResult MyList(YesOrNoCode? type)
+        public ActionResult MyList(YesOrNoCode? isSign)
         {
-            ViewBag.Type = type;
-            var model = IMeetService.GetListByUserId(this.LoginUser.ID);
+            ViewBag.IsSign = isSign;
+            var model = IMeetService.GetListByUserId(this.LoginUser.ID, isSign);
             return View(model);
         }
         

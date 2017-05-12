@@ -339,7 +339,7 @@ namespace Service
         /// </summary>
         /// <param name="userId"></param>
         /// <returns></returns>
-        public List<MeetModel> GetListByUserId(string userId)
+        public List<MeetModel> GetListByUserId(string userId,YesOrNoCode? isSign)
         {
             if (userId.IsNullOrEmpty())
                 return new List<MeetModel>();
@@ -349,10 +349,16 @@ namespace Service
             {
                 meetList.ForEach(x =>
                 {
-                    x.UserJoin = x.MeetUserJoins.Where(y => y.ID.Equals(userId)&&y.State==UserJoinState.Pass).FirstOrDefault();
+                    x.UserJoin = x.MeetUserJoins.Where(y => y.UserID.Equals(userId)&&y.State==UserJoinState.Pass).FirstOrDefault();
                     if (x.UserJoin != null)
                     {
-                        returnList.Add(x);
+                        if (isSign == null)
+                            returnList.Add(x);
+                        else
+                        {
+                            if (x.UserJoin.HadSign == isSign)
+                                returnList.Add(x);
+                        }
                     }
                 });
             }
@@ -451,6 +457,7 @@ namespace Service
                                 NickName = x.Name,
                                 RealName = x.Name
                             };
+                            Add<User>(model);
                             Add<MeetUserJoin>(new MeetUserJoin()
                             {
                                 MeetID = meetId,
@@ -465,6 +472,7 @@ namespace Service
                             model.RealName = x.Name;
                             model.Compnay = x.Company;
                             model.Position = x.Position;
+                            Update<User>(model.ID, model);
                             if (!IsExits<MeetUserJoin>(y => y.UserID == model.ID && y.MeetID == meetId))
                             {
 
@@ -475,6 +483,12 @@ namespace Service
                                     State = UserJoinState.Pass,
                                     AuditTime = DateTime.Now,
                                 });
+                            }
+                            else
+                            {
+                                var join = Find<MeetUserJoin>(y => y.UserID == model.ID && y.MeetID == meetId);
+                                join.State = UserJoinState.Pass;
+                                Update<MeetUserJoin>(join.ID,join);
                             }
                         }
                     }

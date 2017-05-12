@@ -60,7 +60,7 @@
         width: 30px;
         height: 30px;
         line-height: 49px;
-        background: url(./img/baoming.png) no-repeat;
+        background: url(../images/baoming.png) no-repeat;
         background-size: 100% 100%;
     }
 
@@ -199,10 +199,10 @@
             cursor: pointer;
         }
 
-    .activeTxt {
-        color: #da4453;
-        border-bottom: 2px solid #da4453;
-    }
+   .activeTxt {
+            color: #da4453;
+            border-bottom: 2px solid #da4453;
+        }
 </style>
 
 <div class="wrap">
@@ -216,9 +216,9 @@
     <div class="meet-container">
         <div class="meet-title">
             <ul class="meet-tList">
-                <li @(ViewBag.Type==null?"class=\"activeTxt\"":"")>全部会议</li>
-                <li data-type="1" @(ViewBag.Type!=null&& ViewBag.Type== EnumPro.YesOrNoCode.Yes? "class=\"activeTxt\"":"")>已赴约</li>
-                <li data-type="0" @(ViewBag.Type!=null && ViewBag.Type == EnumPro.YesOrNoCode.No ? "class=\"activeTxt\"":"")>未赴约</li>
+                <li data-type=""  class="@(ViewBag.IsSign==null? "activeTxt" : "")" >全部会议</li>
+                <li data-type="1" class="@(ViewBag.IsSign!=null && ViewBag.IsSign == EnumPro.YesOrNoCode.Yes? "activeTxt" : "")"  >已赴约</li>
+                <li data-type="0" class="@(ViewBag.IsSign!=null && ViewBag.IsSign == EnumPro.YesOrNoCode.No? "activeTxt" : "")">未赴约</li>
             </ul>
         </div>
         <div class="meet-content">
@@ -234,8 +234,8 @@
                                         <div class="pt-list">
                                             <div class="pt-top">
                                                 <p style="border-color: rgb(80, 30, 227);">
-                                                    <span>@(item.Meet.OngoingTime)</span>
-                                                    <strong>@(item.Meet.OverTime)</strong>
+                                                    <span>@(item.Meet.OngoingTime.ToString("hh:mm"))</span>
+                                                    <strong>@(item.Meet.OverTime.ToString("hh:mm"))</strong>
                                                 </p>
                                                 <p>@(string.Join(",",item.Rooms.Select(x=>x.Name).ToList()))</p>
                                             </div>
@@ -312,7 +312,7 @@
         //  计算margin-top的高度
         $('.meet-content').css({'margin-top': $('.meet-title').height() + 12});
         $('.meet-tList li').click(function() {
-            window.location.href = "/meet/mylist?type=" + $(this).attr("data-type");
+            window.location.href = "/meet/mylist?isSign=" + $(this).attr("data-type");
         })
     });
 

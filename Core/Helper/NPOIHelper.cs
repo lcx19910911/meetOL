@@ -1,5 +1,6 @@
 ﻿using NPOI.HSSF.UserModel;
 using NPOI.SS.UserModel;
+using NPOI.XSSF.UserModel;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -93,22 +94,22 @@ namespace Core
         {
             try
             {
-                HSSFWorkbook hssfworkbook;
+                XSSFWorkbook hssfworkbook;
                 List<T> lists = new List<T>();
                 using (FileStream file = new FileStream(workbookFile, FileMode.Open, FileAccess.Read))
                 {
-                    hssfworkbook = new HSSFWorkbook(file);
+                    hssfworkbook = new XSSFWorkbook(file);
                 }
-                HSSFSheet sheet = hssfworkbook.GetSheetAt(0) as HSSFSheet;
+                XSSFSheet sheet = hssfworkbook.GetSheetAt(0) as XSSFSheet;
                 IEnumerator rows = sheet.GetRowEnumerator();
-                HSSFRow headerRow = sheet.GetRow(0) as HSSFRow;
+                XSSFRow headerRow = sheet.GetRow(0) as XSSFRow;
                 int cellCount = headerRow.LastCellNum;
                 //Type type = typeof(T);
                 PropertyInfo[] properties;
                 T t = default(T);
                 for (int i = sheet.FirstRowNum + 1; i <= sheet.LastRowNum; i++)
                 {
-                    HSSFRow row = sheet.GetRow(i) as HSSFRow;
+                    XSSFRow row = sheet.GetRow(i) as XSSFRow;
                     t = Activator.CreateInstance<T>();
                     properties = t.GetType().GetProperties();
                     foreach (PropertyInfo column in properties)

@@ -73,14 +73,6 @@
                 content: "步骤三: ";
                 color: #dd0000;
             }
-
-    /*2017.4.25-12:00*/
-    footer a {
-        width: 25%;
-        display: inline-block;
-        float: left;
-        text-align: center;
-    }
 </style>
 <script src="~/Scripts/jquery.qrcode.min.js"></script>
 <div class="wrap">
@@ -98,9 +90,11 @@
         </ul>
     </div>
     <div class="meet-code m0 mt30 cy-codeImg" style="margin:0 auto;width:200px;">
+       
     </div>
+
     <div class="meet-txt m0 mt20 txt-center">
-        扫二维码签到<a href="/meet/">签到情况</a>
+        扫二维码签到&nbsp;&nbsp;<a href="/meet/SignResult" style="font-size:1rem; color:red;">签到情况</a>
     </div>
     <div class="mt50">&nbsp;</div>
 </div>
@@ -117,12 +111,13 @@
         });
         if (isChangeQrCode == "1") {
             setInterval(function () {
+                $(".cy-codeImg canvas").remove();
                 $.ajax({
                     url: "/meet/GetSignUrl",
                     success: function (data) {
                         $(".cy-codeImg").qrcode({
-                            width: "100%", //宽度 
-                            height: "100%", //高度 
+                            width: 200, //宽度 
+                            height: 200, //高度 
                             text: data.Result //任意内容 
                         });
                     }

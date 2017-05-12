@@ -642,6 +642,7 @@
                     OverTime: $("[name='OverTime']").val(),
                     PlaceImage: $("[name='PlaceImage']").val(),
                     IsJoinAudit: $("[name='IsJoinAudit']").val(),
+                    IsChangeQrcode: $("[name='IsChangeQrcode']").val(),
                     IsAutoAllot: $("[name='IsAutoAllot']").val(),
                     Content: ue.getContent(),
                     RoomIDs: $("[name='RoomIDs']").val(),
@@ -840,13 +841,13 @@
                 {
                     className: "am-text-secondary",
                     icon: "icon-pie-chart",
-                    name: "导入",
+                    name: "导入名单",
                     click: function (item) {
 
                         $.Nuoya.ajaxDialog({
                             closeViaDimmer: false,
                             width: "600px",
-                            height: "500px",
+                            height: "300px",
                             ajaxUrl: "/Areas/Admin/HtmlTemplates/Meet/SelectFile.html",
                             title: "选择文件",
                             callback: function () {

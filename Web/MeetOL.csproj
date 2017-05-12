@@ -224,6 +224,7 @@
     <Content Include="Content\UEditor\default\images\wordpaste.png" />
     <Content Include="Content\UEditor\iframe.css" />
     <Content Include="Images\avtar.png" />
+    <Content Include="Images\baoming.png" />
     <Content Include="Images\bm.png" />
     <Content Include="Images\Content\UEditor\default\css\ueditor.css" />
     <Content Include="Images\Content\UEditor\default\css\ueditor.min.css" />
@@ -267,8 +268,12 @@
     <Content Include="Global.asax" />
     <Content Include="Images\404Pic.png" />
     <Content Include="Images\defulat.jpg" />
+    <Content Include="Images\errorIcon.png" />
     <Content Include="Images\good.png" />
     <Content Include="Images\good2.png" />
+    <Content Include="Images\header-1.jpg" />
+    <Content Include="Images\header-2.jpg" />
+    <Content Include="Images\header-3.jpg" />
     <Content Include="Images\hudong.png" />
     <Content Include="Images\huiyi_1.png" />
     <Content Include="Images\huiyi.png" />
@@ -281,6 +286,7 @@
     <Content Include="Images\meetingImg.png" />
     <Content Include="Images\myMeet.png" />
     <Content Include="Images\pingxuan.png" />
+    <Content Include="Images\trueIcon.png" />
     <Content Include="Images\xd_icon_5.png" />
     <Content Include="Images\xiazai.png" />
     <Content Include="Images\zhuyi.png" />

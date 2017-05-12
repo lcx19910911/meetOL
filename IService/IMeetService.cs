@@ -1,5 +1,6 @@
 ﻿using Core.Model;
 using Domain;
+using EnumPro;
 using Model;
 using System;
 using System.Collections.Generic;
@@ -55,7 +56,7 @@ namespace IService
 
         List<MeetTopic> GetListByMeetId(string id);
 
-        List<MeetModel> GetListByUserId(string userId);
+        List<MeetModel> GetListByUserId(string userId, YesOrNoCode? isSign);
 
         WebResult<bool> ExportInto(List<ExportModel> list, string meetId);
     }
