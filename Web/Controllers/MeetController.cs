@@ -183,7 +183,6 @@ namespace MeetOL.Controllers
         /// 我的会议
         /// </summary>
         /// <returns></returns>
-        [JoinFilter]
         public ActionResult MyMeet()
         {
             return View();
@@ -192,7 +191,6 @@ namespace MeetOL.Controllers
         /// 我的会议
         /// </summary>
         /// <returns></returns>
-        [JoinFilter]
         public ActionResult MyList(YesOrNoCode? isSign)
         {
             ViewBag.IsSign = isSign;
