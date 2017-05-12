@@ -719,6 +719,7 @@
     <Content Include="Views\Meet\ForSign.cshtml" />
     <Content Include="Views\Meet\MyMeet.cshtml" />
     <Content Include="Views\Meet\MyList.cshtml" />
+    <Content Include="Views\Meet\SignResult.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
