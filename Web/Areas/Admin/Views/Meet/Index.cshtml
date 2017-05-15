@@ -771,7 +771,7 @@
                {
                    className: "am-text-success",
                    icon: "icon-usb",
-                   name: "报名情况",
+                   name: "报名",
                    //formula: function (item) {
                    //    if (item.IsJoinAudit == 1) {
                    //        return true;
@@ -787,7 +787,7 @@
                {
                    className: "am-text-warning",
                    icon: "icon-universal-access",
-                   name: "评论审核",
+                   name: "评论",
                    click: function (item) {
                        window.open("/admin/TopicUserJoin/index?meetId=" + item.ID);
                    }
@@ -808,23 +808,23 @@
                        window.open("/home/index?meetId=" + item.ID);
                    }
                },
-                {
-                    className: "am-text-danger",
-                    icon: "icon-trash-o",
-                    name: "删除",
-                    click: function (item) {
-                        $.Nuoya.deleteAction("/admin/Meet/Delete", {
-                            ids: item.ID
-                        },
-                        function (data) {
-                             grid.reload();
-                        });
-                    }
-                },
+                //{
+                //    className: "am-text-danger",
+                //    icon: "icon-trash-o",
+                //    name: "删除",
+                //    click: function (item) {
+                //        $.Nuoya.deleteAction("/admin/Meet/Delete", {
+                //            ids: item.ID
+                //        },
+                //        function (data) {
+                //             grid.reload();
+                //        });
+                //    }
+                //},
                 {
                     className: "am-text-secondary",
                     icon: "icon-firefox",
-                    name: "计划信息",
+                    name: "计划",
                     click: function (item) {
                         window.open("/admin/plan/index?id=" + item.ID);
                     }

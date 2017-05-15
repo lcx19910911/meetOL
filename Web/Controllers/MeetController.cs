@@ -102,24 +102,27 @@ namespace MeetOL.Controllers
             var meet = IMeetService.Find(this.MeetID);
             if (meet == null)
                 return View("Index");
-            var usrIdList = meet.MeetUserJoins.Select(x => x.UserID).ToList();
-            var userDic = IUserService.GetList(x => usrIdList.Contains(x.ID)).ToDictionary(x => x.ID);
             if (meet.MeetUserJoins != null && meet.MeetUserJoins.Count > 0)
             {
-                meet.MeetUserJoins.ForEach(x =>
+                var usrIdList = meet.MeetUserJoins.Select(x => x.UserID).ToList();
+                var userDic = IUserService.GetList(x => usrIdList.Contains(x.ID)).ToDictionary(x => x.ID);
+                if (meet.MeetUserJoins != null && meet.MeetUserJoins.Count > 0)
                 {
-                    if (x.UserID.IsNotNullOrEmpty() && userDic.ContainsKey(x.UserID))
+                    meet.MeetUserJoins.ForEach(x =>
                     {
-                        x.User = userDic[x.UserID];
-                    }
-                });
+                        if (x.UserID.IsNotNullOrEmpty() && userDic.ContainsKey(x.UserID))
+                        {
+                            x.User = userDic[x.UserID];
+                        }
+                    });
 
-                return View(meet.MeetUserJoins);
+                    return View(meet.MeetUserJoins);
+                }
             }
-            else
+            
                 return View(new List<MeetUserJoin>());
         }
-        
+
 
         /// <summary>
         /// 增加评论

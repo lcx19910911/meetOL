@@ -298,7 +298,7 @@ namespace Service
             {
                 model.Rooms.ForEach(x =>
                 {
-                    x.MeetPlans = model.MeetPlans.Where(y => y.RoomID.Equals(x.ID)).ToList();
+                    x.MeetPlans = aryModel.MeetPlans.Where(y => y.RoomID.Equals(x.ID)).ToList();
                 });
             }
             return aryModel;
