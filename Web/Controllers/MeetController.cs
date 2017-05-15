@@ -297,7 +297,7 @@ namespace MeetOL.Controllers
             if (model.MeetTopics == null|| model.MeetPlans == null)
                 return View("Index");
             List<MeetTopic> topicList = new List<MeetTopic>();
-            var planList = model.MeetPlans.Where(x => x.StratTime.Date >= DateTime.Now.Date).OrderBy(x => x.StratTime).ToList();
+            var planList = model.MeetPlans.OrderBy(x => x.StratTime).ToList();
             if (planList!=null)
             {
                 planList.ForEach(x =>
