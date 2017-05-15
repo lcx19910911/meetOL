@@ -349,15 +349,18 @@ namespace Service
             {
                 meetList.ForEach(x =>
                 {
-                    x.UserJoin = x.MeetUserJoins.Where(y => y.UserID.Equals(userId)&&y.State==UserJoinState.Pass).FirstOrDefault();
-                    if (x.UserJoin != null)
+                    if (x.MeetUserJoins != null && x.MeetUserJoins.Count > 0)
                     {
-                        if (isSign == null)
-                            returnList.Add(x);
-                        else
+                        x.UserJoin = x.MeetUserJoins.Where(y => y.UserID.Equals(userId) && y.State == UserJoinState.Pass).FirstOrDefault();
+                        if (x.UserJoin != null)
                         {
-                            if (x.UserJoin.HadSign == isSign)
+                            if (isSign == null)
                                 returnList.Add(x);
+                            else
+                            {
+                                if (x.UserJoin.HadSign == isSign)
+                                    returnList.Add(x);
+                            }
                         }
                     }
                 });
