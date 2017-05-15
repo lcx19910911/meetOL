@@ -137,6 +137,8 @@ namespace Service
                     Add<MeetTopic>(y);
                 });
             });
+
+            CacheHelper.Clear();
             return Result(true);
         }
 
@@ -291,15 +293,15 @@ namespace Service
             var model = GetCacheList().Find(x => x.ID.Equals(id));
             if (model == null)
                 return null;
-            var aryModel = model.MeetPlans;
-            if (aryModel != null)
+            var aryModel = model;
+            if (aryModel.MeetPlans != null&&aryModel.MeetPlans.Count>0)
             {
                 model.Rooms.ForEach(x =>
                 {
-                    x.MeetPlans = aryModel.Where(y => y.RoomID.Equals(x.ID)).ToList();
+                    x.MeetPlans = model.MeetPlans.Where(y => y.RoomID.Equals(x.ID)).ToList();
                 });
             }
-            return model;
+            return aryModel;
         }
         /// <summary>
         /// 获得会议统计数据

@@ -701,6 +701,7 @@
     <Content Include="Areas\Admin\Views\Plan\Index.cshtml" />
     <Content Include="Areas\Admin\Views\PlanUserJoin\Index.cshtml" />
     <Content Include="Areas\Admin\Views\User\Index.cshtml" />
+    <Content Include="ClassDiagram1.cd" />
     <None Include="Properties\PublishProfiles\plugins.pubxml" />
     <Content Include="Views\Base\_505.cshtml" />
     <Content Include="Scripts\UEditor\third-party\video-js\font\vjs.eot" />

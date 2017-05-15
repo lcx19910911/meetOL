@@ -164,6 +164,8 @@ namespace Service
             {
                 if (IsExits(x => x.Account == model.Account))
                     return Result(false, ErrorCode.system_name_already_exist);
+                if (model.HeadImgUrl.IsNullOrEmpty())
+                    model.HeadImgUrl = "/Images/avtar.png";
                 model.Password = CryptoHelper.MD5_Encrypt(model.Password);
             }
             Add<User>(model);

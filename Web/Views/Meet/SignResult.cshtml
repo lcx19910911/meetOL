@@ -158,8 +158,8 @@
                     foreach (var item in hadSignList)
                     {
                         <li>
-                            <img src="@(item.User?.HeadImgUrl)" />
-                            <span>@(item.User?.RealName)</span>
+                            <img src="@(item.User.HeadImgUrl.IsNullOrEmpty()?"/Images/avtar.png":item.User.HeadImgUrl)" />
+                            <span>@(item.User.RealName)</span>
                         </li>
                     }
                 }             
@@ -180,7 +180,7 @@
                     foreach (var item in noSignList)
                     {
                         <li>
-                            <img src="@(item.User?.HeadImgUrl)" />
+                            <img src="@(item.User.HeadImgUrl.IsNullOrEmpty()?"/Images/avtar.png":item.User.HeadImgUrl)" />
                             <span>@(item.User?.RealName)</span>
                         </li>
                     }
