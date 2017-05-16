@@ -17,6 +17,12 @@ namespace MeetOL.Controllers
     [Timer]
     public class BaseController : Controller
     {
+
+        public ActionResult Broadcast()
+        {
+            return View();
+        }
+
         public BaseController()
         {
         }
