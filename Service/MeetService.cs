@@ -294,12 +294,15 @@ namespace Service
             if (model == null)
                 return null;
             var aryModel = model;
-            if (aryModel.MeetPlans != null&&aryModel.MeetPlans.Count>0)
+            if (aryModel.MeetPlans != null && aryModel.MeetPlans.Count > 0)
             {
-                model.Rooms.ForEach(x =>
+                if (model.Rooms != null && model.Rooms.Count > 0)
                 {
-                    x.MeetPlans = aryModel.MeetPlans.Where(y => y.RoomID.Equals(x.ID)).ToList();
-                });
+                    model.Rooms.ForEach(x =>
+                    {
+                        x.MeetPlans = aryModel.MeetPlans.Where(y => y.RoomID.Equals(x.ID)).ToList();
+                    });
+                }
             }
             return aryModel;
         }
