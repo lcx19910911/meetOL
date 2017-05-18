@@ -107,7 +107,7 @@ namespace Service
 
         public Room Find(string id)
         {
-            return Find(id);
+            return Find<Room>(x=>x.ID.Equals(id));
         }
 
         /// <summary>
