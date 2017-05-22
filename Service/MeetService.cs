@@ -254,10 +254,14 @@ namespace Service
                             Meet = x,
                             Rooms = dic_Room.Values.Where(y => x.RoomIDs.Contains(y.ID)).ToList()
                         };
+
                         if (dic_Plan.ContainsKey(x.ID))
                         {
                             model.MeetPlans = dic_Plan[x.ID];
-                            if (model.MeetPlans != null && model.MeetPlans.Count > 0)
+                            if (dic_Topic.ContainsKey(x.ID))
+                                model.MeetTopics = dic_Topic[x.ID];
+
+                            if (model.MeetPlans != null && model.MeetPlans.Count > 0&& model.MeetTopics!=null&& model.MeetTopics.Count>0)
                             {
                                 model.MeetPlans.ForEach(y =>
                                 {
@@ -267,15 +271,13 @@ namespace Service
                                     }
                                     if (dic_Topic.ContainsKey(x.ID))
                                     {
-                                        y.MeetTopics = dic_Topic[x.ID].Where(z => z.PlanID.Equals(y.ID)).ToList();
+                                        y.MeetTopics = model.MeetTopics.Where(z => z.PlanID.Equals(y.ID)).ToList();
                                     }
                                 });
                             }
                             var spearkIdList = model.MeetPlans.Select(y => y.SpeakerID).ToList();
                             model.Speakers = dic_Speaker.Values.Where(y => spearkIdList.Contains(y.ID)).ToList();
                         }
-                        if (dic_Topic.ContainsKey(x.ID))
-                            model.MeetTopics = dic_Topic[x.ID];
 
                         if (dic_MeetJoin.ContainsKey(x.ID))
                             model.MeetUserJoins = dic_MeetJoin[x.ID];
@@ -306,6 +308,8 @@ namespace Service
             }
             return aryModel;
         }
+
+
         /// <summary>
         /// 获得会议统计数据
         /// </summary>

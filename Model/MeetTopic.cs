@@ -54,9 +54,9 @@ namespace Model
         public Room Room { get; set; }
 
 
-        [NotMapped]
-        [JsonIgnore]
-        public MeetPlan MeetPlan { get; set; }
+        //[NotMapped]
+        //[JsonIgnore]
+        //public MeetPlan MeetPlan { get; set; }
         [NotMapped]
         public List<TopicUserJoin> TopicUserJoins { get; set; }
     }

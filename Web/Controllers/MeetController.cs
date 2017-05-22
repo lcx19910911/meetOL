@@ -296,7 +296,7 @@ namespace MeetOL.Controllers
         {
             var model = IMeetService.Find(this.MeetID);
             if (model.MeetTopics == null|| model.MeetPlans == null)
-                return View("Index");
+                return RedirectToAction("Index","Home");
             List<MeetTopic> topicList = new List<MeetTopic>();
             var planList = model.MeetPlans.OrderBy(x => x.StratTime).ToList();
             if (planList!=null)
@@ -306,7 +306,6 @@ namespace MeetOL.Controllers
                     var addRange = x.MeetTopics;
                     addRange.ForEach(y =>
                     {
-                        y.MeetPlan = x;
                         y.Speaker = x.Speaker;
                         y.TopicUserJoins = ITopicUserJoinService.GetListByTopicId(y.ID);
                         y.Room = model.Rooms.Find(z => z.ID == y.RoomID);
