@@ -179,13 +179,23 @@
                 {
                     foreach (var item in noSignList)
                     {
+                        if (item.User != null)
+                        {
                         <li>
-                            <img src="@(item.User.HeadImgUrl.IsNullOrEmpty()?"/Images/avtar.png":item.User.HeadImgUrl)" />
-                            <span>@(item.User?.RealName)</span>
+                            <img src="@(item.User.HeadImgUrl)" />
+                            <span>@(item.User.RealName)</span>
                         </li>
+                        }
+                        else
+                        {
+                            <li>
+                                <img src="/Images/avtar.png" />
+                                <span>无名称</span>
+                            </li>
+                        }
                     }
-                }   
-               
+                }
+
             </ul>
         </div>
     </div>
