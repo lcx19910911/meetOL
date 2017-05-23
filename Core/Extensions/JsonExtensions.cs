@@ -17,7 +17,7 @@ namespace Core.Extensions
         {
             settings = settings ?? new JsonSerializerSettings
             {
-                ReferenceLoopHandling = ReferenceLoopHandling.Ignore,//忽略循环引用 即不序列化循环引用
+                ReferenceLoopHandling = ReferenceLoopHandling.Serialize,//忽略循环引用 即不序列化循环引用
             };
             Formatting format = Formatting.None; //Formatting.Indented表示生成的json是格式化好的
             return JsonConvert.SerializeObject(obj, format, settings);

@@ -1,4 +1,5 @@
 ﻿using Model;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +17,7 @@ namespace Domain
 
         public Meet Meet { get; set; }
 
+        [JsonIgnore]
         public List<MeetPlan> MeetPlans { get; set; }
 
         public List<MeetTopic> MeetTopics { get; set; }

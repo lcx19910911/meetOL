@@ -556,6 +556,7 @@
                             if (msg == "") {
                                 $.Nuoya.action("/Admin/Meet/Add", data, function (json) {
                                     if (json.Result) {
+                                        $.Nuoya.alert("保存成功");
                                         e.hide();
                                         grid.reload();
                                     }
@@ -738,6 +739,7 @@
                                         if (msg == "") {
                                             $.Nuoya.action("/Admin/Meet/Update", data, function (json) {
                                                 if (json.Result) {
+                                                    $.Nuoya.alert("保存成功");
                                                     e.hide();
                                                     grid.reload();
                                                 }

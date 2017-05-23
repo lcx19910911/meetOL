@@ -121,18 +121,18 @@
                         <div class="reply-box" data-id="@(item.ID)" data-name="@(item.Name)" data-room="@(item.Room?.Name)">
                             <span>回复</span>
                         </div>
-                        <div class="comment">
                             @if (item.TopicUserJoins != null && item.TopicUserJoins.Count > 0)
                             {
-                                foreach (var obj in item.TopicUserJoins)
-                                {
+                                <div class="comment">
+                                    @foreach (var obj in item.TopicUserJoins)
+                                    {
                                     <p>
                                         <span class="user-name">@(obj.User?.RealName)</span>
                                         <span class="comment-cont">@(obj.Content)</span>
                                     </p>
-                                }
+                                    }
+                                </div>
                             }
-                        </div>
                     </li>
                 }
             }
