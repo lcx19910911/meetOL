@@ -95,7 +95,7 @@ namespace MeetOL.Areas.Admin.Controllers
         public JsonResult Find(string ID)
         {
             var result = IMeetService.Find(ID);
-            return JResult(result.ToJson());
+            return JResult(result);
         }
         /// <summary>
         /// 查找实体
