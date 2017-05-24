@@ -286,6 +286,7 @@
     <Content Include="Images\meetingImg.png" />
     <Content Include="Images\myMeet.png" />
     <Content Include="Images\pingxuan.png" />
+    <Content Include="Images\scanqrcode.jpg" />
     <Content Include="Images\trueIcon.png" />
     <Content Include="Images\xd_icon_5.png" />
     <Content Include="Images\xiazai.png" />
@@ -726,6 +727,7 @@
     <Content Include="Views\Meet\MyMeet.cshtml" />
     <Content Include="Views\Meet\MyList.cshtml" />
     <Content Include="Views\Meet\SignResult.cshtml" />
+    <Content Include="Views\Meet\ScanQRcode.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

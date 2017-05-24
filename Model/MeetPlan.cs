@@ -45,7 +45,8 @@ namespace Model
 
         [NotMapped]
         public Speaker Speaker { get; set; }
-
+        [NotMapped]
+        public string SpeakerName { get; set; }
         [NotMapped]
         public string MeetName { get; set; }
         [NotMapped]
@@ -58,5 +59,11 @@ namespace Model
         public bool CanVote { get; set; }
 
         public int VoteCount { get; set; } = 0;
+
+        [NotMapped]
+
+        public DateTime OngoingTime { get; set; }
+        [NotMapped]
+        public DateTime OverTime { get; set; }
     }
 }

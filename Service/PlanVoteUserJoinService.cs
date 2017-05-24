@@ -122,6 +122,7 @@ namespace Service
         public WebResult<bool> Update(PlanVoteUserJoin model)
         {
             Update<PlanVoteUserJoin>(model.ID, model);
+            CacheHelper.Clear();
             return Result(true);
 
         }
@@ -151,6 +152,7 @@ namespace Service
         public WebResult<bool> Delete(string IDs)
         {
             Delete<PlanVoteUserJoin>(IDs);
+            CacheHelper.Clear();
             return Result(true);
         }
 
@@ -177,6 +179,7 @@ namespace Service
             });
             plan.VoteCount++;
             Update<MeetPlan>(planId, plan);
+            CacheHelper.Clear();
             return Result(true);
         }
     }

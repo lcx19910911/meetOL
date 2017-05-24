@@ -705,7 +705,7 @@
                             ajaxUrl: "/Areas/Admin/HtmlTemplates/Meet/Update.html",
                             title: "编辑会议",
                             callback: function (e) {
-                                $.Nuoya.action("/admin/Meet/Find", { id: item.ID }, function (model) {
+                                $.Nuoya.action("/admin/Meet/Find", { id: item.ID, isShowRoom:true }, function (model) {
                                     //载入数据
                                     $.Nuoya.form("form").dataLoad({
                                         data: model.Meet
@@ -865,6 +865,7 @@
                                         },
                                         callback: function (data) {
                                             if (!data.ErrorDesc) {
+                                                $.Nuoya.alert("导入成功");
                                                 e.hide();
                                                 grid.reload();
                                             }

@@ -92,9 +92,29 @@ namespace MeetOL.Areas.Admin.Controllers
         /// </summary>
         /// <param name="model"</param>
         /// <returns></returns>
-        public JsonResult Find(string ID)
+        public JsonResult Find(string ID,bool isShowRoom,string planId)
         {
             var result = IMeetService.Find(ID);
+            if (isShowRoom && result != null)
+            {
+                result.MeetPlans = null;
+                result.MeetTopics = null;
+                result.MeetUserJoins = null;
+                result.Speakers = null;
+            }
+            else
+            {
+                var model = result.MeetPlans.Find(x=>x.ID==planId);
+                if (model != null)
+                {
+                    model.OngoingTime = result.Meet.OngoingTime;
+                    model.OverTime = result.Meet.OverTime;
+                    if(model.Speaker!=null)
+                        model.SpeakerName = model.Speaker.Name;
+                    model.Speaker = null;
+                }
+                return JResult(model);
+            }
             return JResult(result);
         }
         /// <summary>

@@ -14,6 +14,7 @@ using Newtonsoft.Json;
 using Domain;
 using Core.Helper;
 using EnumPro;
+using System.Web.Security;
 
 namespace MeetOL.Controllers
 {
@@ -200,7 +201,93 @@ namespace MeetOL.Controllers
             var model = IMeetService.GetListByUserId(this.LoginUser.ID, isSign);
             return View(model);
         }
-        
+
+        public ActionResult ScanQRcode()
+        {
+            ViewBag.AppId = Params.WeixinAppId;
+            string cacheToken = this.GetCacheToken(Params.WeixinAppId, Params.WeixinAppSecret);
+            ViewBag.TimeStamp = ConvertDateTimeInt(DateTime.Now).ToString();
+            ViewBag.NonceStr = Guid.NewGuid().ToString("N").Substring(0, 10);
+            string token = "";
+            ViewBag.Signature = this.GetSignature(this.Request.Url.ToString().Replace(":" + this.Request.Url.Port.ToString(), ""), cacheToken, ViewBag.TimeStamp, ViewBag.NonceStr, out token);
+            return View();
+        }
+
+        public string GetSignature(string url, string token, string timestamp, string nonce, out string str)
+        {
+            string str3 = this.GetJsApi_ticket(token);
+            string str4 = "jsapi_ticket=" + str3;
+            string str5 = "noncestr=" + nonce;
+            string str6 = "timestamp=" + timestamp;
+            string str7 = "url=" + url;
+            string[] strArray = new string[] { str4, str5, str6, str7 };
+            str = string.Join("&", strArray);
+            string str8 = str;
+            return FormsAuthentication.HashPasswordForStoringInConfigFile(str, "SHA1").ToLower();
+        }
+
+
+        private string GetCacheToken(string appid, string secret)
+        {
+            string str = GetToken_Message(appid, secret);
+            if ((!string.IsNullOrEmpty(str) && str.Contains("errmsg")) && str.Contains("errcode"))
+            {
+                Dictionary<string, string> dictionary = JsonConvert.DeserializeObject<Dictionary<string, string>>(str);
+                if (((dictionary != null) && dictionary.ContainsKey("errcode")) && dictionary.ContainsKey("errmsg"))
+                {
+                    return str;
+                }
+                return str;
+            }
+            if (string.IsNullOrEmpty(str))
+            {
+                str = "";
+            }
+            return str;
+        }
+
+
+        public string GetJsApi_ticket(string token)
+        {
+            string url = string.Format("https://api.weixin.qq.com/cgi-bin/ticket/getticket?access_token={0}&type=jsapi", token);
+            string str2 = WebHelper.GetPage(url);
+            if (!string.IsNullOrEmpty(str2))
+            {
+                Dictionary<string, string> dictionary = JsonConvert.DeserializeObject<Dictionary<string, string>>(str2);
+                if ((dictionary != null) && dictionary.ContainsKey("ticket"))
+                {
+                    return dictionary["ticket"];
+                }
+            }
+            return string.Empty;
+        }
+
+        public static string GetToken_Message(string appid, string secret)
+        {
+            string token = GetToken(appid, secret);
+            if (token.Contains("access_token"))
+            {
+                token = token.DeserializeJson<Token>().access_token;
+            }
+            return token;
+        }
+
+        public static int ConvertDateTimeInt(DateTime time)
+        {
+            DateTime time2 = TimeZone.CurrentTimeZone.ToLocalTime(new DateTime(0x7b2, 1, 1));
+            TimeSpan span = (TimeSpan)(time - time2);
+            return (int)span.TotalSeconds;
+        }
+
+        public static string GetToken(string appid, string secret)
+        {
+            return CacheHelper.Get<string>("weixinToken", CacheTimeOption.TenMinutes, () =>
+            {
+                string url = string.Format("https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid={0}&secret={1}", appid, secret);
+                var str = WebHelper.GetPage(url, null);
+                return str;
+            });
+        }
 
         #region 页面
 
@@ -295,7 +382,7 @@ namespace MeetOL.Controllers
         public ActionResult TopicList()
         {
             var model = IMeetService.Find(this.MeetID);
-            if (model.MeetTopics == null|| model.MeetPlans == null)
+            if (model.MeetPlans == null)
                 return RedirectToAction("Index","Home");
             List<MeetTopic> topicList = new List<MeetTopic>();
             var planList = model.MeetPlans.OrderBy(x => x.StratTime).ToList();
@@ -304,14 +391,16 @@ namespace MeetOL.Controllers
                 planList.ForEach(x =>
                 {
                     var addRange = x.MeetTopics;
-                    addRange.ForEach(y =>
+                    if (addRange != null)
                     {
-                        y.Speaker = x.Speaker;
-                        y.TopicUserJoins = ITopicUserJoinService.GetListByTopicId(y.ID);
-                        y.Room = model.Rooms.Find(z => z.ID == y.RoomID);
-                    });
-                    topicList.AddRange(addRange);
-
+                        addRange.ForEach(y =>
+                        {
+                            y.Speaker = x.Speaker;
+                            y.TopicUserJoins = ITopicUserJoinService.GetListByTopicId(y.ID);
+                            y.Room = model.Rooms.Find(z => z.ID == y.RoomID);
+                        });
+                        topicList.AddRange(addRange);
+                    }
                 });
             }
             return View(topicList);

@@ -129,6 +129,7 @@ namespace Service
         public WebResult<bool> Update(TopicUserJoin model)
         {
             Update<TopicUserJoin>(model.ID, model);
+            CacheHelper.Clear();
             return Result(true);
 
         }
@@ -171,6 +172,7 @@ namespace Service
         public WebResult<bool> Delete(string IDs)
         {
             Delete<TopicUserJoin>(IDs);
+            CacheHelper.Clear();
             return Result(true);
         }
 
@@ -192,6 +194,7 @@ namespace Service
                 MeetID=topic.MeetID,
                 PlanID=topic.PlanID       
             });
+            CacheHelper.Clear();
             return Result(true);
         }
 
@@ -210,6 +213,7 @@ namespace Service
                 return Result(false, ErrorCode.join_had_audit);
             model.State = state;
             Update(id, model);
+            CacheHelper.Clear();
             return Result(true);
         }
     }

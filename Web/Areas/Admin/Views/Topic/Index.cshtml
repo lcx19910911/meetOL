@@ -135,6 +135,7 @@
                             ajaxUrl: "/Admin/Topic/Add",
                             callback: function (data) {
                                 if (data.Result) {
+                                    $.Nuoya.alert("保存成功");
                                     e.hide();
                                     grid.reload();
                                 }

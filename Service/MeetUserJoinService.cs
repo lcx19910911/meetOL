@@ -170,7 +170,8 @@ namespace Service
                 MeetID = meetId,
                 UserID = userId,
                 State= meet.IsJoinAudit==YesOrNoCode.No?UserJoinState.Pass:UserJoinState.WaitAudit
-            });           
+            });
+            CacheHelper.Clear();
             return Result(true);
         }
 
@@ -237,6 +238,7 @@ namespace Service
             if (IsExits(x => x.MeetID == model.MeetID && x.UserID == Client.LoginUser.ID&&x.ID!=model.ID))
                 return Result(false, ErrorCode.meet_already_join);
             Update<MeetUserJoin>(model.ID, model);
+            CacheHelper.Clear();
             return Result(true);
 
         }
@@ -257,6 +259,7 @@ namespace Service
         public WebResult<bool> Delete(string IDs)
         {
             Delete<MeetUserJoin>(IDs);
+            CacheHelper.Clear();
             return Result(true);
         }
 
@@ -277,6 +280,7 @@ namespace Service
             model.AuditTime = DateTime.Now;
 
             Update(id, model);
+            CacheHelper.Clear();
             return Result(true);
         }
 
@@ -299,6 +303,7 @@ namespace Service
             model.HadSign = YesOrNoCode.Yes;
             model.SignTime = DateTime.Now;
             Update(model.ID, model);
+            CacheHelper.Clear();
             return Result(true);
         }
     }

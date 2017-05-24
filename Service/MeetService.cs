@@ -310,6 +310,8 @@ namespace Service
         }
 
 
+
+        
         /// <summary>
         /// 获得会议统计数据
         /// </summary>
@@ -545,6 +547,7 @@ namespace Service
                 State = meetModel.Meet.IsJoinAudit == YesOrNoCode.Yes ? UserJoinState.WaitAudit : UserJoinState.Pass,
             };
             Add<MeetUserJoin>(model);
+            CacheHelper.Clear();
             return Result(true);
         }
 

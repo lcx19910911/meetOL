@@ -94,7 +94,7 @@
         var position = $("[name='position']").val();
         var phone = $("[name='phone']").val();
         var myreg = /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1}))+\d{8})$/;
-        if (name != "" && compnay != "" && position != "" && phone != "" && myreg.test(phone)) {
+        if (name != "" && phone != "" && myreg.test(phone)) {
             return true;
         }
         else {
@@ -125,6 +125,7 @@
                 method: "post",
                 success: function (data) {
                     if (data.Result) {
+                        alert("报名成功");
                         history.go(-1);
                     }
                     else {
@@ -141,6 +142,7 @@
                 data: $("#bindForm").serialize(),
                 success: function (data) {
                     if (data.Result) {
+                        alert("报名成功");
                         history.go(-1);
                     }
                     else {

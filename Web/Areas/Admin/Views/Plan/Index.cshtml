@@ -129,9 +129,9 @@
             tableId: "dataTable",
             //表格id
             search: {
-            domainId: "searchDomain",
-            subId: "btnSearch"
-        },
+                domainId: "searchDomain",
+                subId: "btnSearch"
+            },
             ajaxUrl: "/Admin/Plan/GetPageList",
             //数据请求地址
             pageSize: 10,
@@ -146,18 +146,16 @@
                             ajaxUrl: "/Areas/Admin/HtmlTemplates/Plan/Update.html",
                             title: "编辑计划",
                             callback: function (e) {
-                                $.Nuoya.action("/admin/Meet/Find", { id: item.MeetID }, function (model) {
-                                    $(model.MeetPlans).each(function (index,obj) {
-                                        if (obj.ID == item.ID) {
-                                            //载入数据
-                                            $.Nuoya.form("form").dataLoad({
-                                                data: item
-                                            });
-                                            $("#startTimeDiv").append("<input type=\"text\" name=\"StratTime\"  value=\"" + RenderTime(item.StratTime) + "\" style=\"width:164px;float:left;\" readonly onfocus=\"WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',minDate:\'" + RenderTime(model.Meet.OngoingTime) + "\',maxDate:\'" + RenderTime(model.Meet.OverTime) + "\'})\" datatype=\"jsondate\" />");
-                                            $("#speaketName").html(item.Speaker.Name);
-                                            formInit();//表单初始化
-                                        }
+                                $.Nuoya.action("/admin/Meet/Find", { id: item.MeetID, planId: item.ID, isShowRoom: false }, function (model) {
+
+
+                                    //载入数据
+                                    $.Nuoya.form("form").dataLoad({
+                                        data: model
                                     });
+                                    $("#startTimeDiv").append("<input type=\"text\" name=\"StratTime\"  value=\"" + RenderTime(model.StratTime) + "\" style=\"width:164px;float:left;\" readonly onfocus=\"WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',minDate:\'" + RenderTime(model.OngoingTime) + "\',maxDate:\'" + RenderTime(model.OverTime) + "\'})\" datatype=\"jsondate\" />");
+                                    $("#speaketName").html(model.SpeakerName);
+                                    formInit();//表单初始化
                                 });
                             },
                             buttons: [{
@@ -174,6 +172,8 @@
                                             if (!data.ErrorDesc) {
                                                 e.hide();
                                                 grid.reload();
+
+                                                $.Nuoya.alert("保存成功");
                                             }
                                             else
                                                 $.Nuoya.alert(data.ErrorDesc);

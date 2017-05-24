@@ -56,6 +56,7 @@
     <Compile Include="DownLoadModel.cs" />
     <Compile Include="MeetModel.cs" />
     <Compile Include="MeetReportModel.cs" />
+    <Compile Include="Token.cs" />
     <Compile Include="UEditor\CatchImageResponseDTO.cs" />
     <Compile Include="UEditor\ConfigDTO.cs" />
     <Compile Include="UEditor\ImageUrlDTO.cs" />
