@@ -97,16 +97,36 @@ namespace MeetOL.Areas.Admin.Controllers
             var result = IMeetService.Find(ID);
             if (isShowRoom && result != null)
             {
-                return JResult(new MeetModel() {
-                    Rooms = result.Rooms,
-                    Meet=result.Meet,
-                    MeetPlans=null,
-                    MeetTopics=null,
-                    MeetUserJoins=null,
-                    signUserIdList=null,
-                    Speakers=null,
-                    userIdList=null,
-                    UserJoin=null,
+                var model = new List<MeetRoomModel>();
+                model = result.Rooms.Select(x => new MeetRoomModel() { Name = x.Name,ID=x.ID }).ToList();
+                var meetPlanDic = result.MeetPlans.GroupBy(x=>x.RoomID).ToDictionary(x => x.Key,x=>x.ToList());
+                var topicDic = result.MeetTopics.GroupBy(x => x.PlanID).ToDictionary(x => x.Key, x => x.ToList());
+                model.ForEach(x =>
+                {
+                    if (meetPlanDic.ContainsKey(x.ID))
+                    {
+                        x.MeetPlans = meetPlanDic[x.ID].Select(y=>new MeetPlanModel() {
+                            ID=y.ID,
+                            StratTime=y.StratTime,
+                            SpeakerID=y.SpeakerID,
+                            SpeakerName=y.Speaker?.Name,
+                            Name =y.Name
+                        }).ToList();
+                        if(x.MeetPlans!=null&& x.MeetPlans.Count>0)
+                        {
+                            x.MeetPlans.ForEach(z =>
+                            {
+                                if (topicDic.ContainsKey(z.ID))
+                                {
+                                    z.MeetTopics = topicDic[z.ID].Select(q => new MeetTopicModel() { Name = q.Name, ID = q.ID }).ToList();
+                               }
+                            });
+                         }
+                   }
+                });
+                return JResult(new {
+                    Rooms = model,
+                    Meet=result.Meet
                 });
             }
             else if(planId.IsNotNullOrEmpty() && result != null&& result.MeetPlans!=null&& result.MeetPlans.Count>0)

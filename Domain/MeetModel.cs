@@ -33,15 +33,15 @@ namespace Domain
         public MeetUserJoin UserJoin { get; set; }
     }
 
-    public class MeetRoomModel:BaseEntity
+    public class MeetRoomModel : BaseEntity
     {
-        public string MeetID { get; set; }
 
-        /// <summary>
-        /// 会议厅
-        /// </summary>
-        public string RoomID { get; set; }
+        public string Name { get; set; }
+        public List<MeetPlanModel> MeetPlans { get; set; }
+    }
 
+    public class MeetPlanModel:BaseEntity
+    {
         /// <summary>
         /// 开始时间
         /// </summary>
@@ -56,14 +56,12 @@ namespace Domain
         /// 演讲人
         /// </summary>
         public string SpeakerID { get; set; }
-        
-        public string SpeakerName { get; set; }
-        public string MeetName { get; set; }
-        public List<MeetTopic> MeetTopics { get; set; }
-        public int VoteCount { get; set; } 
 
-        public DateTime OngoingTime { get; set; }
-        public DateTime OverTime { get; set; }
+
+        public string SpeakerName { get; set; }
+
+        public List<MeetTopicModel> MeetTopics { get; set; }
+        public int VoteCount { get; set; } 
     }
 
     /// <summary>
@@ -71,30 +69,9 @@ namespace Domain
     /// </summary>
     public partial class MeetTopicModel : BaseEntity
     {
-
-        /// <summary>
-        /// 会议id
-        /// </summary>
-        public string MeetID { get; set; }
-
-        /// <summary>
-        /// 会议厅人
-        /// </summary>
-        public string RoomID { get; set; }
-
-        /// <summary>
-        /// 计划
-        /// </summary>
-        public string PlanID { get; set; }
-
         /// <summary>
         /// 计划名称
         /// </summary>
         public string Name { get; set; }
-
-        /// <summary>
-        /// 演讲人
-        /// </summary>
-        public string SpeakerID { get; set; }
     }
 }
