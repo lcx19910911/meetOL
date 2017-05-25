@@ -95,7 +95,7 @@ namespace MeetOL.Areas.Admin.Controllers
         public JsonResult Find(string ID,bool isShowRoom,string planId)
         {
             var result = IMeetService.Find(ID);
-            if (isShowRoom && result != null)
+            if (isShowRoom && result != null&& result.MeetPlans!=null&& result.MeetPlans.Count>0 && result.MeetTopics != null && result.MeetTopics.Count > 0)
             {
                 var model = new List<MeetRoomModel>();
                 model = result.Rooms.Select(x => new MeetRoomModel() { Name = x.Name,ID=x.ID }).ToList();
