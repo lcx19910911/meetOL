@@ -109,20 +109,14 @@ namespace MeetOL.Areas.Admin.Controllers
                     UserJoin=null,
                 });
             }
-            else if(planId.IsNotNullOrEmpty())
+            else if(planId.IsNotNullOrEmpty() && result != null)
             {
                 var model = result.MeetPlans.Find(x=>x.ID==planId);
                 if (model != null)
                 {
-                    model.OngoingTime = result.Meet.OngoingTime;
-                    model.OverTime = result.Meet.OverTime;
-                    if (model.Speaker != null)
-                        model.SpeakerName = model.Speaker.Name;
-                    model.Speaker = null;
-
                     return JResult(new MeetPlan()
                     {
-                        SpeakerName = model.Speaker.Name,
+                        SpeakerName = model.Speaker?.Name,
                         Speaker = null,
                         ID = model.ID,
                         MeetName = result.Meet.Name,
