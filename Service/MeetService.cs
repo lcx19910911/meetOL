@@ -477,6 +477,7 @@ namespace Service
                                 MobilePhone = x.Mobile,
                                 Position = x.Position,
                                 NickName = x.Name,
+                                HeadImgUrl= "/Images/avtar.png",
                                 RealName = x.Name
                             };
                             Add<User>(model);

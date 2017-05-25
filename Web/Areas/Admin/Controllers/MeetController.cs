@@ -109,25 +109,22 @@ namespace MeetOL.Areas.Admin.Controllers
                     UserJoin=null,
                 });
             }
-            else if(planId.IsNotNullOrEmpty() && result != null)
+            else if(planId.IsNotNullOrEmpty() && result != null&& result.MeetPlans!=null&& result.MeetPlans.Count>0)
             {
                 var model = result.MeetPlans.Find(x=>x.ID==planId);
                 if (model != null)
                 {
-                    return JResult(new MeetPlan()
+                    return JResult(new 
                     {
                         SpeakerName = model.Speaker?.Name,
-                        Speaker = null,
                         ID = model.ID,
                         MeetName = result.Meet.Name,
-                        MeetTopics = model.MeetTopics,
                         Name = model.Name,
                         OngoingTime = result.Meet.OngoingTime,
                         OverTime = result.Meet.OverTime,
                         StratTime = model.StratTime,
                         VoteCount = model.VoteCount,
                         SpeakerID = model.SpeakerID,
-                        RoomID = model.RoomID,
                         MeetID = model.MeetID,
                     });
                 }
