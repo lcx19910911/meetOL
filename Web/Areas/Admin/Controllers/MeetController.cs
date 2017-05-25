@@ -97,25 +97,48 @@ namespace MeetOL.Areas.Admin.Controllers
             var result = IMeetService.Find(ID);
             if (isShowRoom && result != null)
             {
-                result.MeetPlans = null;
-                result.MeetTopics = null;
-                result.MeetUserJoins = null;
-                result.Speakers = null;
+                return JResult(new MeetModel() {
+                    Rooms = result.Rooms,
+                    Meet=result.Meet,
+                    MeetPlans=null,
+                    MeetTopics=null,
+                    MeetUserJoins=null,
+                    signUserIdList=null,
+                    Speakers=null,
+                    userIdList=null,
+                    UserJoin=null,
+                });
             }
-            else
+            else if(planId.IsNotNullOrEmpty())
             {
                 var model = result.MeetPlans.Find(x=>x.ID==planId);
                 if (model != null)
                 {
                     model.OngoingTime = result.Meet.OngoingTime;
                     model.OverTime = result.Meet.OverTime;
-                    if(model.Speaker!=null)
+                    if (model.Speaker != null)
                         model.SpeakerName = model.Speaker.Name;
                     model.Speaker = null;
+
+                    return JResult(new MeetPlan()
+                    {
+                        SpeakerName = model.Speaker.Name,
+                        Speaker = null,
+                        ID = model.ID,
+                        MeetName = result.Meet.Name,
+                        MeetTopics = model.MeetTopics,
+                        Name = model.Name,
+                        OngoingTime = result.Meet.OngoingTime,
+                        OverTime = result.Meet.OverTime,
+                        StratTime = model.StratTime,
+                        VoteCount = model.VoteCount,
+                        SpeakerID = model.SpeakerID,
+                        RoomID = model.RoomID,
+                        MeetID = model.MeetID,
+                    });
                 }
-                return JResult(model);
             }
-            return JResult(result);
+            return JResult(new MeetPlan());
         }
         /// <summary>
         /// 查找实体

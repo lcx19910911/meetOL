@@ -130,6 +130,12 @@ namespace Core.Code
         /// </summary>
         [Description("已投票.")]
         meet_had_vote = 209,
+
+
+
+        /// </summary>
+        [Description("已在活动设置填写会议计划.")]
+        meetplan_empty = 210,
         #endregion
 
 

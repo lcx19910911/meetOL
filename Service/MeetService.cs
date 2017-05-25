@@ -124,6 +124,10 @@ namespace Service
             model.Meet.ID = Guid.NewGuid().ToString("N");
             model.Meet.CreateUserId = Client.LoginUser.ID;
             Add<Meet>(model.Meet);
+            if (model.MeetPlans == null||model.MeetPlans.Count==0)
+            {
+                return Result(false, ErrorCode.meetplan_empty);
+            }
             model.MeetPlans.ForEach(x =>
             {
                 x.MeetID = model.Meet.ID;
@@ -167,6 +171,10 @@ namespace Service
                 return Result(false, ErrorCode.sys_param_format_error);
             }
             model.Meet.CreateUserId = entity.Meet.CreateUserId;
+            if (model.MeetPlans == null || model.MeetPlans.Count == 0)
+            {
+                return Result(false, ErrorCode.meetplan_empty);
+            }
             Update<Meet>(model.ID, model.Meet);
 
             var planIdList = model.MeetPlans.Select(x => x.ID).ToList();
