@@ -56,7 +56,7 @@ namespace IService
 
         WebResult<bool> Audit(UserJoinState state, string id);
 
-        WebResult<bool> Sign(string id);
+        WebResult<bool> Sign(string id,string userId);
 
         bool IsMax(string meetId,string userId);
 

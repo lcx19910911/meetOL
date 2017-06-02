@@ -56,8 +56,8 @@ namespace MeetOL.Controllers
             var meet = IMeetService.Find(this.MeetID);
             if (meet == null)
                 return View("Index");
-            ViewBag.IsChangeQrCode = meet.Meet.IsChangeQrcode==YesOrNoCode.Yes?1:0;
-            CacheTimeOption timeCode = meet.Meet.IsChangeQrcode == EnumPro.YesOrNoCode.Yes ? CacheTimeOption.HalfDay : CacheTimeOption.TenSecond;
+            ViewBag.IsChangeQrCode = meet.Meet.IsChangeQrcode == YesOrNoCode.Yes ? 1 : 0;
+            CacheTimeOption timeCode = meet.Meet.IsChangeQrcode == EnumPro.YesOrNoCode.No ? CacheTimeOption.HalfDay : CacheTimeOption.TenSecond;
             var code = CacheHelper.Get<string>("sign_code", timeCode, () =>
             {
                 return Guid.NewGuid().ToString("N").SubString(6); ;
@@ -74,16 +74,17 @@ namespace MeetOL.Controllers
             {
                 return Guid.NewGuid().ToString("N").SubString(6);
             });
-            string url= "http://" + Params.DomianName + "/Meet/ForSign?info="+ CryptoHelper.AES_Encrypt(code+","+this.MeetID,"11111111");
+            string url = "http://" + Params.DomianName + "/Meet/ForSign?info=" + CryptoHelper.AES_Encrypt(code + "," + this.MeetID, "11111111");
             return JResult(url);
         }
 
-        public ActionResult ForSign(string info)
+        public ActionResult ForSign(string info, string userId)
         {
-            if (info.IsNullOrEmpty())
+            if (info.IsNullOrEmpty()|| userId.IsNullOrEmpty())
                 return _404();
             var valiteCode = CacheHelper.Get<string>("sign_code");
             var ary = CryptoHelper.AES_Decrypt(info, "11111111");
+            
             if(ary.IsNullOrEmpty())
                 return _404();
             var list = ary.Split(',');
@@ -91,7 +92,7 @@ namespace MeetOL.Controllers
                 return _404();
             if (valiteCode.IsNotNullOrEmpty() && valiteCode == list[0])
             {
-                return View(IMeetUserJoinService.Sign(list[1]).Result);
+                return View(IMeetUserJoinService.Sign(list[1], userId).Result);
             }
             else
             {

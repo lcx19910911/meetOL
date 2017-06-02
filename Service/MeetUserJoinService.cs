@@ -291,10 +291,10 @@ namespace Service
         /// <param name="isPass"></param>
         /// <param name="id"></param>
         /// <returns></returns>
-        public WebResult<bool> Sign(string id)
+        public WebResult<bool> Sign(string id,string userId)
         {
             //LogHelper.WriteInfo("sign:"+ Client.LoginUser.ID+"  meetid:"+id);
-            var model = Find<MeetUserJoin>(x=>x.UserID.Equals(Client.LoginUser.ID)&&x.MeetID.Equals(id));
+            var model = Find<MeetUserJoin>(x=>x.UserID.Equals(userId) &&x.MeetID.Equals(id));
             if (model == null)
                 return Result(false, ErrorCode.sys_param_format_error);
             if (model.HadSign == YesOrNoCode.Yes)
