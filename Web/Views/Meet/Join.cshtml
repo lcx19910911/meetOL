@@ -120,10 +120,12 @@
 
     
     $("#applyBtn").click(function () {
+        ShowLoading();
             $.ajax({
                 url: "/meet/doApply",
                 method: "post",
                 success: function (data) {
+                    CloseLoading();
                     if (data.Result) {
                         alert("报名成功");
                         history.go(-1);
@@ -135,12 +137,14 @@
             })
     });
     $("#bindBtn").click(function () {
+        ShowLoading();
         if (confirm_do()){
             $.ajax({
                 url: "/meet/doBindApply",
                 method: "post",
                 data: $("#bindForm").serialize(),
                 success: function (data) {
+                    CloseLoading();
                     if (data.Result) {
                         alert("报名成功");
                         history.go(-1);

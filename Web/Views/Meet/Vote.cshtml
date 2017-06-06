@@ -110,6 +110,7 @@
         $(document).ready(function () {
 
             $('.goodit').click(function () {
+                ShowLoading();
                 var curtarget = $(this);
                 var planId = curtarget.attr("data-planId")
                 $.ajax({
@@ -117,6 +118,7 @@
                     url: "/meet/AddPlanJoin",
                     data: { planId: planId },
                     success: function (data) {
+                        CloseLoading();
                         if (data.Result) {
                             $("#tanchu").show();
                         }
