@@ -86,7 +86,11 @@
         //获取Json的时间
         function RenderTime(data) {
             var da = eval('new ' + data.replace('/', '', 'g').replace('/', '', 'g'));
-            return da.getFullYear() + "-" + (da.getMonth() + 1) + "-" + da.getDate() + " " + da.getHours() + ":" + da.getSeconds() + ":" + da.getMinutes();
+            var days = da.getDate();
+            var hours = da.getHours();
+            var minutes = da.getMinutes();
+            var seconds = da.getSeconds();
+            return da.getFullYear() + "-" + (da.getMonth() + 1) + "-" + (days < 10 ? "0" + days : days) + " " + (hours < 10 ? "0" + hours : hours) + ":" + (minutes < 10 ? "0" + minutes : minutes) + ":" + (seconds < 10 ? "0" + seconds : seconds);
         }
         function CurentTime() {
             var now = new Date();

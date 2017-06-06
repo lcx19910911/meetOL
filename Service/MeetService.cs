@@ -249,11 +249,11 @@ namespace Service
                 {
 
                     var list = db.Meet.Where(x => !x.IsDelete).OrderByDescending(x => x.CreatedTime).ToList();
-                    var dic_Plan = db.MeetPlan.Where(x => !x.IsDelete).GroupBy(x => x.MeetID).ToDictionary(x => x.Key, x => x.ToList());
+                    var dic_Plan = db.MeetPlan.Where(x => !x.IsDelete).GroupBy(x => x.MeetID).ToDictionary(x => x.Key, x => x.OrderBy(y=>y.StratTime).ToList());
                     var dic_Speaker = db.Speaker.Where(x => !x.IsDelete).ToDictionary(x => x.ID);
-                    var dic_Topic = db.MeetTopic.Where(x => !x.IsDelete).GroupBy(x => x.MeetID).ToDictionary(x => x.Key, x => x.ToList());
+                    var dic_Topic = db.MeetTopic.Where(x => !x.IsDelete).GroupBy(x => x.MeetID).ToDictionary(x => x.Key, x => x.OrderBy(y => y.CreatedTime).ToList());
                     var dic_Room = db.Room.Where(x => !x.IsDelete).ToDictionary(x => x.ID);
-                    var dic_MeetJoin = db.MeetUserJoin.Where(x => !x.IsDelete).GroupBy(x => x.MeetID).ToDictionary(x => x.Key, x => x.ToList());
+                    var dic_MeetJoin = db.MeetUserJoin.Where(x => !x.IsDelete).GroupBy(x => x.MeetID).ToDictionary(x => x.Key, x => x.OrderBy(y => y.CreatedTime).ToList());
                     list.ForEach(x =>
                     {
                         var model = new MeetModel()
@@ -310,7 +310,7 @@ namespace Service
                 {
                     model.Rooms.ForEach(x =>
                     {
-                        x.MeetPlans = aryModel.MeetPlans.Where(y => y.RoomID.Equals(x.ID)).ToList();
+                        x.MeetPlans = aryModel.MeetPlans.Where(y => y.RoomID.Equals(x.ID)).OrderBy(y => y.StratTime).ToList();
                     });
                 }
             }

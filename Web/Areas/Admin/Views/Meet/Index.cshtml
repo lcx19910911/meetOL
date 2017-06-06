@@ -196,7 +196,7 @@
                                                     '<button class="am-btn am-btn-success am-btn-xs" onclick="SelectSpeaker(this)">选择</button>' +
                                                 '</div>' +
                                                 '<div class="am-u-md-1 am-text-center am-u-end">' +
-                                                    '<button class="am-btn am-btn-danger am-btn-xs" onclick="javascript:$(this).parents(\'.roomPlans\').remove();">删除</button>' +
+                                                    '<button class="am-btn am-btn-danger am-btn-xs" onclick="javascript:$(this).parents(\'.meetplan\').remove();">删除</button>' +
                                                 '</div>' +
                                            '</div>' +
                                             '<div class="am-g am-margin-top">' +
@@ -787,7 +787,7 @@
                    //    }
                    //},
                    click: function (item) {
-                       window.open("/admin/UserJoin/index?meetId=" + item.ID);
+                       window.location.href= "/admin/UserJoin/index?meetId=" + item.ID;
                    }
                },
                {
@@ -795,7 +795,7 @@
                    icon: "icon-universal-access",
                    name: "评论",
                    click: function (item) {
-                       window.open("/admin/TopicUserJoin/index?meetId=" + item.ID);
+                       window.location.href= "/admin/TopicUserJoin/index?meetId=" + item.ID;
                    }
                },
                {
@@ -832,7 +832,7 @@
                     icon: "icon-firefox",
                     name: "计划",
                     click: function (item) {
-                        window.open("/admin/plan/index?id=" + item.ID);
+                        window.location.href= "/admin/plan/index?id=" + item.ID;
                     }
                 },
 
@@ -841,7 +841,7 @@
                     icon: "icon-user",
                     name: "签到结果",
                     click: function (item) {
-                        window.open("/meet/signresult?meetid=" + item.ID);
+                        window.location.href= "/meet/signresult?meetid=" + item.ID;
                     }
                 },
                 {
@@ -897,10 +897,10 @@
                                 $.Nuoya.action("/admin/Meet/GetReport", { id: item.ID }, function (model) {
 
                                     $("#exportAllBtn").click(function () {
-                                        window.open("/admin/meet/exportAll?id=" + item.ID);
+                                        window.location.href= "/admin/meet/exportAll?id=" + item.ID;
                                     });
                                     $("#exportSignBtn").click(function () {
-                                        window.open("/admin/meet/exportSign?id=" + item.ID);
+                                        window.location.href= "/admin/meet/exportSign?id=" + item.ID;
                                     });
                                     $("#joinCount").html("报名参加人数：" + model.JoinCount + "&nbsp;&nbsp;&nbsp;&nbsp;签到人数：" + model.SignCount + "&nbsp;&nbsp;&nbsp;&nbsp;会议计划数：" + model.PlanCount);
                                     $("#topicCount").html("话题数：" + model.TopicCount + "&nbsp;&nbsp;&nbsp;&nbsp;话题参与人数：" + model.TopicJoinCount + "&nbsp;&nbsp;&nbsp;&nbsp;投票参加人数：" + model.VoteCount);
