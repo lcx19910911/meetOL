@@ -47,5 +47,10 @@ namespace MeetOL.Controllers
             return View(model.Meet);
         }
 
+
+        public void ClearCache()
+        {
+            CacheHelper.Clear();
+        }
     }
 }

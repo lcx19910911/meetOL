@@ -69,6 +69,7 @@ namespace Service
             using (DbRepository db = new DbRepository())
             {
                 var addEntity = source.AutoMap<T>();
+                addEntity.ID = source.ID;
                 db.Entry(addEntity).State = System.Data.Entity.EntityState.Added;
                 db.SaveChanges();
             }
