@@ -21,7 +21,7 @@
                 <p><img src="/images/icon_time2.png"><span>@(Model.Name) </span></p>
             </div>
             <div class="time_address">
-                <p><img src="/images/icon_time2.png"><span>@(Model.OngoingTime.ToString("yyyy年MM月dd日"))- @(Model.OverTime.ToString("yyyy年MM月dd日"))</span></p>
+                <p><img src="/images/icon_time2.png"><span>@(Model.OngoingTime.ToString("yyyy年MM月dd日 hh:mm"))- @(Model.OverTime.ToString("yyyy年MM月dd日 hh:mm"))</span></p>
             </div>
             <div class="time_address buttonKey-GPS" onclick="wx.openLocation();">
                 <p><img src="/images/xd_icon_5.png" style="height:16px;width:13px"><span>@(Model.Address)</span></p>
