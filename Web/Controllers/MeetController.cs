@@ -80,7 +80,11 @@ namespace MeetOL.Controllers
 
         public ActionResult ForSign(string info, string userId)
         {
-            if (info.IsNullOrEmpty()|| userId.IsNullOrEmpty())
+            if (info.IsNullOrEmpty())
+                return _404();
+            if (userId.IsNullOrEmpty())
+                userId = LoginUser.ID;
+            if (userId.IsNullOrEmpty())
                 return _404();
             var valiteCode = CacheHelper.Get<string>("sign_code");
             var ary = CryptoHelper.AES_Decrypt(info, "11111111");

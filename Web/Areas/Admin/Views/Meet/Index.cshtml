@@ -373,7 +373,7 @@
                 fileSuffixs: ["jpg", "png", 'jpeg'],
                 maximumFilesUpload: 1,//最大文件上传数       ]
                 isGetFileSize: true,
-                maxFileSize: 20 * 1024 * 1024,
+                maxFileSize: 200 * 1024 * 1024,
                 onComplete: function (data) {
                     debugger
                     if (data) {
@@ -468,7 +468,7 @@
                 fileSuffixs: ["jpg", "png", 'jpeg'],
                 maximumFilesUpload: 1,//最大文件上传数       ]
                 isGetFileSize: true,
-                maxFileSize: 20 * 1024 * 1024,
+                maxFileSize: 200 * 1024 * 1024,
                 onComplete: function (data) {
                     if (data) {
                         $("[name='PlaceImage']").val(data);
@@ -496,7 +496,7 @@
                 maximumFilesUpload: 5,//最大文件上传数
                 isGetFileSize: true,
                 isCheckFileSuffixs: false,
-                maxFileSize: 20 * 1024 * 1024,
+                maxFileSize: 200 * 1024 * 1024,
                 onComplete: function (json) {
                     var data = jQuery.parseJSON(json);
                     if (data.Path != "") {
