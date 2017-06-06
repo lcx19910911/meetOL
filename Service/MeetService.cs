@@ -72,7 +72,7 @@ namespace Service
                     createdTimeEnd = createdTimeEnd.Value.AddDays(1);
                     query = query.Where(x => x.OverTime < createdTimeEnd);
                 }
-                query = query.OrderByDescending(x => x.CreatedTime).Skip((pageIndex - 1) * pageSize).Take(pageSize);
+                query = query.OrderByDescending(x => x.CreatedTime);
 
                 var pageList = CreatePageList(query, pageIndex, pageSize);
 

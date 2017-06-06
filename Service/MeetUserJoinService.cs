@@ -80,7 +80,7 @@ namespace Service
                     query = query.Where(x => x.CreatedTime < createdTimeEnd);
                 }
 
-                query = query.OrderByDescending(x => x.CreatedTime).Skip((pageIndex - 1) * pageSize).Take(pageSize);
+                query = query.OrderByDescending(x => x.CreatedTime);
         
                 var pageResult=CreatePageList(query, pageIndex, pageSize);
                 var userIdList = pageResult.List.Select(x => x.UserID).ToList();

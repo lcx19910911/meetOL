@@ -69,7 +69,7 @@ namespace Service
                     createdTimeEnd = createdTimeEnd.Value.AddDays(1);
                     query = query.Where(x => x.CreatedTime < createdTimeEnd);
                 }
-                query = query.OrderByDescending(x => x.CreatedTime).Skip((pageIndex - 1) * pageSize).Take(pageSize);
+                query = query.OrderByDescending(x => x.CreatedTime);
 
                 var pageResult=CreatePageList(query, pageIndex, pageSize);
                 var speakerIdList = pageResult.List.Select(x => x.SpeakerID).ToList();
@@ -153,7 +153,7 @@ namespace Service
 
         public MeetPlan Find(string id)
         {
-            return Find(id);
+            return Find<MeetPlan>(x=>x.ID==id);
         }
 
         /// <summary>
