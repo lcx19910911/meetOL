@@ -123,17 +123,17 @@ namespace Service
             }
             if (model.Meet.OverTime < model.Meet.OngoingTime || model.Meet.OverTime < DateTime.Now)
                 return Result(false, ErrorCode.meet_end_time_error);
-            model.Meet.ID = Guid.NewGuid().ToString("N");
+            string meetId= Guid.NewGuid().ToString("N");
             model.Meet.CreateUserId = Client.LoginUser.ID;
-            Add<Meet>(model.Meet);
+            Add<Meet>(model.Meet, meetId);
             model.MeetPlans.ForEach(x =>
             {
-                x.MeetID = model.Meet.ID;
+                x.MeetID = meetId;
                 x.ID = Guid.NewGuid().ToString("N");
                 Add<MeetPlan>(x);
                 x.MeetTopics.ForEach(y =>
                 {
-                    y.MeetID = model.Meet.ID;
+                    y.MeetID = meetId;
                     y.SpeakerID = x.SpeakerID;
                     y.PlanID = x.ID;
                     Add<MeetTopic>(y);
@@ -166,10 +166,10 @@ namespace Service
             var entity = Find(model.ID);
             if (entity == null)
                 return Result(false, ErrorCode.sys_param_format_error);
-            if (entity.Meet.CreateUserId != Client.LoginUser.ID)
-            {
-                return Result(false, ErrorCode.sys_param_format_error);
-            }
+            //if (entity.Meet.CreateUserId != Client.LoginUser.ID)
+            //{
+            //    return Result(false, ErrorCode.sys_param_format_error);
+            //}
             model.Meet.CreateUserId = entity.Meet.CreateUserId;
             if (model.MeetPlans == null || model.MeetPlans.Count == 0)
             {

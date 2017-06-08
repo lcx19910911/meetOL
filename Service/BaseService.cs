@@ -64,12 +64,15 @@ namespace Service
         /// </summary>
         /// <param name="source">实体</param>
         /// <returns>影响条数</returns>
-        public void Add<T>(T source) where T : BaseEntity
+        public void Add<T>(T source,string id="") where T : BaseEntity
         {
             using (DbRepository db = new DbRepository())
             {
                 var addEntity = source.AutoMap<T>();
-                addEntity.ID = source.ID;
+                if (id.IsNotNullOrEmpty())
+                {
+                    addEntity.ID = id;
+                }
                 db.Entry(addEntity).State = System.Data.Entity.EntityState.Added;
                 db.SaveChanges();
             }

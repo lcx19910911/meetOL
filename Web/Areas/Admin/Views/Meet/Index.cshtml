@@ -259,6 +259,12 @@
         }
         //按钮加载计划等
         function LoadPlan(obj) {
+
+            if (!document.forms[0].RoomIDs.value) {
+                $.Nuoya.alert("请选择会议厅");
+                return false;
+            }
+
             GetTemplete(valueTextAry);
             $(obj).hide();
         };
@@ -547,7 +553,11 @@
                             $.Nuoya.alert("开始时间必须小于结束时间");
                             return false;
                         }
-
+                        if (!document.forms[0].RoomIDs.value) {
+                            $.Nuoya.alert("请选择会议厅");
+                            return false;
+                        }
+                        
                         $("[name=Content]").val(ue.getContent());
                         var result = $.Nuoya.form("form").valid({
                         });
@@ -626,8 +636,9 @@
                     msg = "请填写计划名称";
                 }
                 if ($(item).find("[name='StratTime']").val() == "") {
-                    msg = "请选择计划时间";
+                    msg = "请选择计划开始时间";
                 }
+                
                 meetPlansAry.push({
                     ID: $(item).attr("data-planId"),
                     RoomID: $(item).attr("data-roomId"),
@@ -738,6 +749,10 @@
                                     var overTime = document.forms[0].OverTime.value;
                                     if (new Date(ongoingTime) > new Date(overTime)) {
                                         $.Nuoya.alert("开始时间必须小于结束时间");
+                                        return false;
+                                    }
+                                    if (!document.forms[0].RoomIDs.value) {
+                                        $.Nuoya.alert("请选择会议厅");
                                         return false;
                                     }
                                     $("[name=Content]").val(ue.getContent());
