@@ -117,17 +117,15 @@ namespace Service
         /// <returns></returns>
         public WebResult<bool> Add(MeetModel model)
         {
-            //if (model.Meet.OngoingTime < DateTime.Now)
-            //    return Result(false, ErrorCode.meet_start_time_error);
+            if (model.MeetPlans == null || model.MeetPlans.Count == 0)
+            {
+                return Result(false, ErrorCode.meetplan_empty);
+            }
             if (model.Meet.OverTime < model.Meet.OngoingTime || model.Meet.OverTime < DateTime.Now)
                 return Result(false, ErrorCode.meet_end_time_error);
             model.Meet.ID = Guid.NewGuid().ToString("N");
             model.Meet.CreateUserId = Client.LoginUser.ID;
             Add<Meet>(model.Meet);
-            if (model.MeetPlans == null||model.MeetPlans.Count==0)
-            {
-                return Result(false, ErrorCode.meetplan_empty);
-            }
             model.MeetPlans.ForEach(x =>
             {
                 x.MeetID = model.Meet.ID;
@@ -159,8 +157,10 @@ namespace Service
         /// <returns></returns>
         public WebResult<bool> Update(MeetModel model)
         {
-            //if (model.Meet.OngoingTime < DateTime.Now)
-            //    return Result(false, ErrorCode.meet_start_time_error);
+            if (model.MeetPlans == null || model.MeetPlans.Count == 0)
+            {
+                return Result(false, ErrorCode.meetplan_empty);
+            }
             if (model.Meet.OverTime < model.Meet.OngoingTime || model.Meet.OverTime < DateTime.Now)
                 return Result(false, ErrorCode.meet_end_time_error);
             var entity = Find(model.ID);

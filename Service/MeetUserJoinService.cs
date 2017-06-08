@@ -159,7 +159,7 @@ namespace Service
                 return Result(false, ErrorCode.sys_param_format_error);
 
             var hadCount = GetCount<MeetUserJoin>(x => !x.IsDelete && x.MeetID.Equals(meetId));
-            if (hadCount > meet.MaxLimit&&meet.MaxLimit!=0)
+            if (hadCount >= meet.MaxLimit&&meet.MaxLimit!=0)
             {
                 return Result(false, ErrorCode.meet_join_max);
             }
@@ -191,7 +191,7 @@ namespace Service
                 if (meet == null)
                     return true;
                 var hadCount = GetCount<MeetUserJoin>(x => !x.IsDelete && x.MeetID.Equals(meetId));
-                if (hadCount > meet.MaxLimit&&meet.MaxLimit!=0)
+                if (hadCount >= meet.MaxLimit&&meet.MaxLimit!=0)
                 {
                     return true;
                 }

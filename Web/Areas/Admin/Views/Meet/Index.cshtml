@@ -638,6 +638,10 @@
                 })
             });
 
+            if (meetPlansAry.length == 0)
+            {
+                msg = "请在活动设置里面填写会议计划";
+            }
             return data = {
                 ID: $("[name='ID']").val(),
                 Meet: {

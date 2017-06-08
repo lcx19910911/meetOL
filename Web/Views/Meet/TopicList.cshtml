@@ -109,10 +109,10 @@
                     <li>
                         <div class="user-box">
                             <div class="head-portrait">
-                                <img src="@(item.Speaker.HeadImages)">
+                                <img src="@(item.Speaker?.HeadImages)">
                             </div>
                             <div class="r-cont">
-                                <h3 class="user-name">@(item.Speaker.Name)</h3>
+                                <h3 class="user-name">@(item.Speaker?.Name)</h3>
                                 <p>
                                     @(item.Name)
                                 </p>
