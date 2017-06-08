@@ -79,6 +79,10 @@
                         required: true,
                         maxlength: 12
                     },
+                    Password: {
+                        required: true,
+                        maxlength: 12
+                    },
                     MobilePhone: {
                         required: true,
                         maxlength: 11
@@ -90,6 +94,10 @@
                         maxlength: "最多{0}个字符"
                     },
                     Account: {
+                        required: "不允许为空",
+                        maxlength: "最多{0}个字符"
+                    },
+                    Password: {
                         required: "不允许为空",
                         maxlength: "最多{0}个字符"
                     },
@@ -154,6 +162,7 @@
                             ajaxUrl: "/Areas/Admin/HtmlTemplates/User/Update.html",
                             title: "编辑管理员",
                             callback: function (e) {
+                                $("#passwordDiv").remove();
                                 $.Nuoya.action("/Admin/User/Find", { id: item.ID }, function (model) {
                                     formInit(model);//表单初始化
                                     //载入数据

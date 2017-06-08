@@ -71,7 +71,6 @@ namespace MeetOL.Areas.Admin.Controllers
         public ActionResult Add(User model)
         {
             model.Type = UserType.Admin;
-            model.Password = "111111";
             var result = IUserService.Add(model);
             return JResult(result);
         }

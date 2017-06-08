@@ -145,6 +145,22 @@
             $("[name='RoomIDsSelect']").ztreeSelect($("[name='RoomIDs']"), "/Admin/Room/GetZTreeChildren",  "", true, false);
         }
 
+        function DeleteTopic(obj)
+        {
+            if ($(obj).parents(".meetplan").find(".meetTopic").length == 1)
+            {
+                $(obj).parents(".meetplan").find(".topicTitle").hide();
+            }
+            $(obj).parent().parent().remove();
+        }
+
+        function AddTopic(obj)
+        {
+            $(AddTopicHtml()).insertBefore($(obj).parent());
+            $(obj).parents(".meetplan").find(".topicTitle").show();
+            event.preventDefault();
+        }
+
         //计划模板
         function GetTemplete(roomAry) {
             $("#roomDiv").html("");
@@ -199,7 +215,7 @@
                                                     '<button class="am-btn am-btn-danger am-btn-xs" onclick="javascript:$(this).parents(\'.meetplan\').remove();">删除</button>' +
                                                 '</div>' +
                                            '</div>' +
-                                            '<div class="am-g am-margin-top">' +
+                                            '<div class="am-g am-margin-top topicTitle">' +
                                                 '<div class="am-u-md-2 am-text-center">' +
                                                       ' &nbsp;' +
                                                  '</div>' +
@@ -227,17 +243,17 @@
                                                     '<input type="text" name="TopicName" value="' + temp.Name + '" class="am-input-sm" maxlength="64">' +
                                                 '</div>' +
                                                 '<div class="am-u-md-2 am-text-center am-u-end">' +
-                                                    '<button class="am-btn am-btn-danger am-btn-xs" onclick="javascript:$(this).parent().parent().remove();">删除</button>' +
+                                                    '<button class="am-btn am-btn-danger am-btn-xs" onclick="DeleteTopic(this)">删除</button>' +
                                                 '</div>' +
                                             '</div>';
                             });
                             rommsTemplete +=
                                              '<div class="am-g am-margin-top">' +
-                                                '<button class="am-btn am-btn-primary am-btn-xs" onclick="javascript:$(AddTopic()).insertBefore($(this).parent());event.preventDefault();">新增话题</button>' +
+                                                '<button class="am-btn am-btn-primary am-btn-xs" onclick="AddTopic(this)">新增话题</button>' +
                                             '</div>';
                         }
                         else {
-                            rommsTemplete += AddTopic();
+                            rommsTemplete += AddTopicHtml();
                         }
                         rommsTemplete += '</div>';
                     });
@@ -290,7 +306,7 @@
                                 '<button class="am-btn am-btn-danger am-btn-xs"  onclick="javascript: $(this).parent().parent().remove();">删除</button>' +
                             '</div>' +
                         '</div>' +
-                        '<div class="am-g am-margin-top">' +
+                        '<div class="am-g am-margin-top topicTitle">' +
                               '<div class="am-u-md-2 am-text-center">&nbsp;' +
                                '</div>' +
                                '<div class="am-u-md-1 am-text-center">' +
@@ -313,16 +329,16 @@
                                  '<input type="text" name="TopicName" value="" class="am-input-sm" maxlength="64">' +
                             '</div>' +
                             '<div class="am-u-md-2 am-text-center am-u-end">' +
-                                 '<button class="am-btn am-btn-danger am-btn-xs" onclick="javascript:$(this).parent().parent().remove();">删除</button>' +
+                                 '<button class="am-btn am-btn-danger am-btn-xs" onclick="DeleteTopic(this)">删除</button>' +
                             '</div>' +
                        '</div>' +
                         '<div class="am-g am-margin-top">' +
-                            '<button class="am-btn am-btn-primary am-btn-xs" onclick="javascript:$(AddTopic()).insertBefore($(this).parent());event.preventDefault();">新增话题</button>' +
+                            '<button class="am-btn am-btn-primary am-btn-xs" onclick="AddTopic(this)">新增话题</button>' +
                         '</div>' +
                 '</div>';
         }
         //添加话题
-        function AddTopic() {
+        function AddTopicHtml() {
             return '<div class="am-g am-margin-top meetTopic">' +
                 '<div class="am-u-md-2 am-text-center">' +
                     '&nbsp;' +
@@ -334,7 +350,7 @@
                     '<input type="text" name="TopicName"  class="am-input-sm" maxlength="64">' +
                 '</div>' +
                 '<div class="am-u-md-2 am-text-center am-u-end">' +
-                    '<button class="am-btn am-btn-danger am-btn-xs" onclick="javascript:$(this).parent().parent().remove();">删除</button>' +
+                    '<button class="am-btn am-btn-danger am-btn-xs" onclick="DeleteTopic(this)">删除</button>' +
                 '</div>' +
             '</div>';
         }
@@ -543,6 +559,15 @@
                             $.Nuoya.alert("活动开始时间不能为空");
                             return false;
                         }
+                        if (typeof (document.forms[0].OngoingTime.value) == "undefined") {
+                            msg = "活动结束时间不能为空";
+
+                        }
+
+                        if (typeof (document.forms[0].OverTime.value) == "undefined") {
+                            msg = "活动结束时间不能为空";
+
+                        }
                         if (!document.forms[0].OverTime.value) {
                             $.Nuoya.alert("活动结束时间不能为空");
                             return false;
@@ -606,7 +631,10 @@
                     Path: $(this).attr("data-Path"),
                 })
             });
-            var maxLimit=$("[name='MaxLimit']").val();
+            var maxLimit = $("[name='MaxLimit']").val();
+            if (maxLimit.trim() == "") {
+                msg = "请填写人数限制";
+            }
             if (parseInt(maxLimit) < 0)
             {
                 msg = "人数限制必须大于等于0";
@@ -634,6 +662,10 @@
 
                 if ($(item).find("[name='Name']").val()== "") {
                     msg = "请填写计划名称";
+                }
+                if (typeof ($(item).find("[name='StratTime']").val()) == "undefined") {
+                    msg = "请选择计划开始时间";
+
                 }
                 if ($(item).find("[name='StratTime']").val() == "") {
                     msg = "请选择计划开始时间";
@@ -745,6 +777,15 @@
                                         return false;
                                     }
 
+                                    if (typeof (document.forms[0].OngoingTime.value) == "undefined") {
+                                        msg = "活动结束时间不能为空";
+
+                                    }
+
+                                    if (typeof (document.forms[0].OverTime.value) == "undefined") {
+                                        msg = "活动结束时间不能为空";
+
+                                    }
                                     var ongoingTime = document.forms[0].OngoingTime.value;
                                     var overTime = document.forms[0].OverTime.value;
                                     if (new Date(ongoingTime) > new Date(overTime)) {
