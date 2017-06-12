@@ -160,7 +160,16 @@
             $(obj).parents(".meetplan").find(".topicTitle").show();
             event.preventDefault();
         }
+        function DeletePlan(obj)
+        {
+            if ($(obj).parents(".roomPlans").find(".meetplan").length != 1)
+            {
+                $(obj).parents('.meetplan').remove();
+            }
+            event.preventDefault();
+        }
 
+       
         //计划模板
         function GetTemplete(roomAry) {
             $("#roomDiv").html("");
@@ -212,7 +221,7 @@
                                                     '<button class="am-btn am-btn-success am-btn-xs" onclick="SelectSpeaker(this)">选择</button>' +
                                                 '</div>' +
                                                 '<div class="am-u-md-1 am-text-center am-u-end">' +
-                                                    '<button class="am-btn am-btn-danger am-btn-xs" onclick="javascript:$(this).parents(\'.meetplan\').remove();">删除</button>' +
+                                                    '<button class="am-btn am-btn-danger am-btn-xs" onclick="DeletePlan(this)">删除</button>' +
                                                 '</div>' +
                                            '</div>' +
                                             '<div class="am-g am-margin-top topicTitle">' +
@@ -287,7 +296,7 @@
         //添加的计划
         function GetAppendHtml(roomId) {
             return '<div class="am-u-md-12 meetplan" data-roomId="' + roomId + '" >' +
-                        '<div class="am-g am-margin-top">' +
+                        '<div class="am-g am-margin-top ">' +
                             '<div class="am-u-md-1 am-text-center">' +
                                 '+' +
                             '</div>' +
@@ -303,7 +312,7 @@
                                '<button class="am-btn am-btn-success am-btn-xs" onclick="SelectSpeaker(this)">选择</button>' +
                             '</div>' +
                             '<div class="am-u-md-1 am-text-center am-u-end">' +
-                                '<button class="am-btn am-btn-danger am-btn-xs"  onclick="javascript: $(this).parent().parent().remove();">删除</button>' +
+                                '<button class="am-btn am-btn-danger am-btn-xs"  onclick="DeletePlan(this)">删除</button>' +
                             '</div>' +
                         '</div>' +
                         '<div class="am-g am-margin-top topicTitle">' +
@@ -583,7 +592,13 @@
                             return false;
                         }
                         
-                        $("[name=Content]").val(ue.getContent());
+
+                        var content=ue.getContent();
+                        if (content.trim() == "") {
+                            $.Nuoya.alert("请填写会议内容");
+                            return false;
+                        }
+                        $("[name=Content]").val(content);
                         var result = $.Nuoya.form("form").valid({
                         });
                         if (result) {
@@ -639,10 +654,6 @@
             {
                 msg = "人数限制必须大于等于0";
                 return false;
-            }
-          
-            if (ue.getContent().trim() == "") {
-                msg = "请填写会议内容";
             }
             var meetPlansAry = new Array();
             $("#roomDiv .meetplan").each(function (index,item) {
@@ -796,7 +807,12 @@
                                         $.Nuoya.alert("请选择会议厅");
                                         return false;
                                     }
-                                    $("[name=Content]").val(ue.getContent());
+                                    var content = ue.getContent();
+                                    if (content.trim() == "") {
+                                        $.Nuoya.alert("请填写会议内容");
+                                        return false;
+                                    }
+                                    $("[name=Content]").val(content);
                                     var result = $.Nuoya.form("form").valid();
                                     var data = GetPostObj();
                                     if (result) {
